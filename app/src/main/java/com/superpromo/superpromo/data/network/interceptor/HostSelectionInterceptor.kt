@@ -11,10 +11,7 @@ class HostSelectionInterceptor : Interceptor {
         val newUrl = request.url.newBuilder()
             .host(BuildConfig.BASE_URL)
             .build()
-        request = request.newBuilder()
-            .url(newUrl)
-            .build()
 
-        return chain.proceed(request)
+        return chain.proceed(newUrl)
     }
 }
