@@ -23,7 +23,8 @@ class SuperPromoRepositoryImpl @Inject constructor(
     ) {
         ProductPagingSource(
             superPromoApi = superPromoApi,
-            shopId = shopId
+            shopId = shopId,
+            limit = 20,
         )
     }.flow
 

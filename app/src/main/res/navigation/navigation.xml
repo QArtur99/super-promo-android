@@ -7,7 +7,12 @@
     <fragment
         android:id="@+id/fragment_start"
         android:name="com.superpromo.superpromo.ui.main.MainFragment"
-        android:label="StartFragment"></fragment>
+        android:label="StartFragment">
+
+        <action
+            android:id="@+id/action_start_to_compare"
+            app:destination="@id/fragment_compare"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_shopping_list"
@@ -21,8 +26,8 @@
 
     <fragment
         android:id="@+id/fragment_compare"
-        android:name="com.superpromo.superpromo.ui.main.MainFragment"
-        android:label="StartFragment"></fragment>
+        android:name="com.superpromo.superpromo.ui.compare.CompareFragment"
+        android:label="CompareFragment"></fragment>
 
     <fragment
         android:id="@+id/fragment_shopping_list_archvied"

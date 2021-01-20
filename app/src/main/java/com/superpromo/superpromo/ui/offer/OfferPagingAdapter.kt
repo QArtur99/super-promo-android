@@ -30,7 +30,7 @@ class OfferPagingAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            R.layout.item_product -> ComparePagingAdapter.MovieViewHolder.create(parent, glide)
+            R.layout.item_product -> ComparePagingAdapter.ProductViewHolder.create(parent, glide)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
     }

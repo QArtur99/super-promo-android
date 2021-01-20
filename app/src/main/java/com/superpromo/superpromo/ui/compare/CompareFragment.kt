@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
@@ -29,6 +31,7 @@ class CompareFragment : Fragment() {
     ): View {
         binding = FragmentCompareBinding.inflate(inflater)
         initAdapter()
+        initSwipeToRefresh()
         return binding.root
     }
 
@@ -39,6 +42,12 @@ class CompareFragment : Fragment() {
             ComparePagingAdapter(glide, ComparePagingAdapter.OnClickListener { view, product ->
 
             })
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = CompareStateAdapter(adapter),
             footer = CompareStateAdapter(adapter)
@@ -47,20 +56,30 @@ class CompareFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             adapter.loadStateFlow.collectLatest { loadStates ->
                 binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
+                if (loadStates.refresh is LoadState.Error) {
+                    if (adapter.itemCount > 0) {
+                        binding.emptyView.visibility = View.GONE
+                    } else {
+                        binding.emptyView.visibility = View.VISIBLE
+                    }
+                }
             }
         }
-
         lifecycleScope.launchWhenCreated {
             compareViewModel.posts.collectLatest {
                 adapter.submitData(it)
             }
         }
-
         lifecycleScope.launchWhenCreated {
             adapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }
                 .filter { it.refresh is LoadState.NotLoading }
+                .collect { binding.recyclerView.scrollToPosition(0) }
         }
+    }
+
+    private fun initSwipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener { adapter.refresh() }
     }
 
 }

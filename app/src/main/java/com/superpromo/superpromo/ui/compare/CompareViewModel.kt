@@ -28,7 +28,7 @@ class CompareViewModel @ViewModelInject constructor(
     }
 
     val posts = flowOf(
-        clearListCh.receiveAsFlow().map { PagingData.empty<Product>() },
+        clearListCh.receiveAsFlow().map { PagingData.empty() },
         savedStateHandle.getLiveData<Int>(KEY_SHOP)
             .asFlow()
             .flatMapLatest { superPromoRepository.getProducts(7, 20) }

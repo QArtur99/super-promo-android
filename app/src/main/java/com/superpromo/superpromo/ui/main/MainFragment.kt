@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentStartBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,11 +22,9 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentStartBinding.inflate(inflater)
-//        val binding: FragmentStartBinding = DataBindingUtil.inflate(
-//            inflater, R.layout.fragment_start, container, false
-//        )
-//        binding.movieDetailViewModel = movieDetailViewModel
-//        binding.lifecycleOwner = this
+        binding.compare.setOnClickListener {
+            findNavController().navigate(R.id.action_start_to_compare)
+        }
         return binding.root
     }
 }

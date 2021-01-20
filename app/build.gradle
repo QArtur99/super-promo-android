@@ -24,9 +24,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'Integer', 'HOST_PORT', ''
+            buildConfigField 'String', 'HOST_URL', '"arturgniewowski.com"'
             buildConfigField 'String', 'BASE_URL', '"https://arturgniewowski.com"'
         }
         debug {
+            buildConfigField 'Integer', 'HOST_PORT', '3002'
+            buildConfigField 'String', 'HOST_URL', '"192.168.1.104"'
             buildConfigField 'String', 'BASE_URL', '"http://0.0.0.0:3002"'
         }
     }
