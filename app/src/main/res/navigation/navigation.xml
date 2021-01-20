@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fragment_start">
+
+    <fragment
+        android:id="@+id/fragment_start"
+        android:name="com.superpromo.superpromo.ui.main.MainFragment"
+        android:label="StartFragment"></fragment>
+
+    <fragment
+        android:id="@+id/fragment_shopping_list"
+        android:name="com.superpromo.superpromo.ui.main.MainFragment"
+        android:label="StartFragment"></fragment>
+
+    <fragment
+        android:id="@+id/fragment_offer"
+        android:name="com.superpromo.superpromo.ui.main.MainFragment"
+        android:label="StartFragment"></fragment>
+
+    <fragment
+        android:id="@+id/fragment_compare"
+        android:name="com.superpromo.superpromo.ui.main.MainFragment"
+        android:label="StartFragment"></fragment>
+
+    <fragment
+        android:id="@+id/fragment_shopping_list_archvied"
+        android:name="com.superpromo.superpromo.ui.main.MainFragment"
+        android:label="StartFragment"></fragment>
+</navigation>

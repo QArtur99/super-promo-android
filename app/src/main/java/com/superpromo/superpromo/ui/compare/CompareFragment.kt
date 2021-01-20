@@ -1,0 +1,66 @@
+package com.superpromo.superpromo.ui.compare
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import com.superpromo.superpromo.GlideApp
+import com.superpromo.superpromo.databinding.FragmentCompareBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
+
+@AndroidEntryPoint
+class CompareFragment : Fragment() {
+
+    private val compareViewModel: CompareViewModel by viewModels()
+    private lateinit var binding: FragmentCompareBinding
+    private lateinit var adapter: ComparePagingAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentCompareBinding.inflate(inflater)
+        initAdapter()
+        return binding.root
+    }
+
+
+    private fun initAdapter() {
+        val glide = GlideApp.with(this)
+        adapter =
+            ComparePagingAdapter(glide, ComparePagingAdapter.OnClickListener { view, product ->
+
+            })
+        binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = CompareStateAdapter(adapter),
+            footer = CompareStateAdapter(adapter)
+        )
+
+        lifecycleScope.launchWhenCreated {
+            adapter.loadStateFlow.collectLatest { loadStates ->
+                binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            compareViewModel.posts.collectLatest {
+                adapter.submitData(it)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            adapter.loadStateFlow
+                .distinctUntilChangedBy { it.refresh }
+                .filter { it.refresh is LoadState.NotLoading }
+        }
+    }
+
+}
