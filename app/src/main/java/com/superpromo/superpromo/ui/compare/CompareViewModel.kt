@@ -8,7 +8,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.superpromo.superpromo.repository.SuperPromoRepository
+import com.superpromo.superpromo.repository.main.SuperPromoRepository
 import com.superpromo.superpromo.ui.data.SearchModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*

@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.repository
+package com.superpromo.superpromo.repository.main
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingSource.LoadResult.Page
