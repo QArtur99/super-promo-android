@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -32,6 +33,17 @@ class CompareFragment : Fragment() {
         binding = FragmentCompareBinding.inflate(inflater)
         initAdapter()
         initSwipeToRefresh()
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+//                TODO("Not yet implemented")
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { compareViewModel.showProducts(query) }
+                return true
+            }
+        })
         return binding.root
     }
 
