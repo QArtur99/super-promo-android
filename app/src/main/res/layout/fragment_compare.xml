@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/purple_500"
+            android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
@@ -45,7 +45,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:background="@color/purple_500"
+            android:background="@color/colorPrimary"
             app:cardCornerRadius="4dp">
 
             <androidx.appcompat.widget.SearchView
