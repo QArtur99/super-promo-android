@@ -18,8 +18,8 @@ class CompareViewModel @ViewModelInject constructor(
     private val superPromoRepository: SuperPromoRepository
 ) : ViewModel() {
     companion object {
-        const val KEY_SHOP = "shopId"
-        val DEFAULT_SHOP = SearchModel(7, "")
+        const val KEY_SHOP = "shopId&CompareViewModel"
+        val DEFAULT_SHOP = SearchModel(null, "")
     }
 
     private val clearListCh = Channel<Unit>(Channel.CONFLATED)

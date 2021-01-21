@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface SuperPromoRepository {
     suspend fun getShops(): ResultStatus<List<Shop>>
-    fun getProducts(shopId: Int, pageSize: Int, product: String): Flow<PagingData<Product>>
+    fun getProducts(shopId: Int?, pageSize: Int, product: String): Flow<PagingData<Product>>
 }

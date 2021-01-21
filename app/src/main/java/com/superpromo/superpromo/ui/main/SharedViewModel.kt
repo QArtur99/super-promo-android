@@ -41,7 +41,7 @@ class SharedViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             when (val shopList = superPromoRepository.getShops()) {
                 is ResultStatus.Success -> {
-                    savedStateHandle.set(KEY_SHOPS, shopList)
+                    savedStateHandle.set(KEY_SHOPS, shopList.data)
                 }
                 is ResultStatus.Error -> {
                     Timber.e(shopList.message)

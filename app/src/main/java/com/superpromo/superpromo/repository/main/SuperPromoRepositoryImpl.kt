@@ -23,7 +23,7 @@ class SuperPromoRepositoryImpl @Inject constructor(
     )
 
     override fun getProducts(
-        shopId: Int,
+        shopId: Int?,
         pageSize: Int,
         product: String
     ) = Pager(PagingConfig(pageSize)) {

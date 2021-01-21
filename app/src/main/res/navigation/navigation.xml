@@ -11,10 +11,10 @@
 
         <action
             android:id="@+id/action_start_to_compare"
-            app:destination="@id/fragment_compare"/>
+            app:destination="@id/fragment_compare" />
         <action
             android:id="@+id/action_start_to_offer"
-            app:destination="@id/fragment_offer"/>
+            app:destination="@id/fragment_offer" />
     </fragment>
 
     <fragment
@@ -29,6 +29,10 @@
         android:name="com.superpromo.superpromo.ui.offer.OfferFragment"
         android:label="OfferFragment">
 
+        <action
+            android:id="@+id/action_offer_to_compare"
+            app:destination="@id/fragment_compare" />
+
     </fragment>
 
     <fragment
@@ -36,6 +40,10 @@
         android:name="com.superpromo.superpromo.ui.compare.CompareFragment"
         android:label="CompareFragment">
 
+        <argument
+            android:name="shopId"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
     <fragment

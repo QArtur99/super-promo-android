@@ -9,7 +9,7 @@ import java.io.IOException
 
 class ProductPagingSource(
     private val superPromoApi: SuperPromoApi,
-    private val shopId: Int,
+    private val shopId: Int?,
     private val limit: Int,
     private val product: String,
 ) : PagingSource<String, Product>() {

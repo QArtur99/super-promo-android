@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
@@ -24,6 +25,7 @@ class CompareFragment : Fragment() {
     private val compareViewModel: CompareViewModel by viewModels()
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ComparePagingAdapter
+    private val bundle: CompareFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +36,9 @@ class CompareFragment : Fragment() {
         initAdapter()
         initSwipeToRefresh()
         initQuery()
+        bundle.shopId?.let {
+            compareViewModel.showShop(it.toInt())
+        }
         return binding.root
     }
 

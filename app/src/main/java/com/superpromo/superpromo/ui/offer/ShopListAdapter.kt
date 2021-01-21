@@ -21,13 +21,13 @@ class ShopListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             R.layout.item_shop ->
-                (holder as ShopViewHolder).bind(clickListener, getItem(position))
+                (holder as ShopViewHolder).bind(getItem(position))
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.item_shop -> ShopViewHolder.create(parent, glide)
+            R.layout.item_shop -> ShopViewHolder.create(parent, glide, clickListener)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
     }
@@ -47,7 +47,7 @@ class ShopListAdapter(
         }
     }
 
-    open class OnClickListener(val clickListener: (v: View, product: Product) -> Unit) {
-        fun onClick(v: View, product: Product) = clickListener(v, product)
+    open class OnClickListener(val clickListener: (v: View, shop: Shop) -> Unit) {
+        fun onClick(v: View, shop: Shop) = clickListener(v, shop)
     }
 }

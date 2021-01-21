@@ -13,14 +13,19 @@ import com.superpromo.superpromo.ui.util.FormatPrice
 
 class ProductViewHolder constructor(
     private val view: View,
-    private val glide: GlideRequests
+    private val glide: GlideRequests,
+    private val clickListener: ComparePagingAdapter.OnClickListener
 ) : RecyclerView.ViewHolder(view) {
 
     companion object {
-        fun create(parent: ViewGroup, glide: GlideRequests): ProductViewHolder {
+        fun create(
+            parent: ViewGroup,
+            glide: GlideRequests,
+            clickListener: ComparePagingAdapter.OnClickListener
+        ): ProductViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_product, parent, false)
-            return ProductViewHolder(view, glide)
+            return ProductViewHolder(view, glide, clickListener)
         }
     }
 
@@ -38,14 +43,11 @@ class ProductViewHolder constructor(
 
     init {
         view.setOnClickListener {
-            product?.let { url ->
-//                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-//                    view.context.startActivity(intent)
-            }
+            product?.let { clickListener.onClick(view, it) }
         }
     }
 
-    fun bind(clickListener: ComparePagingAdapter.OnClickListener, item: Product?) {
+    fun bind(item: Product?) {
         product = item
         bingImg(item)
         val priceString = FormatPrice.getCurrency(item?.price, "zł")
