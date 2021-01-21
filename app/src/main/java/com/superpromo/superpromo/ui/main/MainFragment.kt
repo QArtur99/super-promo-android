@@ -22,6 +22,9 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentStartBinding.inflate(inflater)
+        binding.offer.setOnClickListener {
+            findNavController().navigate(R.id.action_start_to_offer)
+        }
         binding.compare.setOnClickListener {
             findNavController().navigate(R.id.action_start_to_compare)
         }

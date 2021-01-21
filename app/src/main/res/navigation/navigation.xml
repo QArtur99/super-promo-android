@@ -12,25 +12,36 @@
         <action
             android:id="@+id/action_start_to_compare"
             app:destination="@id/fragment_compare"/>
+        <action
+            android:id="@+id/action_start_to_offer"
+            app:destination="@id/fragment_offer"/>
     </fragment>
 
     <fragment
         android:id="@+id/fragment_shopping_list"
         android:name="com.superpromo.superpromo.ui.main.MainFragment"
-        android:label="StartFragment"></fragment>
+        android:label="StartFragment">
+
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_offer"
-        android:name="com.superpromo.superpromo.ui.main.MainFragment"
-        android:label="StartFragment"></fragment>
+        android:name="com.superpromo.superpromo.ui.offer.OfferFragment"
+        android:label="OfferFragment">
+
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_compare"
         android:name="com.superpromo.superpromo.ui.compare.CompareFragment"
-        android:label="CompareFragment"></fragment>
+        android:label="CompareFragment">
+
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_shopping_list_archvied"
         android:name="com.superpromo.superpromo.ui.main.MainFragment"
-        android:label="StartFragment"></fragment>
+        android:label="StartFragment">
+
+    </fragment>
 </navigation>

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
+    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     tools:context=".ui.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -68,35 +69,93 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/shoppingList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_basic"
-            android:padding="@dimen/padding_basic"
-            android:text="Shopping List"
+            android:layout_margin="@dimen/margin_large"
+            android:backgroundTint="@color/purple_500"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toTopOf="@id/offer"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_large"
+                android:text="Shopping List"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/offer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_basic"
-            android:padding="@dimen/padding_basic"
-            android:text="Offer"
+            android:layout_margin="@dimen/margin_large"
+            android:backgroundTint="@color/purple_500"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toTopOf="@id/compare"
-            app:layout_constraintTop_toBottomOf="@id/shoppingList" />
+            app:layout_constraintTop_toBottomOf="@id/shoppingList">
 
-        <Button
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_large"
+                android:text="Offer"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/compare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_basic"
-            android:padding="@dimen/padding_basic"
-            android:text="Compare"
+            android:layout_margin="@dimen/margin_large"
+            android:backgroundTint="@color/purple_500"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toTopOf="@id/empty"
+            app:layout_constraintTop_toBottomOf="@id/offer">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_large"
+                android:text="Compare"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
+            android:backgroundTint="@color/purple_500"
+            android:visibility="invisible"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/offer" />
+            app:layout_constraintTop_toBottomOf="@id/compare">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_large"
+                android:text="Compare"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

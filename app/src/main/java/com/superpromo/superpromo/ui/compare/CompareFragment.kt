@@ -33,9 +33,14 @@ class CompareFragment : Fragment() {
         binding = FragmentCompareBinding.inflate(inflater)
         initAdapter()
         initSwipeToRefresh()
+        initQuery()
+        return binding.root
+    }
+
+    private fun initQuery() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
-//                TODO("Not yet implemented")
+                //                TODO("Not yet implemented")
                 return false
             }
 
@@ -44,21 +49,14 @@ class CompareFragment : Fragment() {
                 return true
             }
         })
-        return binding.root
     }
 
 
     private fun initAdapter() {
         val glide = GlideApp.with(this)
-        adapter =
-            ComparePagingAdapter(glide, ComparePagingAdapter.OnClickListener { view, product ->
-
-            })
+        adapter = ComparePagingAdapter(glide, onProductClickListener())
         binding.recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                this.context,
-                DividerItemDecoration.VERTICAL
-            )
+            DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
         )
         binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = CompareStateAdapter(adapter),
@@ -88,6 +86,10 @@ class CompareFragment : Fragment() {
                 .filter { it.refresh is LoadState.NotLoading }
                 .collect { binding.recyclerView.scrollToPosition(0) }
         }
+    }
+
+    private fun onProductClickListener() = ComparePagingAdapter.OnClickListener { view, product ->
+
     }
 
     private fun initSwipeToRefresh() {
