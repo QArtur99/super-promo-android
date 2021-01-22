@@ -32,7 +32,6 @@
         <action
             android:id="@+id/action_offer_to_compare"
             app:destination="@id/fragment_compare" />
-
     </fragment>
 
     <fragment
@@ -44,6 +43,22 @@
             android:name="shopId"
             app:argType="string"
             app:nullable="true" />
+
+        <action
+            android:id="@+id/action_compare_to_suggestion"
+            app:destination="@id/fragment_suggestion_product" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_suggestion_product"
+        android:name="com.superpromo.superpromo.ui.suggestion.SuggestionFragment"
+        android:label="SuggestionFragment">
+
+        <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="true" />
+
     </fragment>
 
     <fragment

@@ -1,18 +1,29 @@
 package com.superpromo.superpromo.ui.compare
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
+import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
+import com.superpromo.superpromo.ui.compare.product.ComparePagingAdapter
+import com.superpromo.superpromo.ui.compare.product.load.CompareStateAdapter
+import com.superpromo.superpromo.ui.suggestion.SuggestionFragment
+import com.superpromo.superpromo.ui.util.ext.hideSoftKeyBoard
+import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -27,14 +38,18 @@ class CompareFragment : Fragment() {
     private lateinit var adapter: ComparePagingAdapter
     private val bundle: CompareFragmentArgs by navArgs()
 
+    private var query = ""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCompareBinding.inflate(inflater)
+        onNavigationResult()
         initAdapter()
         initSwipeToRefresh()
+        initQuerySuggestion()
         initQuery()
         bundle.shopId?.let {
             compareViewModel.showShop(it.toInt())
@@ -42,11 +57,31 @@ class CompareFragment : Fragment() {
         return binding.root
     }
 
+    fun onNavigationResult() {
+        onNavBackStackListener {
+            if (it.containsKey(SuggestionFragment.KEY_SUGGESTION)) {
+                query = it.get(SuggestionFragment.KEY_SUGGESTION) as String
+                binding.searchView.setQuery(query, true)
+                context?.hideSoftKeyBoard(binding.searchView)
+            }
+        }
+    }
+
+
+    private fun initQuerySuggestion() {
+        binding.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                val txt = binding.searchView.query.toString()
+                val bundle = bundleOf(SuggestionFragment.KEY_QUERY to txt)
+                findNavController().navigate(R.id.action_compare_to_suggestion, bundle)
+            }
+        }
+    }
+
     private fun initQuery() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
-                //                TODO("Not yet implemented")
-                return false
+                return true
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {

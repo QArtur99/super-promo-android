@@ -1,6 +1,5 @@
 package com.superpromo.superpromo.ui.offer
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,9 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
-import com.superpromo.superpromo.data.network.model.Product
 import com.superpromo.superpromo.data.network.model.Shop
-import com.superpromo.superpromo.ui.compare.ProductViewHolder
 
 
 class ShopListAdapter(

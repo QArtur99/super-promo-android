@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.compare
+package com.superpromo.superpromo.ui.compare.product.load
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.compare
+package com.superpromo.superpromo.ui.compare.product
 
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +45,10 @@ class ComparePagingAdapter(
 
     open class OnClickListener(val clickListener: (v: View, product: Product) -> Unit) {
         fun onClick(v: View, product: Product) = clickListener(v, product)
+    }
+
+    fun getItemAt(position: Int): Product {
+        return getItem(position)!!
     }
 
 }

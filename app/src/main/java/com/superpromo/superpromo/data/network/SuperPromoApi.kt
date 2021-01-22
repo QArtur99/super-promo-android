@@ -2,16 +2,18 @@ package com.superpromo.superpromo.data.network
 
 import com.superpromo.superpromo.data.network.model.ProductContainer
 import com.superpromo.superpromo.data.network.model.Shop
+import com.superpromo.superpromo.data.network.model.Suggestion
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 interface SuperPromoApi {
 
     @GET("/shop/getShops")
     fun getShopListAsync(): Deferred<List<Shop>>
+
+    @GET("/product/getSuggestions")
+    fun getProductSuggestionListAsync(): Deferred<List<Suggestion>>
 
     @GET("/product/getProducts")
     fun getProductListAsync(

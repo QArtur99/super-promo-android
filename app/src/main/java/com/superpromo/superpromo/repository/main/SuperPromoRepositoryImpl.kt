@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.superpromo.superpromo.data.network.SuperPromoApi
 import com.superpromo.superpromo.data.network.model.Shop
+import com.superpromo.superpromo.data.network.model.Suggestion
 import com.superpromo.superpromo.di.DefaultDispatcher
 import com.superpromo.superpromo.di.IoDispatcher
 import com.superpromo.superpromo.repository.BaseRepository
@@ -20,6 +21,18 @@ class SuperPromoRepositoryImpl @Inject constructor(
     override suspend fun getShops(): ResultStatus<List<Shop>> = safeApiCall(
         call = { superPromoApi.getShopListAsync().await() },
         errorMessage = "getShops error",
+    )
+
+    override suspend fun getProductSuggestions(): ResultStatus<List<Suggestion>> = safeApiCall(
+        call = {
+//            superPromoApi.getProductSuggestionListAsync().await()
+            listOf(
+                Suggestion("makaron"),
+                Suggestion("kanapka"),
+                Suggestion("sos"),
+            )
+        },
+        errorMessage = "getProductSuggestions error",
     )
 
     override fun getProducts(
