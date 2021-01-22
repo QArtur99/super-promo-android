@@ -10,8 +10,8 @@
         android:label="StartFragment">
 
         <action
-            android:id="@+id/action_start_to_compare"
-            app:destination="@id/fragment_compare" />
+            android:id="@+id/action_start_to_suggestion"
+            app:destination="@id/fragment_suggestion_product" />
         <action
             android:id="@+id/action_start_to_offer"
             app:destination="@id/fragment_offer" />
@@ -44,9 +44,11 @@
             app:argType="string"
             app:nullable="true" />
 
-        <action
-            android:id="@+id/action_compare_to_suggestion"
-            app:destination="@id/fragment_suggestion_product" />
+        <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="true" />
+
     </fragment>
 
     <fragment
@@ -54,10 +56,9 @@
         android:name="com.superpromo.superpromo.ui.suggestion.SuggestionFragment"
         android:label="SuggestionFragment">
 
-        <argument
-            android:name="query"
-            app:argType="string"
-            app:nullable="true" />
+        <action
+            android:id="@+id/action_suggestion_to_compare"
+            app:destination="@id/fragment_compare" />
 
     </fragment>
 

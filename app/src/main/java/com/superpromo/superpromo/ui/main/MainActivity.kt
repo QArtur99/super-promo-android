@@ -10,10 +10,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val sharedViewModel: SharedViewModel by viewModels()
+    private val sharedSuggestionVm : SharedSuggestionVm by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sharedViewModel.run { }
+        sharedSuggestionVm.run { }
     }
 }
