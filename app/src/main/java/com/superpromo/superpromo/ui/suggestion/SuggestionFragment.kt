@@ -54,7 +54,7 @@ class SuggestionFragment : Fragment() {
         return binding.root
     }
 
-    fun onNavigationResult() {
+    private fun onNavigationResult() {
         onNavBackStackListener {
             if (it.containsKey(KEY_QUERY)) {
                 val query = it.get(KEY_QUERY) as String
