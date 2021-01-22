@@ -59,7 +59,6 @@ class SuggestionFragment : Fragment() {
             if (it.containsKey(KEY_QUERY)) {
                 val query = it.get(KEY_QUERY) as String
                 binding.searchView.setQuery(query, false)
-                binding.searchView.requestFocus()
             }
         }
     }
