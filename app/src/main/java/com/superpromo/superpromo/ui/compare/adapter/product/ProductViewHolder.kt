@@ -66,10 +66,10 @@ class ProductViewHolder constructor(
         if (item?.imgUrl?.startsWith("http") == true) {
             glide.load(item.imgUrl)
                 .centerCrop()
-                .placeholder(R.drawable.ic_baseline_browser_not_supported_24)
+                .placeholder(R.drawable.ic_baseline_broken_image_24)
                 .into(productImg)
         } else {
-            productImg.setImageResource(R.drawable.ic_baseline_browser_not_supported_24)
+            productImg.setImageResource(R.drawable.ic_baseline_broken_image_24)
         }
     }
 }

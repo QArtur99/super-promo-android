@@ -48,10 +48,10 @@ class ShopViewHolder constructor(
         if (item?.imgUrl?.startsWith("http") == true) {
             glide.load(item.imgUrl)
                 .centerCrop()
-                .placeholder(R.drawable.ic_baseline_browser_not_supported_24)
+                .placeholder(R.drawable.ic_baseline_broken_image_24)
                 .into(shopLogo)
         } else {
-            shopLogo.setImageResource(R.drawable.ic_baseline_browser_not_supported_24)
+            shopLogo.setImageResource(R.drawable.ic_baseline_broken_image_24)
         }
     }
 }

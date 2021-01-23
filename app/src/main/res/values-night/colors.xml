@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimarLighty">#512DA8</color>
+    <color name="colorPrimary">#4527A0</color>
+    <color name="colorPrimaryDark">#1A237E</color>
     <color name="iconStart">#FFFFFFFF</color>
 </resources>

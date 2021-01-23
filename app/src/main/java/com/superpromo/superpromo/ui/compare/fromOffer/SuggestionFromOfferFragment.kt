@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
+import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.databinding.FragmentSuggestionBinding
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFragment.Companion.KEY_SHOP_ID
 import com.superpromo.superpromo.ui.main.SharedSuggestionVm
@@ -27,7 +28,7 @@ class SuggestionFromOfferFragment : Fragment() {
     }
 
     private val sharedViewModel: SharedSuggestionVm by viewModels({ requireActivity() })
-    private lateinit var binding: FragmentSuggestionBinding
+    private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: SuggestionListAdapter
     private val bundle: SuggestionFromOfferFragmentArgs by navArgs()
 
@@ -36,7 +37,7 @@ class SuggestionFromOfferFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSuggestionBinding.inflate(inflater)
+        binding = FragmentCompareBinding.inflate(inflater)
         initQuery()
         initAdapter()
         initSwipeToRefresh()

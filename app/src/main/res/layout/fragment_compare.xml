@@ -10,14 +10,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/gradient_toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_scrollFlags="noScroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
             <LinearLayout
@@ -44,15 +44,14 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:background="@color/colorPrimary"
             app:cardCornerRadius="4dp">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:background="@color/white"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 app:defaultQueryHint="Sprawdz na przykład ,,mleko”"
