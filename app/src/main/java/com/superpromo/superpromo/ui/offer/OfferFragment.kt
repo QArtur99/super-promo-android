@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
-import com.superpromo.superpromo.ui.compare.CompareFragment
+import com.superpromo.superpromo.ui.compare.fromMain.CompareFragment
 import com.superpromo.superpromo.ui.main.SharedViewModel
-import com.superpromo.superpromo.ui.suggestion.SuggestionFragment
+import com.superpromo.superpromo.ui.compare.fromMain.SuggestionFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -74,8 +74,7 @@ class OfferFragment : Fragment() {
     private fun onShopClickListener() = ShopListAdapter.OnClickListener { view, product ->
         val bundle = bundleOf(
             CompareFragment.KEY_SHOP_ID to product.id.toString(),
-            SuggestionFragment.KEY_QUERY to null
         )
-        findNavController().navigate(R.id.action_offer_to_compare, bundle)
+        findNavController().navigate(R.id.action_offer_to_compare_from_offer, bundle)
     }
 }

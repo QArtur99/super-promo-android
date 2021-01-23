@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.suggestion.suggestion
+package com.superpromo.superpromo.ui.compare.adapter.suggestion
 
 import android.view.LayoutInflater
 import android.view.View

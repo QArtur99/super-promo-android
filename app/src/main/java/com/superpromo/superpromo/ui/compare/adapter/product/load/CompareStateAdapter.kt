@@ -1,9 +1,9 @@
-package com.superpromo.superpromo.ui.compare.product.load
+package com.superpromo.superpromo.ui.compare.adapter.product.load
 
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
-import com.superpromo.superpromo.ui.compare.product.ComparePagingAdapter
+import com.superpromo.superpromo.ui.compare.adapter.product.ComparePagingAdapter
 
 class CompareStateAdapter(
         private val adapter: ComparePagingAdapter

@@ -30,13 +30,13 @@
         android:label="OfferFragment">
 
         <action
-            android:id="@+id/action_offer_to_compare"
-            app:destination="@id/fragment_compare" />
+            android:id="@+id/action_offer_to_compare_from_offer"
+            app:destination="@id/fragment_compare_from_offer" />
     </fragment>
 
     <fragment
         android:id="@+id/fragment_compare"
-        android:name="com.superpromo.superpromo.ui.compare.CompareFragment"
+        android:name="com.superpromo.superpromo.ui.compare.fromMain.CompareFragment"
         android:label="CompareFragment">
 
         <argument
@@ -52,13 +52,41 @@
     </fragment>
 
     <fragment
+        android:id="@+id/fragment_compare_from_offer"
+        android:name="com.superpromo.superpromo.ui.compare.fromOffer.CompareFromOfferFragment"
+        android:label="CompareFromOfferFragment">
+
+        <argument
+            android:name="shopId"
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_compare_to_suggestion_product_from_offer"
+            app:destination="@id/fragment_suggestion_product_from_offer" />
+
+    </fragment>
+
+    <fragment
         android:id="@+id/fragment_suggestion_product"
-        android:name="com.superpromo.superpromo.ui.suggestion.SuggestionFragment"
+        android:name="com.superpromo.superpromo.ui.compare.fromMain.SuggestionFragment"
         android:label="SuggestionFragment">
 
         <action
             android:id="@+id/action_suggestion_to_compare"
             app:destination="@id/fragment_compare" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_suggestion_product_from_offer"
+        android:name="com.superpromo.superpromo.ui.compare.fromOffer.SuggestionFromOfferFragment"
+        android:label="SuggestionFromOfferFragment">
+
+        <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="true" />
 
     </fragment>
 
