@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Shop
+import com.superpromo.superpromo.ui.util.Url
 
 class ShopViewHolder constructor(
     private val view: View,
@@ -45,9 +46,9 @@ class ShopViewHolder constructor(
     }
 
     private fun bingImg(item: Shop?) {
-        if (item?.imgUrl?.startsWith("http") == true) {
-            glide.load(item.imgUrl)
-                .centerCrop()
+        if (item?.imgUrl != null) {
+            glide.load(Url.getBaseUrl() + item.imgUrl)
+                .fitCenter()
                 .placeholder(R.drawable.ic_baseline_broken_image_24)
                 .into(shopLogo)
         } else {
