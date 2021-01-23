@@ -15,7 +15,7 @@ import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFragment
 import com.superpromo.superpromo.ui.main.SharedViewModel
-import com.superpromo.superpromo.ui.compare.fromMain.SuggestionFragment
+import com.superpromo.superpromo.ui.offer.adapter.ShopListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

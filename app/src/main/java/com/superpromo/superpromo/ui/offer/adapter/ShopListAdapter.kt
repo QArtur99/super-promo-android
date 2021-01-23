@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.offer
+package com.superpromo.superpromo.ui.offer.adapter
 
 import android.view.View
 import android.view.ViewGroup
