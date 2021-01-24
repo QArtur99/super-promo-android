@@ -1,12 +1,13 @@
-package com.superpromo.superpromo.ui.compare.adapter.product.load
+package com.superpromo.superpromo.ui.compare.adapter.fromMain
 
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
-import com.superpromo.superpromo.ui.compare.adapter.product.ComparePagingAdapter
+import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferPagingAdapter
+import com.superpromo.superpromo.ui.compare.adapter.load.NetworkStateItemViewHolder
 
-class CompareStateAdapter(
-        private val adapter: ComparePagingAdapter
+class ProductFromMainStateAdapter(
+        private val adapter: ProductFromMainPagingAdapter
 ) : LoadStateAdapter<NetworkStateItemViewHolder>() {
     override fun onBindViewHolder(holder: NetworkStateItemViewHolder, loadState: LoadState) {
         holder.bindTo(loadState)

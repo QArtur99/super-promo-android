@@ -17,8 +17,8 @@ import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.CompareViewModel
 import com.superpromo.superpromo.ui.compare.fromMain.SuggestionFragment
-import com.superpromo.superpromo.ui.compare.adapter.product.ComparePagingAdapter
-import com.superpromo.superpromo.ui.compare.adapter.product.load.CompareStateAdapter
+import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferPagingAdapter
+import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferStateAdapter
 import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -35,7 +35,7 @@ class CompareFromOfferFragment : Fragment() {
 
     private val compareViewModel: CompareViewModel by viewModels()
     private lateinit var binding: FragmentCompareBinding
-    private lateinit var adapter: ComparePagingAdapter
+    private lateinit var adapter: ProductFromOfferPagingAdapter
     private val bundle: CompareFromOfferFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -78,13 +78,13 @@ class CompareFromOfferFragment : Fragment() {
 
     private fun initAdapter() {
         val glide = GlideApp.with(this)
-        adapter = ComparePagingAdapter(glide, onProductClickListener())
+        adapter = ProductFromOfferPagingAdapter(glide, onProductClickListener())
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
         )
         binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = CompareStateAdapter(adapter),
-            footer = CompareStateAdapter(adapter)
+            header = ProductFromOfferStateAdapter(adapter),
+            footer = ProductFromOfferStateAdapter(adapter)
         )
 
         lifecycleScope.launchWhenCreated {
@@ -112,7 +112,7 @@ class CompareFromOfferFragment : Fragment() {
         }
     }
 
-    private fun onProductClickListener() = ComparePagingAdapter.OnClickListener { view, product ->
+    private fun onProductClickListener() = ProductFromOfferPagingAdapter.OnClickListener { view, product ->
 
     }
 

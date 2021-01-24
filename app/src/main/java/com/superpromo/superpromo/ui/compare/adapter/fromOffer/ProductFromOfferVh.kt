@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.compare.adapter.product
+package com.superpromo.superpromo.ui.compare.adapter.fromOffer
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,36 +9,33 @@ import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Product
+import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainVh
 import com.superpromo.superpromo.ui.util.FormatPrice
 
-class ProductViewHolder constructor(
+class ProductFromOfferVh constructor(
     private val view: View,
     private val glide: GlideRequests,
-    private val clickListener: ComparePagingAdapter.OnClickListener
+    private val clickListener: ProductFromOfferPagingAdapter.OnClickListener
 ) : RecyclerView.ViewHolder(view) {
 
     companion object {
         fun create(
             parent: ViewGroup,
             glide: GlideRequests,
-            clickListener: ComparePagingAdapter.OnClickListener
-        ): ProductViewHolder {
+            clickListener: ProductFromOfferPagingAdapter.OnClickListener
+        ): ProductFromOfferVh {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_product, parent, false)
-            return ProductViewHolder(view, glide, clickListener)
+            return ProductFromOfferVh(view, glide, clickListener)
         }
     }
 
     private val productImg: ImageView = view.findViewById(R.id.productImg)
     private val shopName: TextView = view.findViewById(R.id.shopName)
     private val name: TextView = view.findViewById(R.id.name)
-    private val subtitle: TextView = view.findViewById(R.id.subtitle)
     private val price: TextView = view.findViewById(R.id.price)
     private val amount: TextView = view.findViewById(R.id.amount)
-
-    //        private val details: TextView = view.findViewById(R.id.details)
-    private val promoInfo: TextView = view.findViewById(R.id.promoInfo)
-    private val promo: TextView = view.findViewById(R.id.promo)
+    private val details: TextView = view.findViewById(R.id.details)
     private var product: Product? = null
 
     init {
@@ -53,12 +50,17 @@ class ProductViewHolder constructor(
         val priceString = FormatPrice.getCurrency(item?.price, "zł")
         shopName.text = item?.shopName
         name.text = item?.name
-        subtitle.text = item?.subtitle
         price.text = priceString
-        amount.text = item?.amount
-//            details.text = item?.details
-        promoInfo.text = item?.promoInfo
-        promo.text = item?.promo
+        if (item?.amount.isNullOrEmpty()) {
+            amount.visibility = View.GONE
+        } else {
+            amount.text = item?.amount
+        }
+        if (item?.details.isNullOrEmpty()) {
+            details.visibility = View.GONE
+        } else {
+            details.text = item?.details
+        }
     }
 
     private fun bingImg(item: Product?) {

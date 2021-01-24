@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.compare.adapter.product
+package com.superpromo.superpromo.ui.compare.adapter.fromOffer
 
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +9,8 @@ import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Product
 
-class ComparePagingAdapter(
+
+class ProductFromOfferPagingAdapter(
     private val glide: GlideRequests,
     private val clickListener: OnClickListener,
 ) : PagingDataAdapter<Product, RecyclerView.ViewHolder>(GridViewDiffCallback) {
@@ -17,13 +18,13 @@ class ComparePagingAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             R.layout.item_product ->
-                (holder as ProductViewHolder).bind(getItem(position))
+                (holder as ProductFromOfferVh).bind(getItem(position))
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.item_product -> ProductViewHolder.create(parent, glide, clickListener)
+            R.layout.item_product -> ProductFromOfferVh.create(parent, glide, clickListener)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
     }

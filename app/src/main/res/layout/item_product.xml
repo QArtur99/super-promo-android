@@ -62,52 +62,11 @@
         tools:text="Message" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/col_v1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/col_v2"
-        app:layout_constraintStart_toEndOf="@id/productImgWrapper"
-        app:layout_constraintTop_toBottomOf="@id/name">
-
-        <TextView
-            android:id="@+id/subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Message" />
-
-        <TextView
-            android:id="@+id/sth2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/subtitle"
-            tools:text="Message" />
-
-        <TextView
-            android:id="@+id/promo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sth2"
-            tools:text="Message" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/col_v2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/col_v1"
+        app:layout_constraintStart_toEndOf="@id/productImgWrapper"
         app:layout_constraintTop_toBottomOf="@id/name">
 
         <TextView
@@ -132,7 +91,7 @@
             tools:text="Message" />
 
         <TextView
-            android:id="@+id/promoInfo"
+            android:id="@+id/details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 

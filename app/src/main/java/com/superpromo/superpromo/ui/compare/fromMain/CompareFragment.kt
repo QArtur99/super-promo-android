@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.CompareViewModel
-import com.superpromo.superpromo.ui.compare.adapter.product.ComparePagingAdapter
-import com.superpromo.superpromo.ui.compare.adapter.product.load.CompareStateAdapter
+import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainPagingAdapter
+import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainStateAdapter
+import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferStateAdapter
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -32,7 +33,7 @@ class CompareFragment : Fragment() {
 
     private val compareViewModel: CompareViewModel by viewModels()
     private lateinit var binding: FragmentCompareBinding
-    private lateinit var adapter: ComparePagingAdapter
+    private lateinit var adapter: ProductFromMainPagingAdapter
     private val bundle: CompareFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -68,13 +69,13 @@ class CompareFragment : Fragment() {
 
     private fun initAdapter() {
         val glide = GlideApp.with(this)
-        adapter = ComparePagingAdapter(glide, onProductClickListener())
+        adapter = ProductFromMainPagingAdapter(glide, onProductClickListener())
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
         )
         binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = CompareStateAdapter(adapter),
-            footer = CompareStateAdapter(adapter)
+            header = ProductFromMainStateAdapter(adapter),
+            footer = ProductFromMainStateAdapter(adapter)
         )
 
         lifecycleScope.launchWhenCreated {
@@ -102,7 +103,7 @@ class CompareFragment : Fragment() {
         }
     }
 
-    private fun onProductClickListener() = ComparePagingAdapter.OnClickListener { view, product ->
+    private fun onProductClickListener() = ProductFromMainPagingAdapter.OnClickListener { view, product ->
 
     }
 
