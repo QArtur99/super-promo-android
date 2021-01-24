@@ -10,14 +10,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val sharedViewModel: SharedViewModel by viewModels()
+    private val sharedProductVm: SharedProductVm by viewModels()
     private val sharedSuggestionVm : SharedSuggestionVm by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarGradiant(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        sharedViewModel.run { }
+        sharedProductVm.run { }
         sharedSuggestionVm.run { }
     }
 }

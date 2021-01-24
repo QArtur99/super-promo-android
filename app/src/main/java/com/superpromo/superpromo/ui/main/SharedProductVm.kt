@@ -9,7 +9,7 @@ import com.superpromo.superpromo.repository.state.ResultStatus
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class SharedViewModel @ViewModelInject constructor(
+class SharedProductVm @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val superPromoRepository: SuperPromoRepository
 ) : ViewModel() {

@@ -14,14 +14,14 @@ import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFragment
-import com.superpromo.superpromo.ui.main.SharedViewModel
+import com.superpromo.superpromo.ui.main.SharedProductVm
 import com.superpromo.superpromo.ui.offer.adapter.ShopListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OfferFragment : Fragment() {
 
-    private val sharedViewModel: SharedViewModel by viewModels({ requireActivity() })
+    private val sharedProductVm: SharedProductVm by viewModels({ requireActivity() })
     private val offerViewModel: OfferViewModel by viewModels()
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ShopListAdapter
@@ -36,7 +36,7 @@ class OfferFragment : Fragment() {
         initQuery()
         initAdapter()
         initSwipeToRefresh()
-        sharedViewModel.shops.observe(viewLifecycleOwner, {
+        sharedProductVm.shops.observe(viewLifecycleOwner, {
             adapter.submitList(it)
             binding.swipeRefresh.isRefreshing = false
         })
@@ -47,12 +47,12 @@ class OfferFragment : Fragment() {
     private fun initQuery() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { sharedViewModel.showShops(newText) }
+                newText?.let { sharedProductVm.showShops(newText) }
                 return true
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { sharedViewModel.showShops(query) }
+                query?.let { sharedProductVm.showShops(query) }
                 return true
             }
         })
@@ -68,7 +68,7 @@ class OfferFragment : Fragment() {
     }
 
     private fun initSwipeToRefresh() {
-        binding.swipeRefresh.setOnRefreshListener { sharedViewModel.getShops() }
+        binding.swipeRefresh.setOnRefreshListener { sharedProductVm.getShops() }
     }
 
     private fun onShopClickListener() = ShopListAdapter.OnClickListener { view, product ->
