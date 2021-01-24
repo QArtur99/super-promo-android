@@ -16,6 +16,7 @@ data class ProductContainer(
 data class Product(
     val id: Int,
     val shopId: Int,
+    var shopName: String?,
     val name: String?,
     val subtitle: String?,
     val price: Double?,

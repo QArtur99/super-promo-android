@@ -10,6 +10,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.superpromo.superpromo.repository.main.SuperPromoRepository
 import com.superpromo.superpromo.ui.data.SearchModel
+import com.superpromo.superpromo.ui.main.SharedProductVm
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 

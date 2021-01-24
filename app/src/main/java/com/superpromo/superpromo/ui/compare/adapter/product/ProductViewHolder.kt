@@ -51,8 +51,7 @@ class ProductViewHolder constructor(
         product = item
         bingImg(item)
         val priceString = FormatPrice.getCurrency(item?.price, "zł")
-//            shopName.text = item?.shopId.toString()
-        shopName.text = "Żabka"
+        shopName.text = item?.shopName
         name.text = item?.name
         subtitle.text = item?.subtitle
         price.text = priceString

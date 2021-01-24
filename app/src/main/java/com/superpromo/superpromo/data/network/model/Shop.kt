@@ -8,6 +8,7 @@ import kotlinx.parcelize.Parcelize
 @JsonClass(generateAdapter = true)
 data class Shop (
     val id: Int,
+    val categoryId: Int,
     val name: String,
     val imgUrl: String?,
     val url: String?,

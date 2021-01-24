@@ -80,21 +80,25 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutine"
 
-    // Retrofit for networking
+    //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_adapter"
 
-    // Paging
+    //Room
+    implementation "androidx.room:room-runtime:$room"
+    kapt "androidx.room:room-compiler:$room"
+
+    //Paging
     implementation "androidx.paging:paging-runtime-ktx:$paging"
 
-    // hilt
+    //Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
-    // hilt test
+    //Hilt test
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
 
