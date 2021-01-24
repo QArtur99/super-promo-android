@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Suggestion(
-    val suggestion: String,
+    val name: String,
 ) : Parcelable

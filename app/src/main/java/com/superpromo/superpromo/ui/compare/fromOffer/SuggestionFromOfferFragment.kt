@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
-import com.superpromo.superpromo.databinding.FragmentSuggestionBinding
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFragment.Companion.KEY_SHOP_ID
 import com.superpromo.superpromo.ui.main.SharedSuggestionVm
 import com.superpromo.superpromo.ui.compare.adapter.suggestion.SuggestionListAdapter
@@ -49,7 +48,7 @@ class SuggestionFromOfferFragment : Fragment() {
             binding.searchView.setQuery(it, false)
             binding.searchView.requestFocus()
         }
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -81,8 +80,8 @@ class SuggestionFromOfferFragment : Fragment() {
     }
 
     private fun onSuggestionClickListener() = SuggestionListAdapter.OnClickListener { view, item ->
-        binding.searchView.setQuery(item.suggestion, false)
-        goToCompare(item.suggestion)
+        binding.searchView.setQuery(item.name, false)
+        goToCompare(item.name)
     }
 
     private fun goToCompare(query: String) {

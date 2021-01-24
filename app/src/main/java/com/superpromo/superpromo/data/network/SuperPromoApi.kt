@@ -13,7 +13,9 @@ interface SuperPromoApi {
     fun getShopListAsync(): Deferred<List<Shop>>
 
     @GET("/product/getSuggestions")
-    fun getProductSuggestionListAsync(): Deferred<List<Suggestion>>
+    fun getProductSuggestionListAsync(
+        @Query("categoryId") categoryId: Int? = null
+    ): Deferred<List<Suggestion>>
 
     @GET("/product/getProducts")
     fun getProductListAsync(

@@ -36,7 +36,7 @@ class SuggestionListAdapter(
 
     companion object GridViewDiffCallback : DiffUtil.ItemCallback<Suggestion>() {
         override fun areItemsTheSame(oldItem: Suggestion, newItem: Suggestion): Boolean {
-            return oldItem.suggestion == newItem.suggestion
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: Suggestion, newItem: Suggestion): Boolean {

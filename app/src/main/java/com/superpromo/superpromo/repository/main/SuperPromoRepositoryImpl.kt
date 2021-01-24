@@ -25,12 +25,7 @@ class SuperPromoRepositoryImpl @Inject constructor(
 
     override suspend fun getProductSuggestions(): ResultStatus<List<Suggestion>> = safeApiCall(
         call = {
-//            superPromoApi.getProductSuggestionListAsync().await()
-            listOf(
-                Suggestion("makaron"),
-                Suggestion("kanapka"),
-                Suggestion("sos"),
-            )
+            superPromoApi.getProductSuggestionListAsync(1).await()
         },
         errorMessage = "getProductSuggestions error",
     )

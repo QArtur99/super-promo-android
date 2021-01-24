@@ -26,7 +26,7 @@ class SharedSuggestionVm @ViewModelInject constructor(
         addSource(suggestionFull) { value = it }
         addSource(filterByShopName) { name ->
             value = suggestionFull.value?.filter {
-                it.suggestion.contains(name, ignoreCase = true)
+                it.name.contains(name, ignoreCase = true)
             } ?: return@addSource
         }
     }

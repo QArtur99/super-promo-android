@@ -39,6 +39,6 @@ class SuggestionViewHolder constructor(
 
     fun bind(item: Suggestion?) {
         this.item = item
-        suggestion.text = item?.suggestion
+        suggestion.text = item?.name
     }
 }
