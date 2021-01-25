@@ -45,7 +45,7 @@ class OfferFragment : Fragment() {
     }
 
     private fun initQuery() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.appBar.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let { sharedProductVm.showShops(newText) }
                 return true

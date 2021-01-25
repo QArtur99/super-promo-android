@@ -7,6 +7,7 @@ import okhttp3.Response
 class HostSelectionInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
+        chain.connection()
 
         val newUrl = request.url.newBuilder()
             .host(BuildConfig.HOST_URL)

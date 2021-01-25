@@ -53,13 +53,13 @@ class SuggestionFragment : Fragment() {
         onNavBackStackListener {
             if (it.containsKey(KEY_QUERY)) {
                 val query = it.get(KEY_QUERY) as String
-                binding.searchView.setQuery(query, false)
+                binding.appBar.searchView.setQuery(query, false)
             }
         }
     }
 
     private fun initQuery() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.appBar.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let { sharedViewModel.showSuggestions(newText) }
                 return true
@@ -86,12 +86,12 @@ class SuggestionFragment : Fragment() {
     }
 
     private fun onSuggestionClickListener() = SuggestionListAdapter.OnClickListener { view, item ->
-        binding.searchView.setQuery(item.name, false)
+        binding.appBar.searchView.setQuery(item.name, false)
         goToCompare(item.name)
     }
 
     private fun goToCompare(query: String) {
-        binding.searchView.clearFocus()
+        binding.appBar.searchView.clearFocus()
         val bundle = bundleOf(
             KEY_SHOP_ID to null,
             KEY_QUERY to query

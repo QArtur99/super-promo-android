@@ -50,7 +50,7 @@ class CompareFragment : Fragment() {
             compareViewModel.showShop(it.toInt())
         }
         bundle.query?.let {
-            binding.searchView.setQuery(it, false)
+            binding.appBar.searchView.setQuery(it, false)
             compareViewModel.showProducts(it)
         }
         setHasOptionsMenu(true);
@@ -58,9 +58,9 @@ class CompareFragment : Fragment() {
     }
 
     private fun initQuerySuggestion() {
-        binding.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
+        binding.appBar.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                val txt = binding.searchView.query.toString()
+                val txt = binding.appBar.searchView.query.toString()
                 val bundle = bundleOf(SuggestionFragment.KEY_QUERY to txt)
                 setNavigationResult(bundle)
             }
@@ -83,9 +83,9 @@ class CompareFragment : Fragment() {
                 binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
                 if (loadStates.refresh is LoadState.Error) {
                     if (adapter.itemCount > 0) {
-                        binding.emptyView.visibility = View.GONE
+                        binding.emptyView.emptyView.visibility = View.GONE
                     } else {
-                        binding.emptyView.visibility = View.VISIBLE
+                        binding.emptyView.emptyView.visibility = View.VISIBLE
                     }
                 }
             }

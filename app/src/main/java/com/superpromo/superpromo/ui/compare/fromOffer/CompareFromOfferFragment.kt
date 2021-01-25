@@ -60,16 +60,16 @@ class CompareFromOfferFragment : Fragment() {
         onNavBackStackListener {
             if (it.containsKey(SuggestionFragment.KEY_QUERY)) {
                 val query = it.get(SuggestionFragment.KEY_QUERY) as String
-                binding.searchView.setQuery(query, false)
+                binding.appBar.searchView.setQuery(query, false)
                 compareViewModel.showProducts(query)
             }
         }
     }
 
     private fun initQuerySuggestion() {
-        binding.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
+        binding.appBar.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                val txt = binding.searchView.query.toString()
+                val txt = binding.appBar.searchView.query.toString()
                 val bundle = bundleOf(SuggestionFragment.KEY_QUERY to txt)
                 findNavController().navigate(R.id.action_compare_to_suggestion_product_from_offer, bundle)
             }
@@ -92,9 +92,9 @@ class CompareFromOfferFragment : Fragment() {
                 binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
                 if (loadStates.refresh is LoadState.Error) {
                     if (adapter.itemCount > 0) {
-                        binding.emptyView.visibility = View.GONE
+                        binding.emptyView.emptyView.visibility = View.GONE
                     } else {
-                        binding.emptyView.visibility = View.VISIBLE
+                        binding.emptyView.emptyView.visibility = View.VISIBLE
                     }
                 }
             }

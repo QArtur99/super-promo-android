@@ -1,9 +1,11 @@
 package com.superpromo.superpromo.di
 
+import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.superpromo.superpromo.BuildConfig
 import com.superpromo.superpromo.data.network.SuperPromoApi
+import com.superpromo.superpromo.data.network.interceptor.ConnectionInterceptor
 import com.superpromo.superpromo.data.network.interceptor.HostSelectionInterceptor
 import dagger.Module
 import dagger.Provides
@@ -33,11 +35,17 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideConnectionInterceptor(context: Context) = ConnectionInterceptor(context)
+
+    @Provides
+    @Singleton
     fun provideOkHttpClient(
         interceptor: HttpLoggingInterceptor,
+        connectionInterceptor: ConnectionInterceptor,
         hostSelectionInterceptor: HostSelectionInterceptor
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(interceptor)
+        .addInterceptor(connectionInterceptor)
         .addInterceptor(hostSelectionInterceptor)
         .build()
 

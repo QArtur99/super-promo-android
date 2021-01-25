@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_name">SuperPromo</string>
+    <string name="retry">Retry</string>
+    <string name="no_connection">Sprawdź połączenie z internetem.</string>
+    <string name="no_connection_sub_text">Kliknij, aby spróbować ponownie.</string>
+    <string name="server_problem">Server not responding</string>
+    <string name="server_problem_sub_text">We will fix it as soon as possible</string>
+    <string name="empty">Nie znaleźono produktu.</string>
+    <string name="empty_sub_text">Kliknij, aby spróbować ponownie.</string>
 </resources>
