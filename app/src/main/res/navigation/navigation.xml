@@ -36,8 +36,8 @@
 
     <fragment
         android:id="@+id/fragment_compare"
-        android:name="com.superpromo.superpromo.ui.compare.fromMain.CompareFragment"
-        android:label="CompareFragment">
+        android:name="com.superpromo.superpromo.ui.compare.fromMain.CompareFromMainFragment"
+        android:label="CompareFromMainFragment">
 
         <argument
             android:name="shopId"
@@ -69,7 +69,7 @@
 
     <fragment
         android:id="@+id/fragment_suggestion_product"
-        android:name="com.superpromo.superpromo.ui.compare.fromMain.SuggestionFragment"
+        android:name="com.superpromo.superpromo.ui.compare.fromMain.SuggestionFromMainFragment"
         android:label="SuggestionFragment">
 
         <action

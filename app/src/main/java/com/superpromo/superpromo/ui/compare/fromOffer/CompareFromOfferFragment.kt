@@ -10,21 +10,23 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.CompareViewModel
-import com.superpromo.superpromo.ui.compare.fromMain.SuggestionFragment
 import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferPagingAdapter
 import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferStateAdapter
+import com.superpromo.superpromo.ui.compare.fromMain.SuggestionFromMainFragment
 import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
+import timber.log.Timber
 
 @AndroidEntryPoint
 class CompareFromOfferFragment : Fragment() {
@@ -37,6 +39,7 @@ class CompareFromOfferFragment : Fragment() {
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ProductFromOfferPagingAdapter
     private val bundle: CompareFromOfferFragmentArgs by navArgs()
+    private var loading = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,8 +61,8 @@ class CompareFromOfferFragment : Fragment() {
 
     private fun onNavigationResult() {
         onNavBackStackListener {
-            if (it.containsKey(SuggestionFragment.KEY_QUERY)) {
-                val query = it.get(SuggestionFragment.KEY_QUERY) as String
+            if (it.containsKey(SuggestionFromMainFragment.KEY_QUERY)) {
+                val query = it.get(SuggestionFromMainFragment.KEY_QUERY) as String
                 binding.appBar.searchView.setQuery(query, false)
                 compareViewModel.showProducts(query)
             }
@@ -70,8 +73,11 @@ class CompareFromOfferFragment : Fragment() {
         binding.appBar.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 val txt = binding.appBar.searchView.query.toString()
-                val bundle = bundleOf(SuggestionFragment.KEY_QUERY to txt)
-                findNavController().navigate(R.id.action_compare_to_suggestion_product_from_offer, bundle)
+                val bundle = bundleOf(SuggestionFromMainFragment.KEY_QUERY to txt)
+                findNavController().navigate(
+                    R.id.action_compare_to_suggestion_product_from_offer,
+                    bundle
+                )
             }
         }
     }
@@ -90,13 +96,7 @@ class CompareFromOfferFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             adapter.loadStateFlow.collectLatest { loadStates ->
                 binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
-                if (loadStates.refresh is LoadState.Error) {
-                    if (adapter.itemCount > 0) {
-                        binding.emptyView.emptyView.visibility = View.GONE
-                    } else {
-                        binding.emptyView.emptyView.visibility = View.VISIBLE
-                    }
-                }
+                handleError(loadStates)
             }
         }
         lifecycleScope.launchWhenCreated {
@@ -112,12 +112,45 @@ class CompareFromOfferFragment : Fragment() {
         }
     }
 
-    private fun onProductClickListener() = ProductFromOfferPagingAdapter.OnClickListener { view, product ->
-
+    private fun handleError(loadStates: CombinedLoadStates) {
+        when (loadStates.refresh) {
+            is LoadState.Error -> {
+                val stateError = loadStates.refresh as LoadState.Error
+                if (adapter.itemCount > 0) {
+                    binding.emptyView.emptyView.visibility = View.GONE
+                    binding.noConnection.noConnection.visibility = View.GONE
+                } else {
+                    binding.emptyView.emptyView.visibility = View.GONE
+                    binding.noConnection.noConnection.visibility = View.VISIBLE
+                }
+            }
+            is LoadState.NotLoading -> {
+                if (adapter.itemCount == 0 && loading) {
+                    binding.emptyView.emptyView.visibility = View.VISIBLE
+                    binding.noConnection.noConnection.visibility = View.GONE
+                } else {
+                    binding.emptyView.emptyView.visibility = View.GONE
+                    binding.noConnection.noConnection.visibility = View.GONE
+                }
+                loading = false
+            }
+            else -> {
+                loading = true
+            }
+        }
     }
 
+
+    private fun onProductClickListener() =
+        ProductFromOfferPagingAdapter.OnClickListener { view, product ->
+
+        }
+
     private fun initSwipeToRefresh() {
-        binding.swipeRefresh.setOnRefreshListener { adapter.refresh() }
+        binding.swipeRefresh.setOnRefreshListener {
+            Timber.e("initSwipeToRefresh")
+            adapter.refresh()
+        }
     }
 
 }

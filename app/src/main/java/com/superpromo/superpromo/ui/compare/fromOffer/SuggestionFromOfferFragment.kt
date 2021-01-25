@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
-import com.superpromo.superpromo.ui.compare.fromMain.CompareFragment.Companion.KEY_SHOP_ID
+import com.superpromo.superpromo.ui.compare.fromMain.CompareFromMainFragment.Companion.KEY_SHOP_ID
 import com.superpromo.superpromo.ui.main.SharedSuggestionVm
 import com.superpromo.superpromo.ui.compare.adapter.suggestion.SuggestionListAdapter
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
