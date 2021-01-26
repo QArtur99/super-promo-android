@@ -13,15 +13,16 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
+import com.superpromo.superpromo.repository.state.State
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFromMainFragment
-import com.superpromo.superpromo.ui.main.SharedProductVm
+import com.superpromo.superpromo.ui.main.SharedShopVm
 import com.superpromo.superpromo.ui.offer.adapter.ShopListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OfferFragment : Fragment() {
 
-    private val sharedProductVm: SharedProductVm by viewModels({ requireActivity() })
+    private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val offerViewModel: OfferViewModel by viewModels()
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ShopListAdapter
@@ -36,23 +37,54 @@ class OfferFragment : Fragment() {
         initQuery()
         initAdapter()
         initSwipeToRefresh()
-        sharedProductVm.shops.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
-            binding.swipeRefresh.isRefreshing = false
-        })
+
+        observeShops()
 
         return binding.root
+    }
+
+    private fun observeShops() {
+        sharedShopVm.shops.observe(viewLifecycleOwner, {
+            when (it.state) {
+                is State.Loading -> {
+                    binding.swipeRefresh.isRefreshing = true
+                    binding.noConnection.noConnection.visibility = View.GONE
+                    binding.emptyView.emptyView.visibility = View.GONE
+                }
+                is State.Success -> {
+                    adapter.submitList(it.shopList)
+                    binding.swipeRefresh.isRefreshing = false
+                    if (it.shopList.isEmpty()) {
+                        binding.noConnection.noConnection.visibility = View.GONE
+                        binding.emptyView.emptyView.visibility = View.VISIBLE
+                    } else {
+                        binding.noConnection.noConnection.visibility = View.GONE
+                        binding.emptyView.emptyView.visibility = View.GONE
+                    }
+                }
+                is State.Error -> {
+                    binding.swipeRefresh.isRefreshing = false
+                    if (it.shopList.isEmpty()) {
+                        binding.noConnection.noConnection.visibility = View.VISIBLE
+                        binding.emptyView.emptyView.visibility = View.GONE
+                    } else {
+                        binding.noConnection.noConnection.visibility = View.GONE
+                        binding.emptyView.emptyView.visibility = View.GONE
+                    }
+                }
+            }
+        })
     }
 
     private fun initQuery() {
         binding.appBar.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { sharedProductVm.showShops(newText) }
+                newText?.let { sharedShopVm.showShops(newText) }
                 return true
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { sharedProductVm.showShops(query) }
+                query?.let { sharedShopVm.showShops(query) }
                 return true
             }
         })
@@ -68,7 +100,7 @@ class OfferFragment : Fragment() {
     }
 
     private fun initSwipeToRefresh() {
-        binding.swipeRefresh.setOnRefreshListener { sharedProductVm.getShops() }
+        binding.swipeRefresh.setOnRefreshListener { sharedShopVm.getShops() }
     }
 
     private fun onShopClickListener() = ShopListAdapter.OnClickListener { view, product ->

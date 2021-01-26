@@ -6,6 +6,10 @@
     <string name="no_connection_sub_text">Kliknij, aby spróbować ponownie.</string>
     <string name="server_problem">Server not responding</string>
     <string name="server_problem_sub_text">We will fix it as soon as possible</string>
-    <string name="empty">Nie znaleźono produktu.</string>
-    <string name="empty_sub_text">Kliknij, aby spróbować ponownie.</string>
+    <string name="no_product">Nie znaleźono produktu.</string>
+    <string name="no_product_sub_text">Kliknij, aby spróbować ponownie.</string>
+    <string name="no_shop">Nie znaleźono produktu.</string>
+    <string name="no_shop_sub_text">Kliknij, aby spróbować ponownie.</string>
+    <string name="no_suggestion">Brak podpowiedzi.</string>
+    <string name="no_suggestion_sub_text"/>
 </resources>

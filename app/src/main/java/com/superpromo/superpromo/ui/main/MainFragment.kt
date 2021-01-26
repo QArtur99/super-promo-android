@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
+    private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val sharedSuggestionVm: SharedSuggestionVm by viewModels({ requireActivity() })
     private val movieDetailViewModel: MainViewModel by viewModels()
 
@@ -25,10 +26,10 @@ class MainFragment : Fragment() {
     ): View {
         val binding = FragmentStartBinding.inflate(inflater)
         binding.offer.setOnClickListener {
+            sharedShopVm.showShops("")
             findNavController().navigate(R.id.action_start_to_offer)
         }
         binding.compare.setOnClickListener {
-            sharedSuggestionVm.suggestions.observe(viewLifecycleOwner, {})
             sharedSuggestionVm.showSuggestions("")
             findNavController().navigate(R.id.action_start_to_suggestion)
         }

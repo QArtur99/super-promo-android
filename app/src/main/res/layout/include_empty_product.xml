@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/emptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="108dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/empty_image"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_baseline_web_asset_24" />
+
+        <TextView
+            android:id="@+id/empty_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_image"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/no_product"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/empty_subtitle_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_title_text"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:paddingTop="@dimen/padding_xsmall"
+            android:text="@string/no_product_sub_text"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="#A2AAB0"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</merge>

@@ -33,7 +33,7 @@
 
         <include
             android:id="@+id/emptyView"
-            layout="@layout/include_empty" />
+            layout="@layout/include_empty_product" />
         <include
             android:id="@+id/noConnection"
             layout="@layout/include_no_network" />

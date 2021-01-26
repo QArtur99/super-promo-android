@@ -1,6 +1,8 @@
 package com.superpromo.superpromo.ui.compare.fromOffer
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +41,6 @@ class CompareFromOfferFragment : Fragment() {
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ProductFromOfferPagingAdapter
     private val bundle: CompareFromOfferFragmentArgs by navArgs()
-    private var loading = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +56,7 @@ class CompareFromOfferFragment : Fragment() {
         bundle.shopId?.let {
             compareViewModel.showShop(it.toInt())
         }
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -94,10 +95,13 @@ class CompareFromOfferFragment : Fragment() {
         )
 
         lifecycleScope.launchWhenCreated {
-            adapter.loadStateFlow.collectLatest { loadStates ->
-                binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
-                handleError(loadStates)
-            }
+            adapter.loadStateFlow
+                .distinctUntilChangedBy { it.refresh }
+                .collectLatest { loadStates ->
+                    Timber.e(loadStates.refresh.toString())
+                    binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
+                    handleError(loadStates)
+                }
         }
         lifecycleScope.launchWhenCreated {
             compareViewModel.posts.collectLatest {
@@ -114,28 +118,31 @@ class CompareFromOfferFragment : Fragment() {
 
     private fun handleError(loadStates: CombinedLoadStates) {
         when (loadStates.refresh) {
+            is LoadState.Loading -> {
+                binding.emptyView.emptyView.visibility = View.GONE
+                binding.noConnection.noConnection.visibility = View.GONE
+            }
             is LoadState.Error -> {
                 val stateError = loadStates.refresh as LoadState.Error
-                if (adapter.itemCount > 0) {
-                    binding.emptyView.emptyView.visibility = View.GONE
-                    binding.noConnection.noConnection.visibility = View.GONE
-                } else {
+                if (adapter.itemCount == 0) {
                     binding.emptyView.emptyView.visibility = View.GONE
                     binding.noConnection.noConnection.visibility = View.VISIBLE
+                } else {
+                    binding.emptyView.emptyView.visibility = View.GONE
+                    binding.noConnection.noConnection.visibility = View.GONE
                 }
             }
             is LoadState.NotLoading -> {
-                if (adapter.itemCount == 0 && loading) {
-                    binding.emptyView.emptyView.visibility = View.VISIBLE
-                    binding.noConnection.noConnection.visibility = View.GONE
+                if (adapter.itemCount == 0) {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        if (adapter.itemCount != 0) return@postDelayed
+                        binding.emptyView.emptyView.visibility = View.VISIBLE
+                        binding.noConnection.noConnection.visibility = View.GONE
+                    }, 300)
                 } else {
                     binding.emptyView.emptyView.visibility = View.GONE
                     binding.noConnection.noConnection.visibility = View.GONE
                 }
-                loading = false
-            }
-            else -> {
-                loading = true
             }
         }
     }

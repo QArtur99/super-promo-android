@@ -1,10 +1,10 @@
 package com.superpromo.superpromo.repository.state
 
-sealed class ResultStatus<out R> {
+sealed class ResultApi<out T> {
 
-    object Loading : ResultStatus<Nothing>()
-    data class Success<out T>(val data: T) : ResultStatus<T>()
-    data class Error(val code: Int, val message: String) : ResultStatus<Nothing>()
+    object Loading : ResultApi<Nothing>()
+    data class Success<out T>(val data: T) : ResultApi<T>()
+    data class Error(val code: Int, val message: String) : ResultApi<Nothing>()
 
     val succeeded: Boolean
         get() = this is Success<*> && data != null

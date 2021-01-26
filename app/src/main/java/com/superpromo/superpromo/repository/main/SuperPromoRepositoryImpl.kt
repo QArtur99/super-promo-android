@@ -2,7 +2,6 @@ package com.superpromo.superpromo.repository.main
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.superpromo.superpromo.data.db.SuperPromoDao
 import com.superpromo.superpromo.data.db.SuperPromoDb
 import com.superpromo.superpromo.data.network.SuperPromoApi
 import com.superpromo.superpromo.data.network.model.Shop
@@ -10,7 +9,7 @@ import com.superpromo.superpromo.data.network.model.Suggestion
 import com.superpromo.superpromo.di.DefaultDispatcher
 import com.superpromo.superpromo.di.IoDispatcher
 import com.superpromo.superpromo.repository.BaseRepository
-import com.superpromo.superpromo.repository.state.ResultStatus
+import com.superpromo.superpromo.repository.state.ResultApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -24,7 +23,7 @@ class SuperPromoRepositoryImpl @Inject constructor(
 
     private val shopMap = HashMap<Int, Shop>()
 
-    override suspend fun getShops(): ResultStatus<List<Shop>> = safeApiCall(
+    override suspend fun getShops(): ResultApi<List<Shop>> = safeApiCall(
         call = {
             val result = superPromoApi.getShopListAsync().await()
             shopsToMap(result)
@@ -39,7 +38,7 @@ class SuperPromoRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getProductSuggestions(): ResultStatus<List<Suggestion>> = safeApiCall(
+    override suspend fun getProductSuggestions(): ResultApi<List<Suggestion>> = safeApiCall(
         call = {
             superPromoApi.getProductSuggestionListAsync(1).await()
         },

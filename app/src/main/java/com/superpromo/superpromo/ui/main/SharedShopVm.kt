@@ -5,11 +5,15 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.superpromo.superpromo.data.network.model.Shop
 import com.superpromo.superpromo.repository.main.SuperPromoRepository
-import com.superpromo.superpromo.repository.state.ResultStatus
+import com.superpromo.superpromo.repository.state.ResultApi
+import com.superpromo.superpromo.repository.state.State
+import com.superpromo.superpromo.ui.data.ShopModel
+import com.superpromo.superpromo.ui.util.ext.addSourceInvoke
+import com.superpromo.superpromo.ui.util.unaccent
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class SharedProductVm @ViewModelInject constructor(
+class SharedShopVm @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val superPromoRepository: SuperPromoRepository
 ) : ViewModel() {
@@ -18,16 +22,20 @@ class SharedProductVm @ViewModelInject constructor(
         const val KEY_FILTER_SHOPS = "shopFilter"
     }
 
+    private val _shopErrorState = MutableLiveData<State>(State.Loading)
+    private val shopErrorState: LiveData<State> = _shopErrorState
     private val _shopsFull = savedStateHandle.getLiveData<List<Shop>>(KEY_SHOPS)
     private val shopsFull = _shopsFull.map { it }
     private val _filterByShopName = savedStateHandle.getLiveData<String>(KEY_FILTER_SHOPS)
     private val filterByShopName = _filterByShopName.map { it }
-    val shops = MediatorLiveData<List<Shop>>().apply {
-        addSource(shopsFull) { value = it }
-        addSource(filterByShopName) { name ->
-            value = shopsFull.value?.filter {
-                it.name.contains(name, ignoreCase = true)
-            } ?: return@addSource
+    val shops = MediatorLiveData<ShopModel>().apply {
+        value = ShopModel(emptyList(), "", State.Loading)
+        addSourceInvoke(shopErrorState) { value?.state = it }
+        addSourceInvoke(shopsFull) { value?.shopList = it }
+        addSourceInvoke(filterByShopName) { name ->
+            value?.shopList = shopsFull.value?.filter {
+                it.name.unaccent().contains(name.unaccent(), ignoreCase = true)
+            } ?: emptyList()
         }
     }
 
@@ -39,12 +47,15 @@ class SharedProductVm @ViewModelInject constructor(
 
     fun getShops() {
         viewModelScope.launch {
+            _shopErrorState.value = State.Loading
             when (val shopList = superPromoRepository.getShops()) {
-                is ResultStatus.Success -> {
+                is ResultApi.Success -> {
                     savedStateHandle.set(KEY_SHOPS, shopList.data)
+                    _shopErrorState.value = State.Success
                 }
-                is ResultStatus.Error -> {
+                is ResultApi.Error -> {
                     Timber.e(shopList.message)
+                    _shopErrorState.value = State.Error
                 }
             }
         }

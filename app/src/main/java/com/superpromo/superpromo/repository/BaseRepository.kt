@@ -2,7 +2,7 @@ package com.superpromo.superpromo.repository
 
 import com.superpromo.superpromo.data.exception.NetworkException
 import com.superpromo.superpromo.di.IoDispatcher
-import com.superpromo.superpromo.repository.state.ResultStatus
+import com.superpromo.superpromo.repository.state.ResultApi
 import com.superpromo.superpromo.repository.util.ApiCodes
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -13,14 +13,14 @@ open class BaseRepository(
     protected suspend fun <T> safeApiCall(
         call: suspend () -> T,
         errorMessage: String
-    ): ResultStatus<T> = withContext(ioDispatcher) {
+    ): ResultApi<T> = withContext(ioDispatcher) {
         try {
             val response = call.invoke()
-            ResultStatus.Success(response)
+            ResultApi.Success(response)
         } catch (e: Exception) {
             when (e) {
-                is NetworkException -> ResultStatus.Error(ApiCodes.NO_CONNECTION, e.toString())
-                else -> ResultStatus.Error(ApiCodes.UNKNOWN, e.toString())
+                is NetworkException -> ResultApi.Error(ApiCodes.NO_CONNECTION, e.toString())
+                else -> ResultApi.Error(ApiCodes.UNKNOWN, e.toString())
             }
         }
     }

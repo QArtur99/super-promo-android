@@ -11,10 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
-import com.superpromo.superpromo.databinding.FragmentCompareBinding
+import com.superpromo.superpromo.databinding.FragmentSuggestionBinding
+import com.superpromo.superpromo.repository.state.State
+import com.superpromo.superpromo.ui.compare.adapter.suggestion.SuggestionListAdapter
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFromMainFragment.Companion.KEY_SHOP_ID
 import com.superpromo.superpromo.ui.main.SharedSuggestionVm
-import com.superpromo.superpromo.ui.compare.adapter.suggestion.SuggestionListAdapter
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,8 +27,8 @@ class SuggestionFromOfferFragment : Fragment() {
         const val KEY_QUERY = "query"
     }
 
-    private val sharedViewModel: SharedSuggestionVm by viewModels({ requireActivity() })
-    private lateinit var binding: FragmentCompareBinding
+    private val sharedSuggestionVm: SharedSuggestionVm by viewModels({ requireActivity() })
+    private lateinit var binding: FragmentSuggestionBinding
     private lateinit var adapter: SuggestionListAdapter
     private val bundle: SuggestionFromOfferFragmentArgs by navArgs()
 
@@ -36,26 +37,58 @@ class SuggestionFromOfferFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCompareBinding.inflate(inflater)
+        binding = FragmentSuggestionBinding.inflate(inflater)
         initQuery()
         initAdapter()
         initSwipeToRefresh()
-        sharedViewModel.suggestions.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
-            binding.swipeRefresh.isRefreshing = false
-        })
         bundle.query?.let {
             binding.appBar.searchView.setQuery(it, false)
             binding.appBar.searchView.requestFocus()
         }
+
+        observeSuggestions()
+
         setHasOptionsMenu(true)
         return binding.root
+    }
+
+    private fun observeSuggestions() {
+        sharedSuggestionVm.suggestions.observe(viewLifecycleOwner, {
+            when (it.state) {
+                is State.Loading -> {
+                    binding.swipeRefresh.isRefreshing = true
+                    binding.noConnection.noConnection.visibility = View.GONE
+                    binding.emptyView.emptyView.visibility = View.GONE
+                }
+                is State.Success -> {
+                    adapter.submitList(it.suggestionList)
+                    binding.swipeRefresh.isRefreshing = false
+                    if (it.suggestionList.isEmpty()) {
+                        binding.noConnection.noConnection.visibility = View.GONE
+                        binding.emptyView.emptyView.visibility = View.VISIBLE
+                    } else {
+                        binding.noConnection.noConnection.visibility = View.GONE
+                        binding.emptyView.emptyView.visibility = View.GONE
+                    }
+                }
+                is State.Error -> {
+                    binding.swipeRefresh.isRefreshing = false
+                    if (it.suggestionList.isEmpty()) {
+                        binding.noConnection.noConnection.visibility = View.VISIBLE
+                        binding.emptyView.emptyView.visibility = View.GONE
+                    } else {
+                        binding.noConnection.noConnection.visibility = View.GONE
+                        binding.emptyView.emptyView.visibility = View.GONE
+                    }
+                }
+            }
+        })
     }
 
     private fun initQuery() {
         binding.appBar.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { sharedViewModel.showSuggestions(newText) }
+                newText?.let { sharedSuggestionVm.showSuggestions(newText) }
                 return true
             }
 
@@ -76,7 +109,7 @@ class SuggestionFromOfferFragment : Fragment() {
     }
 
     private fun initSwipeToRefresh() {
-        binding.swipeRefresh.setOnRefreshListener { sharedViewModel.getProductSuggestions() }
+        binding.swipeRefresh.setOnRefreshListener { sharedSuggestionVm.getProductSuggestions() }
     }
 
     private fun onSuggestionClickListener() = SuggestionListAdapter.OnClickListener { view, item ->
