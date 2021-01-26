@@ -1,8 +1,6 @@
 package com.superpromo.superpromo.ui.compare.fromOffer
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +26,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
-import timber.log.Timber
 
 @AndroidEntryPoint
 class CompareFromOfferFragment : Fragment() {
@@ -41,6 +38,7 @@ class CompareFromOfferFragment : Fragment() {
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ProductFromOfferPagingAdapter
     private val bundle: CompareFromOfferFragmentArgs by navArgs()
+    private var showEmpty = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,13 +93,10 @@ class CompareFromOfferFragment : Fragment() {
         )
 
         lifecycleScope.launchWhenCreated {
-            adapter.loadStateFlow
-                .distinctUntilChangedBy { it.refresh }
-                .collectLatest { loadStates ->
-                    Timber.e(loadStates.refresh.toString())
-                    binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
-                    handleError(loadStates)
-                }
+            adapter.loadStateFlow.collectLatest { loadStates ->
+                binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
+                handleError(loadStates)
+            }
         }
         lifecycleScope.launchWhenCreated {
             compareViewModel.posts.collectLatest {
@@ -122,23 +117,21 @@ class CompareFromOfferFragment : Fragment() {
                 binding.emptyView.emptyView.visibility = View.GONE
                 binding.noConnection.noConnection.visibility = View.GONE
             }
+            is LoadState.NotLoading -> {
+                if (adapter.itemCount == 0 && showEmpty) {
+                    binding.emptyView.emptyView.visibility = View.VISIBLE
+                    binding.noConnection.noConnection.visibility = View.GONE
+                } else {
+                    binding.emptyView.emptyView.visibility = View.GONE
+                    binding.noConnection.noConnection.visibility = View.GONE
+                }
+                showEmpty = true
+            }
             is LoadState.Error -> {
                 val stateError = loadStates.refresh as LoadState.Error
                 if (adapter.itemCount == 0) {
                     binding.emptyView.emptyView.visibility = View.GONE
                     binding.noConnection.noConnection.visibility = View.VISIBLE
-                } else {
-                    binding.emptyView.emptyView.visibility = View.GONE
-                    binding.noConnection.noConnection.visibility = View.GONE
-                }
-            }
-            is LoadState.NotLoading -> {
-                if (adapter.itemCount == 0) {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        if (adapter.itemCount != 0) return@postDelayed
-                        binding.emptyView.emptyView.visibility = View.VISIBLE
-                        binding.noConnection.noConnection.visibility = View.GONE
-                    }, 300)
                 } else {
                     binding.emptyView.emptyView.visibility = View.GONE
                     binding.noConnection.noConnection.visibility = View.GONE
@@ -154,10 +147,7 @@ class CompareFromOfferFragment : Fragment() {
         }
 
     private fun initSwipeToRefresh() {
-        binding.swipeRefresh.setOnRefreshListener {
-            Timber.e("initSwipeToRefresh")
-            adapter.refresh()
-        }
+        binding.swipeRefresh.setOnRefreshListener { adapter.refresh() }
     }
 
 }

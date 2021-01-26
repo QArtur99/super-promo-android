@@ -1,8 +1,6 @@
 package com.superpromo.superpromo.ui.compare.fromMain
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +19,10 @@ import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainPagi
 import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainStateAdapter
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 
 @AndroidEntryPoint
 class CompareFromMainFragment : Fragment() {
@@ -34,6 +35,7 @@ class CompareFromMainFragment : Fragment() {
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ProductFromMainPagingAdapter
     private val bundle: CompareFromMainFragmentArgs by navArgs()
+    private var showEmpty = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -102,23 +104,21 @@ class CompareFromMainFragment : Fragment() {
                 binding.emptyView.emptyView.visibility = View.GONE
                 binding.noConnection.noConnection.visibility = View.GONE
             }
+            is LoadState.NotLoading -> {
+                if (adapter.itemCount == 0 && showEmpty) {
+                    binding.emptyView.emptyView.visibility = View.VISIBLE
+                    binding.noConnection.noConnection.visibility = View.GONE
+                } else {
+                    binding.emptyView.emptyView.visibility = View.GONE
+                    binding.noConnection.noConnection.visibility = View.GONE
+                }
+                showEmpty = true
+            }
             is LoadState.Error -> {
                 val stateError = loadStates.refresh as LoadState.Error
                 if (adapter.itemCount == 0) {
                     binding.emptyView.emptyView.visibility = View.GONE
                     binding.noConnection.noConnection.visibility = View.VISIBLE
-                } else {
-                    binding.emptyView.emptyView.visibility = View.GONE
-                    binding.noConnection.noConnection.visibility = View.GONE
-                }
-            }
-            is LoadState.NotLoading -> {
-                if (adapter.itemCount == 0) {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        if (adapter.itemCount != 0) return@postDelayed
-                        binding.emptyView.emptyView.visibility = View.VISIBLE
-                        binding.noConnection.noConnection.visibility = View.GONE
-                    }, 300)
                 } else {
                     binding.emptyView.emptyView.visibility = View.GONE
                     binding.noConnection.noConnection.visibility = View.GONE
