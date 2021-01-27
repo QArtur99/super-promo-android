@@ -13,4 +13,5 @@
     <color name="transparent">#00000000</color>
     <color name="iconStart">#FFFFFFFF</color>
     <color name="iconPlaceholder">#FF000000</color>
+    <color name="header_logo">#ffb84d</color>
 </resources>

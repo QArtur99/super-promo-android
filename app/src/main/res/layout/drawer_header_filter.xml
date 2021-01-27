@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="@dimen/padding_small"
-    android:paddingBottom="@dimen/padding_small"
-    android:paddingStart="@dimen/padding_basic"
-    android:paddingEnd="@dimen/padding_basic"
-
-    >
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="6dp"
+    android:padding="@dimen/padding_basic"
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/productImgWrapper"
-        android:layout_width="64dp"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/shopName"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/productImg"
-            android:layout_width="0dp"
+            android:layout_width="24dp"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_close_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,20 +35,43 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/shopName"
+        android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_small"
-        android:layout_alignParentStart="true"
         android:ellipsize="end"
         android:maxLines="1"
+        android:text="Sklepy"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/productImgWrapper"
+        app:layout_constraintEnd_toStartOf="@+id/restore"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Message" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/restore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_settings_backup_restore_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

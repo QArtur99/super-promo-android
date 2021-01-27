@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SuperPromo</string>
+    <string name="app_name">Super Promo</string>
     <string name="retry">Retry</string>
     <string name="no_connection">Connection error.</string>
     <string name="no_connection_sub_text">Tap to try again.</string>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_left"
+    app:startDestination="@id/fragment_menu">
+
+    <fragment
+        android:id="@+id/fragment_menu"
+        android:name="com.superpromo.superpromo.ui.menu_left.MenuFragment"
+        android:label="MenuFragment">
+    </fragment>
+
+</navigation>

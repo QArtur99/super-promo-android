@@ -65,4 +65,10 @@ class SharedShopVm @ViewModelInject constructor(
         savedStateHandle.set(KEY_FILTER_SHOPS, query)
     }
 
+    fun insertShop(shop: Shop) {
+        viewModelScope.launch {
+            superPromoRepository.insertShop(shop)
+        }
+    }
+
 }

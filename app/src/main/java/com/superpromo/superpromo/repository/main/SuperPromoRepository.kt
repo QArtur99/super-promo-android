@@ -11,4 +11,6 @@ interface SuperPromoRepository {
     suspend fun getShops(): ResultApi<List<Shop>>
     suspend fun getProductSuggestions(): ResultApi<List<Suggestion>>
     fun getProducts(shopId: Int?, pageSize: Int, product: String): Flow<PagingData<Product>>
+
+    suspend fun insertShop(shop: Shop)
 }

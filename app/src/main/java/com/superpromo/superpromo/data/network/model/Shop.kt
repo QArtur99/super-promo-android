@@ -13,5 +13,5 @@ data class Shop (
     val imgUrl: String?,
     val url: String?,
     val productCount: Int?,
-    val isAvailable: Boolean?,
+    var isAvailable: Boolean?,
 ) : Parcelable
