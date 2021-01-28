@@ -22,6 +22,7 @@ class DatabaseModule {
             "super_promo_database"
         )
             .fallbackToDestructiveMigration()
+
             .build()
     }
 

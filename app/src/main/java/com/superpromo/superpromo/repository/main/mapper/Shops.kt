@@ -16,5 +16,23 @@ fun Shop.asDbModel(): ShopDb {
         url = this.url,
         productCount = this.productCount,
         isAvailable = this.isAvailable,
+        isAvailableInDb = this.isAvailableInDb,
+    )
+}
+
+fun List<ShopDb>.asDomainModel(): List<Shop> {
+    return map { it.asDomainModel() }
+}
+
+fun ShopDb.asDomainModel(): Shop {
+    return Shop(
+        id = this.id,
+        categoryId = this.categoryId,
+        name = this.name,
+        imgUrl = this.imgUrl,
+        url = this.url,
+        productCount = this.productCount,
+        isAvailable = this.isAvailable,
+        isAvailableInDb = this.isAvailableInDb,
     )
 }

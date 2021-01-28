@@ -106,10 +106,10 @@ class MenuFragment : Fragment() {
         val checkbox = view.findViewById<CheckBox>(R.id.checkbox)
         if (checkbox.isChecked) {
             checkbox.isChecked = false
-            sharedShopVm.insertShop(shop.apply { isAvailable = false })
+            sharedShopVm.insertShop(shop.apply { isAvailableInDb = false })
         } else {
             checkbox.isChecked = true
-            sharedShopVm.insertShop(shop.apply { isAvailable = true })
+            sharedShopVm.insertShop(shop.apply { isAvailableInDb = true })
         }
     }
 }

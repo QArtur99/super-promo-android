@@ -3,6 +3,7 @@ package com.superpromo.superpromo.repository.main
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.superpromo.superpromo.data.db.SuperPromoDb
+import com.superpromo.superpromo.data.db.model.ShopDb
 import com.superpromo.superpromo.data.network.SuperPromoApi
 import com.superpromo.superpromo.data.network.model.Shop
 import com.superpromo.superpromo.data.network.model.Suggestion
@@ -60,9 +61,21 @@ class SuperPromoRepositoryImpl @Inject constructor(
         )
     }.flow
 
-    override suspend fun insertShop(shop: Shop){
-        withContext(ioDispatcher){
+    override suspend fun insertShop(shop: Shop) {
+        withContext(ioDispatcher) {
             superPromoDb.movieDatabaseDao().insert(shop.asDbModel())
+        }
+    }
+
+    override suspend fun deleteShopAll() {
+        withContext(ioDispatcher) {
+            superPromoDb.movieDatabaseDao().deleteAll()
+        }
+    }
+
+    override suspend fun getShopList(): List<ShopDb> {
+        return withContext(ioDispatcher) {
+            superPromoDb.movieDatabaseDao().getItemAll()
         }
     }
 

@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/padding_small"
-    android:paddingBottom="@dimen/padding_small"
+    android:foreground="?attr/selectableItemBackground"
     android:paddingStart="@dimen/padding_basic"
+    android:paddingTop="@dimen/padding_small"
     android:paddingEnd="@dimen/padding_basic"
-    >
+    android:paddingBottom="@dimen/padding_small">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/productImgWrapper"
+        android:id="@+id/closeWrapper"
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_small"
-        app:layout_constraintEnd_toStartOf="@+id/shopName"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shopName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -44,20 +44,20 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkbox"
-        app:layout_constraintStart_toEndOf="@id/productImgWrapper"
+        app:layout_constraintStart_toEndOf="@id/closeWrapper"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Message" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkbox"
-        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:buttonTint="@color/colorPrimary"
+        android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/shopName"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

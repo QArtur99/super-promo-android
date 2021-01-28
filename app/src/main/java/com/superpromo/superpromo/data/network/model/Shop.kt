@@ -6,12 +6,13 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class Shop (
+data class Shop(
     val id: Int,
     val categoryId: Int,
     val name: String,
     val imgUrl: String?,
     val url: String?,
     val productCount: Int?,
-    var isAvailable: Boolean?,
+    val isAvailable: Boolean?,
+    var isAvailableInDb: Boolean = false,
 ) : Parcelable

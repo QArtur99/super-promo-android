@@ -11,8 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentStartBinding
-import com.superpromo.superpromo.ui.util.ext.setStatusBarDark
-import com.superpromo.superpromo.ui.util.ext.setStatusBarTransparent
+import com.superpromo.superpromo.ui.util.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +19,7 @@ class MainFragment : Fragment() {
 
     private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val sharedSuggestionVm: SharedSuggestionVm by viewModels({ requireActivity() })
+    private val sharedDrawerVm: SharedDrawerVm by viewModels({ requireActivity() })
     private val movieDetailViewModel: MainViewModel by viewModels()
     private lateinit var binding: FragmentStartBinding
     private val activityCompat by lazy { activity as AppCompatActivity }
@@ -55,6 +55,7 @@ class MainFragment : Fragment() {
 
             override fun onDrawerOpened(drawerView: View) {
 //                setStatusBarDark()
+//                sharedDrawerVm.onOpenedEnd()
             }
 
             override fun onDrawerClosed(drawerView: View) {
@@ -64,6 +65,9 @@ class MainFragment : Fragment() {
             override fun onDrawerStateChanged(newState: Int) {
 //                TODO("Not yet implemented")
             }
+        })
+        sharedDrawerVm.onCloseEndClick.observe(viewLifecycleOwner, EventObserver {
+            binding.drawer.closeDrawer(GravityCompat.END)
         })
         setHasOptionsMenu(true)
         return binding.root
@@ -88,7 +92,7 @@ class MainFragment : Fragment() {
             }
             android.R.id.home -> {
                 if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
-                    binding.drawer.closeDrawer(GravityCompat.END)
+                    binding.drawer.closeDrawer(GravityCompat.START)
 //                    setStatusBarTransparent()
                 } else {
                     binding.drawer.openDrawer(GravityCompat.START)

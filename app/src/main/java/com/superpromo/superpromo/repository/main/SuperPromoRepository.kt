@@ -1,6 +1,7 @@
 package com.superpromo.superpromo.repository.main
 
 import androidx.paging.PagingData
+import com.superpromo.superpromo.data.db.model.ShopDb
 import com.superpromo.superpromo.data.network.model.Product
 import com.superpromo.superpromo.data.network.model.Shop
 import com.superpromo.superpromo.data.network.model.Suggestion
@@ -13,4 +14,6 @@ interface SuperPromoRepository {
     fun getProducts(shopId: Int?, pageSize: Int, product: String): Flow<PagingData<Product>>
 
     suspend fun insertShop(shop: Shop)
+    suspend fun deleteShopAll()
+    suspend fun getShopList(): List<ShopDb>
 }

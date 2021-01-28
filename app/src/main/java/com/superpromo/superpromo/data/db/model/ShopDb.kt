@@ -27,4 +27,7 @@ data class ShopDb(
 
     @ColumnInfo(name = "isAvailable")
     val isAvailable: Boolean?,
+
+    @ColumnInfo(name = "isAvailableInDb")
+    val isAvailableInDb: Boolean,
 )

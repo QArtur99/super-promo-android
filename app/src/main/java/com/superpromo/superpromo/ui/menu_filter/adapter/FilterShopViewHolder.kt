@@ -44,6 +44,7 @@ class FilterShopViewHolder constructor(
     fun bind(item: Shop) {
         shop = item
         shopName.text = item.name
+        checkbox.isChecked = item.isAvailableInDb
         bingImg(item)
     }
 

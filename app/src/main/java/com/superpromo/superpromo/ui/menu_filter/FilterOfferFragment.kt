@@ -7,19 +7,24 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.DrawerFragmentOfferFilterBinding
 import com.superpromo.superpromo.repository.state.State
-import com.superpromo.superpromo.ui.menu_filter.adapter.FilterShopListAdapter
+import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.main.SharedShopVm
+import com.superpromo.superpromo.ui.menu_filter.adapter.FilterShopListAdapter
+import com.superpromo.superpromo.ui.util.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FilterOfferFragment : Fragment() {
 
     private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
+    private val sharedDrawerVm: SharedDrawerVm by viewModels({ requireActivity() })
+
     private val filterOfferViewModel: FilterOfferViewModel by viewModels()
     private lateinit var binding: DrawerFragmentOfferFilterBinding
     private lateinit var adapter: FilterShopListAdapter
@@ -31,17 +36,30 @@ class FilterOfferFragment : Fragment() {
     ): View {
         binding = DrawerFragmentOfferFilterBinding.inflate(inflater)
 
-        initQuery()
         initAdapter()
         initSwipeToRefresh()
 
         observeShops()
+        setOnCloseClick()
+        setOnRestoreClick()
 
         return binding.root
     }
 
+    private fun setOnCloseClick() {
+        binding.header.close.setOnClickListener {
+            sharedDrawerVm.onCloseEndClick()
+        }
+    }
+
+    private fun setOnRestoreClick() {
+        binding.header.restore.setOnClickListener {
+            sharedShopVm.deleteShopAll()
+        }
+    }
+
     private fun observeShops() {
-        sharedShopVm.shops.observe(viewLifecycleOwner, {
+        sharedShopVm.shopList.observe(viewLifecycleOwner, {
             when (it.state) {
                 is State.Loading -> {
                     binding.swipeRefresh.isRefreshing = true
@@ -73,20 +91,6 @@ class FilterOfferFragment : Fragment() {
         })
     }
 
-    private fun initQuery() {
-//        binding.appBar.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                newText?.let { sharedShopVm.showShops(newText) }
-//                return true
-//            }
-//
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                query?.let { sharedShopVm.showShops(query) }
-//                return true
-//            }
-//        })
-    }
-
     private fun initAdapter() {
         val glide = GlideApp.with(this)
         adapter = FilterShopListAdapter(glide, onShopClickListener())
@@ -104,10 +108,10 @@ class FilterOfferFragment : Fragment() {
         val checkbox = view.findViewById<CheckBox>(R.id.checkbox)
         if (checkbox.isChecked) {
             checkbox.isChecked = false
-            sharedShopVm.insertShop(shop.apply { isAvailable = false })
+            sharedShopVm.insertShop(shop.apply { isAvailableInDb = false })
         } else {
             checkbox.isChecked = true
-            sharedShopVm.insertShop(shop.apply { isAvailable = true })
+            sharedShopVm.insertShop(shop.apply { isAvailableInDb = true })
         }
     }
 }

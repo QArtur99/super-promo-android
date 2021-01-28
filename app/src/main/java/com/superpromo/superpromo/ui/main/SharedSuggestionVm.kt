@@ -40,9 +40,9 @@ class SharedSuggestionVm @ViewModelInject constructor(
     }
 
     init {
-        getProductSuggestions()
         savedStateHandle.set(KEY_SUGGESTIONS, emptyList<Suggestion>())
         savedStateHandle.set(KEY_FILTER_SUGGESTIONS, "")
+        getProductSuggestions()
     }
 
     fun getProductSuggestions() {
