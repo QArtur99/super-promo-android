@@ -7,6 +7,7 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.request.RequestOptions
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Shop
@@ -51,6 +52,7 @@ class FilterShopViewHolder constructor(
     private fun bingImg(item: Shop?) {
         if (item?.imgUrl != null) {
             glide.load(Url.getBaseUrl() + item.imgUrl)
+                .apply(RequestOptions().override(200, 200))
                 .fitCenter()
                 .placeholder(R.drawable.ic_baseline_broken_image_24)
                 .into(shopLogo)

@@ -42,7 +42,6 @@ class FilterOfferFragment : Fragment() {
         observeShops()
         setOnCloseClick()
         setOnRestoreClick()
-
         return binding.root
     }
 

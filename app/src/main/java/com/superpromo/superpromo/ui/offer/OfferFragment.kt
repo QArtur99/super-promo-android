@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -24,6 +25,7 @@ class OfferFragment : Fragment() {
 
     private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val offerViewModel: OfferViewModel by viewModels()
+    private val activityCompat by lazy { activity as AppCompatActivity }
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ShopListAdapter
 
@@ -33,6 +35,8 @@ class OfferFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCompareBinding.inflate(inflater)
+        activityCompat.setSupportActionBar(binding.appBar.toolbar)
+        activityCompat.title = ""
 
         initQuery()
         initAdapter()

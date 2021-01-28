@@ -1,12 +1,20 @@
 package com.superpromo.superpromo.ui.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.superpromo.superpromo.R
-import com.superpromo.superpromo.ui.util.ext.setStatusBarGradiant
+import com.superpromo.superpromo.databinding.ActivityMainBinding
+import com.superpromo.superpromo.repository.state.State
+import com.superpromo.superpromo.ui.util.EventObserver
+import com.superpromo.superpromo.ui.util.ext.setStatusBarGradient
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -14,13 +22,65 @@ class MainActivity : AppCompatActivity() {
     private val sharedShopVm: SharedShopVm by viewModels()
     private val sharedSuggestionVm: SharedSuggestionVm by viewModels()
     private val sharedDrawerVm: SharedDrawerVm by viewModels()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStatusBarGradiant(this)
-        setContentView(R.layout.activity_main)
-        sharedShopVm.shopList.observe(this, {})
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        sharedShopVm.shopList.observe(this, {
+            if (it.shopList.isNotEmpty() || it.state is State.Error) {
+                setStatusBarGradient(this)
+                setContentView(binding.root)
+            }
+        })
         sharedShopVm.shops.observe(this, {})
         sharedSuggestionVm.suggestions.observe(this, {})
+        binding.drawer.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+//                setStatusBarDark()
+//                sharedDrawerVm.onOpenedEnd()
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+//                setStatusBarTransparent()
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+//                TODO("Not yet implemented")
+            }
+        })
+        sharedDrawerVm.onCloseEndClick.observe(this, EventObserver {
+            binding.drawer.closeDrawer(GravityCompat.END)
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.filter, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_favorite -> {
+                if (binding.drawer.isDrawerOpen(GravityCompat.END)) {
+                    binding.drawer.closeDrawer(GravityCompat.END)
+                } else {
+                    binding.drawer.openDrawer(GravityCompat.END)
+                }
+            }
+            android.R.id.home -> {
+                if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawer.closeDrawer(GravityCompat.START)
+                } else {
+                    binding.drawer.openDrawer(GravityCompat.START)
+                }
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
     }
 }

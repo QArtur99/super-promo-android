@@ -10,7 +10,7 @@ import com.superpromo.superpromo.R
 
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-fun setStatusBarGradiant(activity: Activity) {
+fun setStatusBarGradient(activity: Activity) {
     val window: Window = activity.window
     val background = ContextCompat.getDrawable(activity, R.drawable.gradient_toolbar)
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
