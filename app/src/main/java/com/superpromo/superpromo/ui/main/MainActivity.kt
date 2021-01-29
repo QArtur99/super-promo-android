@@ -10,7 +10,6 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.ActivityMainBinding
-import com.superpromo.superpromo.repository.state.State
 import com.superpromo.superpromo.ui.util.EventObserver
 import com.superpromo.superpromo.ui.util.ext.setStatusBarGradient
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,12 +26,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        sharedShopVm.shopList.observe(this, {
-            if (it.shopList.isNotEmpty() || it.state is State.Error) {
-                setStatusBarGradient(this)
-                setContentView(binding.root)
-            }
-        })
+        setStatusBarGradient(this)
+        setContentView(binding.root)
+        sharedShopVm.shopList.observe(this, {})
         sharedShopVm.shops.observe(this, {})
         sharedSuggestionVm.suggestions.observe(this, {})
         binding.drawer.addDrawerListener(object : DrawerLayout.DrawerListener {

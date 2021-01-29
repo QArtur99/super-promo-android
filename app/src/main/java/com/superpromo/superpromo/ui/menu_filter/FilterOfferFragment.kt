@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
@@ -16,7 +15,6 @@ import com.superpromo.superpromo.repository.state.State
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.main.SharedShopVm
 import com.superpromo.superpromo.ui.menu_filter.adapter.FilterShopListAdapter
-import com.superpromo.superpromo.ui.util.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

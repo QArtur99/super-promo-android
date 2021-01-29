@@ -49,7 +49,8 @@ class ShopViewHolder constructor(
         if (item?.imgUrl != null) {
             glide.load(Url.getBaseUrl() + item.imgUrl)
                 .fitCenter()
-                .placeholder(R.drawable.ic_baseline_broken_image_24)
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_baseline_broken_image_24)
                 .into(shopLogo)
         } else {
             shopLogo.setImageResource(R.drawable.ic_baseline_broken_image_24)

@@ -52,9 +52,10 @@ class FilterShopViewHolder constructor(
     private fun bingImg(item: Shop?) {
         if (item?.imgUrl != null) {
             glide.load(Url.getBaseUrl() + item.imgUrl)
-                .apply(RequestOptions().override(200, 200))
+                .override(200, 200)
                 .fitCenter()
-                .placeholder(R.drawable.ic_baseline_broken_image_24)
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_baseline_broken_image_24)
                 .into(shopLogo)
         } else {
             shopLogo.setImageResource(R.drawable.ic_baseline_broken_image_24)

@@ -49,6 +49,7 @@ class ProductFromOfferVh constructor(
         bingImg(item)
         val priceString = FormatPrice.getCurrency(item?.price, "zł")
         shopName.text = item?.shopName
+        shopName.visibility = View.GONE
         name.text = item?.name
         price.text = priceString
         if (item?.amount.isNullOrEmpty()) {
@@ -66,8 +67,9 @@ class ProductFromOfferVh constructor(
     private fun bingImg(item: Product?) {
         if (item?.imgUrl?.startsWith("http") == true) {
             glide.load(item.imgUrl)
-                .centerCrop()
-                .placeholder(R.drawable.ic_baseline_broken_image_24)
+                .fitCenter()
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_baseline_broken_image_24)
                 .into(productImg)
         } else {
             productImg.setImageResource(R.drawable.ic_baseline_broken_image_24)

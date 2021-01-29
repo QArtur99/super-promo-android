@@ -16,21 +16,23 @@ class ProductFromMainPagingAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.item_product ->
-                (holder as ProductFromMainVh).bind(getItem(position))
+            R.layout.item_product -> (holder as ProductFromMainVh).bind(getItem(position))
+            R.layout.item_product_img -> (holder as ProductImgFromMainVh).bind(getItem(position))
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             R.layout.item_product -> ProductFromMainVh.create(parent, glide, clickListener)
+            R.layout.item_product_img -> ProductImgFromMainVh.create(parent, glide, clickListener)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)!!
-        return R.layout.item_product
+        val isOnlyImg = item.isOnlyImg ?: false
+        return if (isOnlyImg) R.layout.item_product_img else R.layout.item_product
     }
 
     companion object GridViewDiffCallback : DiffUtil.ItemCallback<Product>() {
