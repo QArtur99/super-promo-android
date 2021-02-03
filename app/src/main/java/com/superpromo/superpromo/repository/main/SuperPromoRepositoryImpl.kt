@@ -14,6 +14,7 @@ import com.superpromo.superpromo.repository.main.mapper.asDbModel
 import com.superpromo.superpromo.repository.state.ResultApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class SuperPromoRepositoryImpl @Inject constructor(
@@ -48,15 +49,15 @@ class SuperPromoRepositoryImpl @Inject constructor(
     )
 
     override fun getProducts(
-        shopId: Int?,
+        shopIds: String,
         pageSize: Int,
         product: String
     ) = Pager(PagingConfig(pageSize)) {
         ProductPagingSource(
             superPromoApi = superPromoApi,
             shopMap = shopMap,
-            shopId = shopId,
-            limit = 20,
+            shopIds = shopIds,
+            limit = pageSize,
             product = product,
         )
     }.flow

@@ -17,6 +17,7 @@ import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.CompareViewModel
 import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainPagingAdapter
 import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainStateAdapter
+import com.superpromo.superpromo.ui.main.SharedShopVm
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -31,7 +32,9 @@ class CompareFromMainFragment : Fragment() {
         const val KEY_SHOP_ID = "shopId"
     }
 
+    private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val compareViewModel: CompareViewModel by viewModels()
+
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ProductFromMainPagingAdapter
     private val bundle: CompareFromMainFragmentArgs by navArgs()
@@ -47,12 +50,12 @@ class CompareFromMainFragment : Fragment() {
         initSwipeToRefresh()
         initQuerySuggestion()
 
-        bundle.shopId?.let {
-            compareViewModel.showShop(it.toInt())
-        }
-        bundle.query?.let {
-            binding.appBar.searchView.setQuery(it, false)
-            compareViewModel.showProducts(it)
+
+        bundle.query?.let {query ->
+            sharedShopVm.shopsAvailable.observe(viewLifecycleOwner, {
+                binding.appBar.searchView.setQuery(query, false)
+                compareViewModel.showProducts(it, query)
+            })
         }
         setHasOptionsMenu(true)
         return binding.root

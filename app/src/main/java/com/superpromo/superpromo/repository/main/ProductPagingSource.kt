@@ -11,14 +11,14 @@ import java.io.IOException
 class ProductPagingSource(
     private val superPromoApi: SuperPromoApi,
     private val shopMap: HashMap<Int, Shop>,
-    private val shopId: Int?,
+    private val shopIds: String,
     private val limit: Int,
     private val product: String,
 ) : PagingSource<String, Product>() {
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Product> {
         return try {
             val data = superPromoApi.getProductListAsync(
-                shopId = shopId,
+                shopIds = shopIds,
                 page = params.key?.toInt(),
                 limit = limit,
                 product = product,

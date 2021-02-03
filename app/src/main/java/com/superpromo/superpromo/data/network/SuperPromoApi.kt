@@ -19,7 +19,7 @@ interface SuperPromoApi {
 
     @GET("/product/getProducts")
     fun getProductListAsync(
-        @Query("shopId") shopId: Int? = null,
+        @Query("shopIds") shopIds: String? = null,
         @Query("page") page: Int? = null,
         @Query("limit") limit: Int? = null,
         @Query("product") product: String? = null,

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface SuperPromoRepository {
     suspend fun getShops(): ResultApi<List<Shop>>
     suspend fun getProductSuggestions(): ResultApi<List<Suggestion>>
-    fun getProducts(shopId: Int?, pageSize: Int, product: String): Flow<PagingData<Product>>
+    fun getProducts(shopIds: String, pageSize: Int, product: String): Flow<PagingData<Product>>
 
     suspend fun insertShop(shop: Shop)
     suspend fun deleteShopAll()

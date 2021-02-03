@@ -28,7 +28,7 @@ class SharedShopVm @ViewModelInject constructor(
     private val _shopsFull = savedStateHandle.getLiveData<List<Shop>>(KEY_SHOPS)
     private val shopsFull = _shopsFull.map { it }
     private val _shopsAvailable = savedStateHandle.getLiveData<List<Shop>>(KEY_SHOPS_AVAILABLE)
-    private val shopsAvailable = _shopsAvailable.map { it }
+    val shopsAvailable = _shopsAvailable.map { it }
     private val _filterByShopName = savedStateHandle.getLiveData<String>(KEY_FILTER_SHOPS)
     private val filterByShopName = _filterByShopName.map { it }
     val shopList = MediatorLiveData<ShopModel>().apply {
