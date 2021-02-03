@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentStartBinding
 import com.superpromo.superpromo.ui.util.EventObserver
+import com.superpromo.superpromo.ui.util.ext.setToolbar
+import com.superpromo.superpromo.ui.util.ext.setToolbarHome
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +22,6 @@ class MainFragment : Fragment() {
     private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val sharedSuggestionVm: SharedSuggestionVm by viewModels({ requireActivity() })
     private val movieDetailViewModel: MainViewModel by viewModels()
-    private val activityCompat by lazy { activity as AppCompatActivity }
     private lateinit var binding: FragmentStartBinding
 
     override fun onCreateView(
@@ -29,9 +30,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStartBinding.inflate(inflater)
-        activityCompat.setSupportActionBar(binding.appBar.toolbar)
-        activityCompat.title = ""
-        binding.appBar.toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+        setToolbarHome(binding.appBar.toolbar)
 
         binding.offer.setOnClickListener {
             sharedShopVm.showShops("")

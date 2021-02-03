@@ -18,6 +18,7 @@ import com.superpromo.superpromo.repository.state.State
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFromMainFragment
 import com.superpromo.superpromo.ui.main.SharedShopVm
 import com.superpromo.superpromo.ui.offer.adapter.ShopListAdapter
+import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +26,6 @@ class OfferFragment : Fragment() {
 
     private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val offerViewModel: OfferViewModel by viewModels()
-    private val activityCompat by lazy { activity as AppCompatActivity }
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ShopListAdapter
 
@@ -35,8 +35,7 @@ class OfferFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCompareBinding.inflate(inflater)
-        activityCompat.setSupportActionBar(binding.appBar.toolbar)
-        activityCompat.title = ""
+        setToolbar(binding.appBar.toolbar)
 
         initQuery()
         initAdapter()

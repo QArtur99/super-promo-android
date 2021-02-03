@@ -19,6 +19,7 @@ import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainPagi
 import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainStateAdapter
 import com.superpromo.superpromo.ui.main.SharedShopVm
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
+import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -46,6 +47,8 @@ class CompareFromMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCompareBinding.inflate(inflater)
+        setToolbar(binding.appBar.toolbar)
+
         initAdapter()
         initSwipeToRefresh()
         initQuerySuggestion()

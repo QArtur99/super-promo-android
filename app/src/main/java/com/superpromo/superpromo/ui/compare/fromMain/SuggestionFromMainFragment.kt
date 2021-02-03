@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ import com.superpromo.superpromo.ui.compare.adapter.suggestion.SuggestionListAda
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFromMainFragment.Companion.KEY_SHOP_ID
 import com.superpromo.superpromo.ui.main.SharedSuggestionVm
 import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
+import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -38,7 +40,9 @@ class SuggestionFromMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSuggestionBinding.inflate(inflater)
+        setToolbar(binding.appBar.toolbar)
         onNavigationResult()
+
         initQuery()
         initAdapter()
         initSwipeToRefresh()

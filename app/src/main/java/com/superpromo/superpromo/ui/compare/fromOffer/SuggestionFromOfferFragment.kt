@@ -17,6 +17,7 @@ import com.superpromo.superpromo.ui.compare.adapter.suggestion.SuggestionListAda
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFromMainFragment.Companion.KEY_SHOP_ID
 import com.superpromo.superpromo.ui.main.SharedSuggestionVm
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
+import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -38,6 +39,8 @@ class SuggestionFromOfferFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSuggestionBinding.inflate(inflater)
+        setToolbar(binding.appBar.toolbar)
+
         initQuery()
         initAdapter()
         initSwipeToRefresh()

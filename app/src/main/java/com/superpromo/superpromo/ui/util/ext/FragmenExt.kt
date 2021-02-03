@@ -7,6 +7,8 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.activity.addCallback
 import androidx.annotation.MainThread
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -31,8 +33,25 @@ fun Fragment.setNavigationResult(result: Bundle) {
 
 fun Fragment.addBackPressListener(backPress: BackPress) {
     activity?.onBackPressedDispatcher?.addCallback {
-        findNavController().popBackStack()
+        backPress.onBackPressed()
+        isEnabled = false
+        activity?.onBackPressed()
     }
+}
+
+fun Fragment.setToolbarHome(toolbar: Toolbar) {
+    val activityCompat = activity as AppCompatActivity
+    activityCompat.setSupportActionBar(toolbar)
+    activityCompat.title = ""
+    toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+}
+
+fun Fragment.setToolbar(toolbar: Toolbar) {
+    val activityCompat = activity as AppCompatActivity
+    activityCompat.setSupportActionBar(toolbar)
+    activityCompat.title = ""
+    toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+    toolbar.setNavigationOnClickListener { activityCompat.onBackPressed() }
 }
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
