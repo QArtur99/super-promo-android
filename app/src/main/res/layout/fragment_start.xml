@@ -10,6 +10,7 @@
 
     <include
         android:id="@+id/appBar"
+        android:elevation="@dimen/elevation_toolbar"
         layout="@layout/include_toolbar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

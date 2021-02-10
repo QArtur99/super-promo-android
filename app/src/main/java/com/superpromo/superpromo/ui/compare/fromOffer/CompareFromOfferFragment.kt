@@ -2,6 +2,7 @@ package com.superpromo.superpromo.ui.compare.fromOffer
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -151,6 +152,11 @@ class CompareFromOfferFragment : Fragment() {
 
     private fun initSwipeToRefresh() {
         binding.swipeRefresh.setOnRefreshListener { adapter.refresh() }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.clear()
     }
 
 }
