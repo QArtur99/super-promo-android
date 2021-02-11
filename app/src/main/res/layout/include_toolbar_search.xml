@@ -50,11 +50,12 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-                app:defaultQueryHint="Sprawdz na przykład ,,mleko”"
+                app:defaultQueryHint="Sprawdz na przykład „mleko”"
                 app:iconifiedByDefault="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:queryBackground="@color/transparent" />
         </androidx.cardview.widget.CardView>
     </com.google.android.material.appbar.AppBarLayout>
 </merge>

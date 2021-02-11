@@ -12,4 +12,12 @@
     <string name="no_shop_sub_text">Tap to try again.</string>
     <string name="no_suggestion">No suggestions.</string>
     <string name="no_suggestion_sub_text" />
+
+    <string name="menu_shopping">Shopping list</string>
+    <string name="menu_cards">Loyalty cards</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_contact">Contact us</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_info">About app</string>
 </resources>

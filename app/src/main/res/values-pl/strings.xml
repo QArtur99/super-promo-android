@@ -12,4 +12,12 @@
     <string name="no_shop_sub_text">Kliknij, aby spróbować ponownie.</string>
     <string name="no_suggestion">Brak podpowiedzi.</string>
     <string name="no_suggestion_sub_text"/>
+
+    <string name="menu_shopping">Lista zakupów</string>
+    <string name="menu_cards">Karty lojalnościowe</string>
+    <string name="menu_favorite">Ulubione</string>
+    <string name="menu_share">Udostępnij</string>
+    <string name="menu_contact">Napisz do nas</string>
+    <string name="menu_settings">Ustawienia</string>
+    <string name="menu_info">O aplikacji</string>
 </resources>
