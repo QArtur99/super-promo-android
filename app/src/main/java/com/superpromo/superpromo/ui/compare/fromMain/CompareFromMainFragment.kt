@@ -9,15 +9,19 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
+import com.superpromo.superpromo.GlideRequests
+import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.CompareViewModel
 import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainPagingAdapter
 import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainStateAdapter
+import com.superpromo.superpromo.ui.detail.DetailFragment
 import com.superpromo.superpromo.ui.main.SharedShopVm
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
 import com.superpromo.superpromo.ui.util.ext.setToolbar
@@ -30,10 +34,7 @@ import kotlinx.coroutines.flow.filter
 @AndroidEntryPoint
 class CompareFromMainFragment : Fragment() {
 
-    companion object {
-        const val KEY_SHOP_ID = "shopId"
-    }
-
+    private val glide: GlideRequests by lazy { GlideApp.with(this) }
     private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val compareViewModel: CompareViewModel by viewModels()
 
@@ -55,7 +56,7 @@ class CompareFromMainFragment : Fragment() {
         initQuerySuggestion()
 
 
-        bundle.query?.let {query ->
+        bundle.query?.let { query ->
             sharedShopVm.shopsAvailable.observe(viewLifecycleOwner, {
                 binding.appBar.searchView.setQuery(query, false)
                 compareViewModel.showProducts(it, query)
@@ -76,7 +77,6 @@ class CompareFromMainFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val glide = GlideApp.with(this)
         adapter = ProductFromMainPagingAdapter(glide, onProductClickListener())
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
@@ -136,7 +136,10 @@ class CompareFromMainFragment : Fragment() {
 
     private fun onProductClickListener() =
         ProductFromMainPagingAdapter.OnClickListener { view, product ->
-
+            val bundle = bundleOf(
+                DetailFragment.KEY_PRODUCT to product,
+            )
+            findNavController().navigate(R.id.action_to_detail, bundle)
         }
 
     private fun initSwipeToRefresh() {

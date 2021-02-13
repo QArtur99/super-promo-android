@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
+import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.DrawerFragmentOfferFilterBinding
 import com.superpromo.superpromo.repository.state.State
@@ -20,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FilterOfferFragment : Fragment() {
 
+    private val glide: GlideRequests by lazy { GlideApp.with(this) }
     private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val sharedDrawerVm: SharedDrawerVm by viewModels({ requireActivity() })
 
@@ -89,7 +91,6 @@ class FilterOfferFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val glide = GlideApp.with(this)
         adapter = FilterShopListAdapter(glide, onShopClickListener())
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)

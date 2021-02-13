@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Shop
+import com.superpromo.superpromo.ui.util.GlideHelper
 import com.superpromo.superpromo.ui.util.Url
 
 class FilterShopViewHolder constructor(
@@ -46,19 +47,9 @@ class FilterShopViewHolder constructor(
         shop = item
         shopName.text = item.name
         checkbox.isChecked = item.isAvailableInDb
-        bingImg(item)
-    }
-
-    private fun bingImg(item: Shop?) {
-        if (item?.imgUrl != null) {
-            glide.load(Url.getBaseUrl() + item.imgUrl)
-                .override(200, 200)
-                .fitCenter()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_baseline_broken_image_24)
-                .into(shopLogo)
-        } else {
-            shopLogo.setImageResource(R.drawable.ic_baseline_broken_image_24)
+        item.imgUrl?.let {
+            val imgUrl = Url.getBaseUrl() + it
+            GlideHelper.bingImg(shopLogo, glide, imgUrl)
         }
     }
 }

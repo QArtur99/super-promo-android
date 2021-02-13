@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Product
-import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainPagingAdapter
-import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferPagingAdapter
-import com.superpromo.superpromo.ui.util.FormatPrice
+import com.superpromo.superpromo.ui.util.GlideHelper
 
 class ProductImgOfferMainVh constructor(
     private val view: View,
@@ -43,20 +41,10 @@ class ProductImgOfferMainVh constructor(
 
     fun bind(item: Product?) {
         product = item
-        bingImg(item)
+        item?.imgUrl?.let {
+            GlideHelper.bingImg(productImg, glide, it)
+        }
         shopName.text = item?.shopName
         shopName.visibility = View.GONE
-    }
-
-    private fun bingImg(item: Product?) {
-        if (item?.imgUrl?.startsWith("http") == true) {
-            glide.load(item.imgUrl)
-                .fitCenter()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_baseline_broken_image_24)
-                .into(productImg)
-        } else {
-            productImg.setImageResource(R.drawable.ic_baseline_broken_image_24)
-        }
     }
 }

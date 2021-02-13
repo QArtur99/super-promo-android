@@ -11,6 +11,7 @@ import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Product
 import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferPagingAdapter
 import com.superpromo.superpromo.ui.util.FormatPrice
+import com.superpromo.superpromo.ui.util.GlideHelper
 
 class ProductImgFromMainVh constructor(
     private val view: View,
@@ -42,19 +43,9 @@ class ProductImgFromMainVh constructor(
 
     fun bind(item: Product?) {
         product = item
-        bingImg(item)
-        shopName.text = item?.shopName
-    }
-
-    private fun bingImg(item: Product?) {
-        if (item?.imgUrl?.startsWith("http") == true) {
-            glide.load(item.imgUrl)
-                .fitCenter()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_baseline_broken_image_24)
-                .into(productImg)
-        } else {
-            productImg.setImageResource(R.drawable.ic_baseline_broken_image_24)
+        item?.imgUrl?.let {
+            GlideHelper.bingImg(productImg, glide, it)
         }
+        shopName.text = item?.shopName
     }
 }

@@ -1,7 +1,9 @@
 package com.superpromo.superpromo.data.network.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
 data class ProductContainer(
@@ -13,6 +15,7 @@ data class ProductContainer(
 )
 
 @JsonClass(generateAdapter = true)
+@Parcelize
 data class Product(
     val id: Int,
     val shopId: Int,
@@ -27,4 +30,4 @@ data class Product(
     val imgUrl: String?,
     val url: String?,
     val isOnlyImg: Boolean?,
-)
+) : Parcelable

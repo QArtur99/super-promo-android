@@ -14,7 +14,7 @@ import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.databinding.FragmentSuggestionBinding
 import com.superpromo.superpromo.repository.state.State
 import com.superpromo.superpromo.ui.compare.adapter.suggestion.SuggestionListAdapter
-import com.superpromo.superpromo.ui.compare.fromMain.CompareFromMainFragment.Companion.KEY_SHOP_ID
+import com.superpromo.superpromo.ui.compare.fromOffer.CompareFromOfferFragment.Companion.KEY_SHOP_ID
 import com.superpromo.superpromo.ui.main.SharedSuggestionVm
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
 import com.superpromo.superpromo.ui.util.ext.setToolbar

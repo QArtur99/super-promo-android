@@ -15,12 +15,14 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
+import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.CompareViewModel
 import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferPagingAdapter
 import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferStateAdapter
 import com.superpromo.superpromo.ui.compare.fromMain.SuggestionFromMainFragment
+import com.superpromo.superpromo.ui.detail.DetailFragment
 import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +38,7 @@ class CompareFromOfferFragment : Fragment() {
         const val KEY_SHOP_ID = "shopId"
     }
 
+    private val glide: GlideRequests by lazy { GlideApp.with(this) }
     private val compareViewModel: CompareViewModel by viewModels()
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ProductFromOfferPagingAdapter
@@ -86,7 +89,6 @@ class CompareFromOfferFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val glide = GlideApp.with(this)
         adapter = ProductFromOfferPagingAdapter(glide, onProductClickListener())
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
@@ -147,7 +149,10 @@ class CompareFromOfferFragment : Fragment() {
 
     private fun onProductClickListener() =
         ProductFromOfferPagingAdapter.OnClickListener { view, product ->
-
+            val bundle = bundleOf(
+                DetailFragment.KEY_PRODUCT to product,
+            )
+            findNavController().navigate(R.id.action_to_detail, bundle)
         }
 
     private fun initSwipeToRefresh() {

@@ -12,10 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
+import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.repository.state.State
 import com.superpromo.superpromo.ui.compare.fromMain.CompareFromMainFragment
+import com.superpromo.superpromo.ui.compare.fromOffer.CompareFromOfferFragment.Companion.KEY_SHOP_ID
 import com.superpromo.superpromo.ui.main.SharedShopVm
 import com.superpromo.superpromo.ui.offer.adapter.ShopListAdapter
 import com.superpromo.superpromo.ui.util.ext.setToolbar
@@ -24,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class OfferFragment : Fragment() {
 
+    private val glide: GlideRequests by lazy { GlideApp.with(this) }
     private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val offerViewModel: OfferViewModel by viewModels()
     private lateinit var binding: FragmentCompareBinding
@@ -94,7 +97,6 @@ class OfferFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val glide = GlideApp.with(this)
         adapter = ShopListAdapter(glide, onShopClickListener())
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
@@ -108,7 +110,7 @@ class OfferFragment : Fragment() {
 
     private fun onShopClickListener() = ShopListAdapter.OnClickListener { view, product ->
         val bundle = bundleOf(
-            CompareFromMainFragment.KEY_SHOP_ID to product.id.toString(),
+            KEY_SHOP_ID to product.id.toString(),
         )
         findNavController().navigate(R.id.action_offer_to_compare_from_offer, bundle)
     }

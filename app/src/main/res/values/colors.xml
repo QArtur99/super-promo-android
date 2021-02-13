@@ -14,4 +14,6 @@
     <color name="iconStart">#FFFFFFFF</color>
     <color name="iconPlaceholder">#FF000000</color>
     <color name="header_logo">#ffb84d</color>
+    <color name="detail_title_hint">#aaaaaa</color>
+    <color name="detail_title">#000000</color>
 </resources>

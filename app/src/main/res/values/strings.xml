@@ -20,4 +20,14 @@
     <string name="menu_contact">Contact us</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_info">About app</string>
+
+    <string name="detail_shopName">Shop</string>
+    <string name="detail_productName">Product</string>
+    <string name="detail_productSubName">Product info</string>
+    <string name="detail_price">Price</string>
+    <string name="detail_amount">Amount</string>
+    <string name="detail_details">Details</string>
+    <string name="detail_promo">Promo</string>
+    <string name="detail_promoInfo">Promo info</string>
+    <string name="detail_url">Url</string>
 </resources>
