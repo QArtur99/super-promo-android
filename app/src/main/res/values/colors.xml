@@ -16,4 +16,5 @@
     <color name="header_logo">#ffb84d</color>
     <color name="detail_title_hint">#aaaaaa</color>
     <color name="detail_title">#000000</color>
+    <color name="url">#0000EE</color>
 </resources>

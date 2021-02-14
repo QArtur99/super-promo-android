@@ -219,7 +219,7 @@
                 android:id="@+id/url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/detail_title"
+                android:textColor="@color/url"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="@string/detail_url" />

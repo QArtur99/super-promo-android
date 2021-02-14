@@ -51,7 +51,11 @@ fun Fragment.setToolbar(toolbar: Toolbar) {
     activityCompat.setSupportActionBar(toolbar)
     activityCompat.title = ""
     toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-    toolbar.setNavigationOnClickListener { activityCompat.onBackPressed() }
+    toolbar.setNavigationOnClickListener {
+        if (activity?.hideSoftKeyBoard(it) == false) {
+            activityCompat.onBackPressed()
+        }
+    }
 }
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)

@@ -4,12 +4,12 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
-fun Context.showSoftKeyBoard(v: View) {
+fun Context.showSoftKeyBoard(v: View): Boolean? {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-    imm?.showSoftInput(v,0)
+    return imm?.showSoftInput(v, 0)
 }
 
-fun Context.hideSoftKeyBoard(v: View) {
+fun Context.hideSoftKeyBoard(v: View): Boolean? {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-    imm?.hideSoftInputFromWindow(v.windowToken,0)
+    return imm?.hideSoftInputFromWindow(v.windowToken, 0)
 }

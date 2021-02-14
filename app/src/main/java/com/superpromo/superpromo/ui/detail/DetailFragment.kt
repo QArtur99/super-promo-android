@@ -1,10 +1,12 @@
 package com.superpromo.superpromo.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -12,6 +14,7 @@ import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.data.network.model.Product
 import com.superpromo.superpromo.databinding.FragmentDetailBinding
+import com.superpromo.superpromo.ui.WebViewActivity
 import com.superpromo.superpromo.ui.util.GlideHelper
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import com.superpromo.superpromo.ui.util.ext.toStringN
@@ -40,6 +43,7 @@ class DetailFragment : Fragment() {
         bundle.product?.let {
             setView(it)
             hideEmptyView(it)
+            setListeners()
         }
         setHasOptionsMenu(true)
         return binding.root
@@ -96,6 +100,15 @@ class DetailFragment : Fragment() {
         if (item.url.isNullOrEmpty()) {
             binding.urlHint.visibility = View.GONE
             binding.url.visibility = View.GONE
+        }
+    }
+
+    private fun setListeners() {
+        binding.url.setOnClickListener {
+            val textView = it as TextView
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra(WebViewActivity.ACTION_GO_TO_URL, textView.text)
+            activity?.startActivityForResult(intent, WebViewActivity.ACTION_RESULT)
         }
     }
 
