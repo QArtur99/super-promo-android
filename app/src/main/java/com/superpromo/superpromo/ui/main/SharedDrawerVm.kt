@@ -20,8 +20,15 @@ class SharedDrawerVm @ViewModelInject constructor(
     private val _onOpenedEnd = MutableLiveData<Event<Boolean>>()
     val onOpenedEnd: LiveData<Event<Boolean>> = _onOpenedEnd
 
+    private val _onCloseStartClick = MutableLiveData<Event<Boolean>>()
+    val onCloseStartClick: LiveData<Event<Boolean>> = _onCloseStartClick
+
     fun onCloseEndClick() {
         _onCloseEndClick.value = Event(true)
+    }
+
+    fun onCloseStartClick() {
+        _onCloseStartClick.value = Event(true)
     }
 
     fun onOpenedEnd() {

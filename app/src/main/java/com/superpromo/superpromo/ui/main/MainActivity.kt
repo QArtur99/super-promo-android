@@ -52,6 +52,9 @@ class MainActivity : AppCompatActivity() {
         sharedDrawerVm.onCloseEndClick.observe(this, EventObserver {
             binding.drawer.closeDrawer(GravityCompat.END)
         })
+        sharedDrawerVm.onCloseStartClick.observe(this, EventObserver {
+            binding.drawer.closeDrawer(GravityCompat.START)
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
