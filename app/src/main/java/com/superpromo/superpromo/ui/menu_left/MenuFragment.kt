@@ -47,7 +47,7 @@ class MenuFragment : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
-    private fun onShopClickListener() = MenuListAdapter.OnClickListener { view, shop ->
-        sharedDrawerVm.onCloseStartClick()
+    private fun onShopClickListener() = MenuListAdapter.OnClickListener { view, menuModel ->
+        sharedDrawerVm.onCloseStartClick(menuModel.title)
     }
 }

@@ -10,8 +10,8 @@
 
     <include
         android:id="@+id/appBar"
-        android:elevation="@dimen/elevation_toolbar"
-        layout="@layout/include_toolbar" />
+        layout="@layout/include_toolbar"
+        android:elevation="@dimen/elevation_toolbar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,12 +23,12 @@
             android:id="@+id/offer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_large"
-            android:backgroundTint="?android:attr/colorPrimary"
+            android:layout_margin="@dimen/margin_basic"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="@dimen/corner_basic"
+            app:cardElevation="@dimen/elevation_card"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Offer"
+                    android:text="@string/main_offer"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -61,9 +61,9 @@
             android:id="@+id/compare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_large"
-            android:backgroundTint="?android:attr/colorPrimary"
-            app:cardCornerRadius="8dp"
+            android:layout_margin="@dimen/margin_basic"
+            app:cardCornerRadius="@dimen/corner_basic"
+            app:cardElevation="@dimen/elevation_card"
             app:layout_constraintTop_toBottomOf="@id/offer">
 
             <LinearLayout
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Compare"
+                    android:text="@string/main_compare"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -95,9 +95,9 @@
             android:id="@+id/shoppingList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_large"
-            android:backgroundTint="?android:attr/colorPrimary"
-            app:cardCornerRadius="8dp"
+            android:layout_margin="@dimen/margin_basic"
+            app:cardCornerRadius="@dimen/corner_basic"
+            app:cardElevation="@dimen/elevation_card"
             app:layout_constraintTop_toBottomOf="@id/compare">
 
             <LinearLayout
@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Shopping List"
+                    android:text="@string/main_shopping"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="16sp" />

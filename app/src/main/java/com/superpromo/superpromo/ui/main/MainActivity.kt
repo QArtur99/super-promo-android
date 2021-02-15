@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.ActivityMainBinding
 import com.superpromo.superpromo.ui.util.EventObserver
@@ -54,8 +55,13 @@ class MainActivity : AppCompatActivity() {
         })
         sharedDrawerVm.onCloseStartClick.observe(this, EventObserver {
             binding.drawer.closeDrawer(GravityCompat.START)
+            when (it) {
+                R.string.menu_cards -> findNavController().navigate(R.id.action_start_to_card)
+            }
         })
     }
+
+    private fun findNavController() = binding.navHostFragment.findNavController()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.filter, menu)

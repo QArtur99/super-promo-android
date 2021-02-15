@@ -14,25 +14,25 @@ class SharedDrawerVm @ViewModelInject constructor(
     private val superPromoRepository: SuperPromoRepository
 ) : ViewModel() {
 
-    private val _onCloseEndClick = MutableLiveData<Event<Boolean>>()
-    val onCloseEndClick: LiveData<Event<Boolean>> = _onCloseEndClick
+    private val _onCloseEndClick = MutableLiveData<Event<Int>>()
+    val onCloseEndClick: LiveData<Event<Int>> = _onCloseEndClick
 
-    private val _onOpenedEnd = MutableLiveData<Event<Boolean>>()
-    val onOpenedEnd: LiveData<Event<Boolean>> = _onOpenedEnd
+    private val _onOpenedEnd = MutableLiveData<Event<Int>>()
+    val onOpenedEnd: LiveData<Event<Int>> = _onOpenedEnd
 
-    private val _onCloseStartClick = MutableLiveData<Event<Boolean>>()
-    val onCloseStartClick: LiveData<Event<Boolean>> = _onCloseStartClick
+    private val _onCloseStartClick = MutableLiveData<Event<Int>>()
+    val onCloseStartClick: LiveData<Event<Int>> = _onCloseStartClick
 
-    fun onCloseEndClick() {
-        _onCloseEndClick.value = Event(true)
+    fun onCloseEndClick(id: Int) {
+        _onCloseEndClick.value = Event(id)
     }
 
-    fun onCloseStartClick() {
-        _onCloseStartClick.value = Event(true)
+    fun onCloseStartClick(id: Int) {
+        _onCloseStartClick.value = Event(id)
     }
 
-    fun onOpenedEnd() {
-        _onOpenedEnd.value = Event(true)
+    fun onOpenedEnd(id: Int) {
+        _onOpenedEnd.value = Event(id)
     }
 
 

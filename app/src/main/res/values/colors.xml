@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey_dark">#7b7b7b</color>
     <color name="grey_light">#c4c4c4</color>
+    <color name="grey_very_light">#dddddd</color>
     <color name="transparent">#00000000</color>
     <color name="iconStart">#FFFFFFFF</color>
     <color name="iconPlaceholder">#FF000000</color>
@@ -17,4 +18,5 @@
     <color name="detail_title_hint">#aaaaaa</color>
     <color name="detail_title">#000000</color>
     <color name="url">#0000EE</color>
+    <color name="red">#FF0000</color>
 </resources>

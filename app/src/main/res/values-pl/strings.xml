@@ -11,7 +11,11 @@
     <string name="no_shop">Nie znaleźono produktu.</string>
     <string name="no_shop_sub_text">Kliknij, aby spróbować ponownie.</string>
     <string name="no_suggestion">Brak podpowiedzi.</string>
-    <string name="no_suggestion_sub_text"/>
+    <string name="no_suggestion_sub_text" />
+
+    <string name="main_compare">Porównaj</string>
+    <string name="main_offer">Oferta</string>
+    <string name="main_shopping">Lista zakupów</string>
 
     <string name="menu_shopping">Lista zakupów</string>
     <string name="menu_cards">Karty lojalnościowe</string>
@@ -30,4 +34,7 @@
     <string name="detail_promo">Promocja</string>
     <string name="detail_promoInfo">Informacja o promocji</string>
     <string name="detail_url">Link do produktu</string>
+
+    <string name="card_barcode_title">Zeskanuj kod kreskowy karty</string>
+    <string name="card_barcode_enter_manually">Wprowadź ręcznie</string>
 </resources>

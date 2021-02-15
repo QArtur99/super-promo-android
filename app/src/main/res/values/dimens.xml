@@ -9,5 +9,14 @@
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_basic">16dp</dimen>
     <dimen name="padding_large">32dp</dimen>
-    <dimen name="elevation_toolbar">6dp</dimen>
+
+    <dimen name="elevation_toolbar">4dp</dimen>
+    <dimen name="elevation_card">2dp</dimen>
+    <dimen name="elevation_fab">6dp</dimen>
+
+    <dimen name="corner_small">4dp</dimen>
+    <dimen name="corner_basic">8dp</dimen>
+    <dimen name="corner_large">16dp</dimen>
+
+
 </resources>

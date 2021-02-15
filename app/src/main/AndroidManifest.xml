@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.WebViewActivity" />
+        <activity
+            android:name=".ui.CustomCaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>

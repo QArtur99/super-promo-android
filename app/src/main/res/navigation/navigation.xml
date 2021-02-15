@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_start_to_offer"
             app:destination="@id/fragment_offer" />
+        <action
+            android:id="@+id/action_start_to_card"
+            app:destination="@id/fragment_card" />
     </fragment>
 
     <fragment
@@ -101,6 +104,13 @@
             android:name="product"
             app:argType="com.superpromo.superpromo.data.network.model.Product"
             app:nullable="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_card"
+        android:name="com.superpromo.superpromo.ui.card.CardFragment"
+        android:label="CardFragment">
 
     </fragment>
 

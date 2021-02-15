@@ -2,6 +2,7 @@ package com.superpromo.superpromo.ui.compare.fromOffer
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
@@ -127,5 +128,10 @@ class SuggestionFromOfferFragment : Fragment() {
             KEY_QUERY to query
         )
         setNavigationResult(bundle)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.clear()
     }
 }

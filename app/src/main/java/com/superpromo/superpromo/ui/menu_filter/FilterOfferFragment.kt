@@ -47,7 +47,7 @@ class FilterOfferFragment : Fragment() {
 
     private fun setOnCloseClick() {
         binding.header.close.setOnClickListener {
-            sharedDrawerVm.onCloseEndClick()
+            sharedDrawerVm.onCloseEndClick(it.id)
         }
     }
 

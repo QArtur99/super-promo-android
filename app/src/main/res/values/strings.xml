@@ -13,6 +13,10 @@
     <string name="no_suggestion">No suggestions.</string>
     <string name="no_suggestion_sub_text" />
 
+    <string name="main_compare">Compare</string>
+    <string name="main_offer">Offer</string>
+    <string name="main_shopping">Shopping list</string>
+
     <string name="menu_shopping">Shopping list</string>
     <string name="menu_cards">Loyalty cards</string>
     <string name="menu_favorite">Favorite</string>
@@ -30,4 +34,7 @@
     <string name="detail_promo">Promo</string>
     <string name="detail_promoInfo">Promo info</string>
     <string name="detail_url">Url</string>
+
+    <string name="card_barcode_title">Scan the card\'s barcode</string>
+    <string name="card_barcode_enter_manually">Enter manually</string>
 </resources>
