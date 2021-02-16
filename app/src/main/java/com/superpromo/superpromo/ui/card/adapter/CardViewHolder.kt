@@ -28,7 +28,7 @@ class CardViewHolder constructor(
     }
 
     //    private val shopLogo: ImageView = view.findViewById(R.id.productImg)
-    private val cardName: TextView = view.findViewById(R.id.cardName)
+    private val cardName: TextView = view.findViewById(R.id.editText)
     private var cardModel: CardModel? = null
 
     init {

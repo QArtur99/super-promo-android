@@ -19,7 +19,7 @@
             android:background="@color/header_logo">
 
             <TextView
-                android:id="@+id/cardName"
+                android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

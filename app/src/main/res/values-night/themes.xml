@@ -13,5 +13,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!-- Customize your theme here. -->
+        <item name="alertDialogTheme">@style/AlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/AlertDialog</item>
     </style>
 </resources>

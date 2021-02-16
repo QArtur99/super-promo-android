@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Super Promo</string>
+    <string name="common_btn_ok">Ok</string>
+    <string name="common_btn_cancel">Cancel</string>
+
     <string name="retry">Retry</string>
     <string name="no_connection">Connection error.</string>
     <string name="no_connection_sub_text">Tap to try again.</string>
@@ -35,6 +38,8 @@
     <string name="detail_promoInfo">Promo info</string>
     <string name="detail_url">Url</string>
 
-    <string name="card_barcode_title">Scan the card\'s barcode</string>
+    <string name="card_barcode_dialog_name_title">Enter a card\'s name</string>
+    <string name="card_barcode_dialog_number_title">Enter a card\'s number</string>
+    <string name="card_barcode_title">Scan a card\'s barcode</string>
     <string name="card_barcode_enter_manually">Enter manually</string>
 </resources>
