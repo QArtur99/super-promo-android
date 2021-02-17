@@ -18,6 +18,17 @@
             android:layout_height="match_parent"
             android:background="@color/grey_very_light">
 
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_card_7"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Test" />
+
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
