@@ -112,6 +112,21 @@
         android:name="com.superpromo.superpromo.ui.card.CardFragment"
         android:label="CardFragment">
 
+        <action
+            android:id="@+id/action_to_card_detail"
+            app:destination="@id/fragment_card_detail" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_card_detail"
+        android:name="com.superpromo.superpromo.ui.card_detail.CardDetailFragment"
+        android:label="CardDetailFragment">
+
+        <argument
+            android:name="card"
+            app:argType="com.superpromo.superpromo.data.db.model.CardDb"
+            app:nullable="true" />
     </fragment>
 
     <fragment

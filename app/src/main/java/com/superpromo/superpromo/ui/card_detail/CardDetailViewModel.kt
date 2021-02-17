@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.card
+package com.superpromo.superpromo.ui.card_detail
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
@@ -9,7 +9,7 @@ import com.superpromo.superpromo.repository.card.CardRepository
 import com.superpromo.superpromo.ui.data.CardColorModel
 import kotlinx.coroutines.launch
 
-class CardViewModel @ViewModelInject constructor(
+class CardDetailViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val cardRepository: CardRepository,
 ) : ViewModel() {

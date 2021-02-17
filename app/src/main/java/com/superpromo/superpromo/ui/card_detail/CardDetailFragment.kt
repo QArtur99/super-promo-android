@@ -1,6 +1,5 @@
-package com.superpromo.superpromo.ui.card
+package com.superpromo.superpromo.ui.card_detail
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -8,34 +7,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AlertDialog
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.DialogCardColorBinding
 import com.superpromo.superpromo.databinding.DialogCardNameBinding
-import com.superpromo.superpromo.databinding.FragmentCardBinding
+import com.superpromo.superpromo.databinding.FragmentCardDetailBinding
 import com.superpromo.superpromo.ui.CustomCaptureActivity
-import com.superpromo.superpromo.ui.card.adapter.CardListAdapter
 import com.superpromo.superpromo.ui.card.color_adapter.CardColorListAdapter
-import com.superpromo.superpromo.ui.card_detail.CardDetailFragment
 import com.superpromo.superpromo.ui.data.CardColorModel
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.util.ext.setToolbar
-import com.superpromo.superpromo.ui.util.ext.toast
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class CardFragment : Fragment() {
+class CardDetailFragment : Fragment() {
+
+    companion object {
+        const val KEY_CARD = "card"
+    }
 
     private val sharedDrawerVm: SharedDrawerVm by viewModels({ requireActivity() })
-    private val cardViewModel: CardViewModel by viewModels()
+    private val cardDetailViewModel: CardDetailViewModel by viewModels()
 
-    private lateinit var binding: FragmentCardBinding
-    private lateinit var adapter: CardListAdapter
+    private val bundle: CardDetailFragmentArgs by navArgs()
+    private lateinit var binding: FragmentCardDetailBinding
 
     private var selectedName: String? = null
     private var selectedView: View? = null
@@ -46,62 +48,24 @@ class CardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCardBinding.inflate(inflater)
+        binding = FragmentCardDetailBinding.inflate(inflater)
         setToolbar(binding.appBar.toolbar)
-
-        initAdapter()
-        initSwipeToRefresh()
-
-        observeMenuList()
-
+        bundle.card?.let {
+            binding.editText.text = it.name
+            binding.code.text = it.number
+            generateBarcode(it.number)
+        }
         setHasOptionsMenu(true)
         return binding.root
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if (result != null) {
-            if (result.contents == null) {
-                toast("Cancelled")
-            } else {
-                toast("Success")
-                cardViewModel.addCard(
-                    selectedName!!,
-                    getString(selectedColor?.color!!),
-                    result.contents
-                )
-            }
-        }
-    }
 
-    private fun observeMenuList() {
-        cardViewModel.cardList.observe(viewLifecycleOwner, {
-            binding.swipeRefresh.isRefreshing = false
-            adapter.submitList(it)
-        })
-    }
-
-    private fun initAdapter() {
-        val glide = GlideApp.with(this)
-        adapter = CardListAdapter(glide, onShopClickListener())
-        binding.recyclerView.adapter = adapter
-    }
-
-    private fun initSwipeToRefresh() {
-        binding.swipeRefresh.setOnRefreshListener { cardViewModel.getCardList() }
-    }
-
-    private fun onShopClickListener() = CardListAdapter.OnClickListener { view, card ->
-        when (card.name) {
-            "" -> addCardName()
-            else -> {
-                val bundle = bundleOf(
-                    CardDetailFragment.KEY_CARD to card,
-                )
-                findNavController().navigate(R.id.action_to_card_detail, bundle)
-
-            }
+    private fun generateBarcode(number: String) {
+        try {
+            val barcodeEncoder = BarcodeEncoder()
+            val bitmap = barcodeEncoder.encodeBitmap(number, BarcodeFormat.CODE_39, 600, 200)
+            binding.barcode.setImageBitmap(bitmap)
+        } catch (e: Exception) {
         }
     }
 
@@ -139,7 +103,7 @@ class CardFragment : Fragment() {
         val glide = GlideApp.with(this)
         val adapter = CardColorListAdapter(glide, onCardColorClickListener())
         binding.recyclerView.adapter = adapter
-        cardViewModel.cardColorList.observe(viewLifecycleOwner, {
+        cardDetailViewModel.cardColorList.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
     }

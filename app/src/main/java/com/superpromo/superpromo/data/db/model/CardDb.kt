@@ -1,11 +1,18 @@
 package com.superpromo.superpromo.data.db.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "cards")
+@Parcelize
 data class CardDb(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+
     @ColumnInfo(name = "name")
     val name: String,
 
@@ -14,7 +21,4 @@ data class CardDb(
 
     @ColumnInfo(name = "number")
     val number: String,
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Long? = null
-}
+) : Parcelable
