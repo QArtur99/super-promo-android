@@ -13,6 +13,13 @@
         app:cardBackgroundColor="@color/header_logo"
         app:cardElevation="@dimen/elevation_card">
 
+        <RelativeLayout
+            android:id="@+id/selector"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/layer_list_card_color" />
+
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

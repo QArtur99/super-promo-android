@@ -38,6 +38,7 @@
     <string name="detail_promoInfo">Promo info</string>
     <string name="detail_url">Url</string>
 
+    <string name="card_barcode_dialog_color_title">Select a card\'s color</string>
     <string name="card_barcode_dialog_name_title">Enter a card\'s name</string>
     <string name="card_barcode_dialog_number_title">Enter a card\'s number</string>
     <string name="card_barcode_title">Scan a card\'s barcode</string>

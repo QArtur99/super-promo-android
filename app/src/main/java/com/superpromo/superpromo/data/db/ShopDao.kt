@@ -5,7 +5,7 @@ import com.superpromo.superpromo.data.db.model.ShopDb
 
 
 @Dao
-interface SuperPromoDao {
+interface ShopDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(item: ShopDb)

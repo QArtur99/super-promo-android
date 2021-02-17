@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,8 +19,10 @@ import com.superpromo.superpromo.databinding.FragmentCardBinding
 import com.superpromo.superpromo.ui.CustomCaptureActivity
 import com.superpromo.superpromo.ui.card.adapter.CardListAdapter
 import com.superpromo.superpromo.ui.card.color_adapter.CardColorListAdapter
+import com.superpromo.superpromo.ui.data.CardColorModel
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.util.ext.setToolbar
+import com.superpromo.superpromo.ui.util.ext.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,6 +34,10 @@ class CardFragment : Fragment() {
     private lateinit var binding: FragmentCardBinding
     private lateinit var adapter: CardListAdapter
 
+    private var selectedName: String? = null
+    private var selectedView: View? = null
+    private var selectedColor: CardColorModel? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +47,7 @@ class CardFragment : Fragment() {
         setToolbar(binding.appBar.toolbar)
 
         initAdapter()
+        initSwipeToRefresh()
 
         observeMenuList()
 
@@ -53,15 +60,21 @@ class CardFragment : Fragment() {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
-                Toast.makeText(requireActivity(), "Cancelled", Toast.LENGTH_LONG).show()
+                toast("Cancelled")
             } else {
-                Toast.makeText(requireActivity(), "Success:" + result.contents, Toast.LENGTH_LONG).show()
+                toast("Success")
+                cardViewModel.addCard(
+                    selectedName!!,
+                    getString(selectedColor?.color!!),
+                    result.contents
+                )
             }
         }
     }
 
     private fun observeMenuList() {
         cardViewModel.cardList.observe(viewLifecycleOwner, {
+            binding.swipeRefresh.isRefreshing = false
             adapter.submitList(it)
         })
     }
@@ -72,11 +85,13 @@ class CardFragment : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
+    private fun initSwipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener { cardViewModel.getCardList() }
+    }
+
     private fun onShopClickListener() = CardListAdapter.OnClickListener { view, card ->
-        when (card.background) {
-            R.drawable.ic_baseline_add_circle_24 -> {
-                addCardName()
-            }
+        when (card.name) {
+            "" -> addCardName()
             else -> {
 
             }
@@ -89,6 +104,7 @@ class CardFragment : Fragment() {
             .setTitle(R.string.card_barcode_dialog_name_title)
             .setView(bindingDialog.root)
             .setPositiveButton(R.string.common_btn_ok) { _, _ ->
+                selectedName = bindingDialog.editText.text.toString()
                 addCardColor()
             }
             .setNegativeButton(R.string.common_btn_cancel) { _, _ ->
@@ -101,7 +117,7 @@ class CardFragment : Fragment() {
         val bindingDialog = DialogCardColorBinding.inflate(layoutInflater)
         setColorCardAdapter(bindingDialog)
         val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.card_barcode_dialog_name_title)
+            .setTitle(R.string.card_barcode_dialog_color_title)
             .setView(bindingDialog.root)
             .setPositiveButton(R.string.common_btn_ok) { _, _ ->
                 scanCard()
@@ -121,9 +137,15 @@ class CardFragment : Fragment() {
         })
     }
 
-    private fun onCardColorClickListener() = CardColorListAdapter.OnClickListener { view, card ->
-
-    }
+    private fun onCardColorClickListener() =
+        CardColorListAdapter.OnClickListener { view, cardColor ->
+            var selector = selectedView?.findViewById<RelativeLayout>(R.id.selector)
+            selector?.visibility = View.GONE
+            selectedView = view
+            selectedColor = cardColor
+            selector = view.findViewById(R.id.selector)
+            selector.visibility = View.VISIBLE
+        }
 
     private fun scanCard() {
         val scanIntegrator = IntentIntegrator.forSupportFragment(this)

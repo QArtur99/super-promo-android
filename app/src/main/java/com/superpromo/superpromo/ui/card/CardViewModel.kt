@@ -2,37 +2,25 @@ package com.superpromo.superpromo.ui.card
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.superpromo.superpromo.R
-import com.superpromo.superpromo.repository.main.SuperPromoRepository
+import com.superpromo.superpromo.data.db.model.CardDb
+import com.superpromo.superpromo.repository.card.CardRepository
 import com.superpromo.superpromo.ui.data.CardColorModel
-import com.superpromo.superpromo.ui.data.CardModel
+import kotlinx.coroutines.launch
 
 class CardViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val superPromoRepository: SuperPromoRepository
+    private val cardRepository: CardRepository,
 ) : ViewModel() {
 
-    private val _cardList = MutableLiveData<List<CardModel>>()
-    val cardList: LiveData<List<CardModel>> = _cardList
+    private val _cardList = MutableLiveData<List<CardDb>>()
+    val cardList: LiveData<List<CardDb>> = _cardList
 
     private val _cardColorList = MutableLiveData<List<CardColorModel>>()
     val cardColorList: LiveData<List<CardColorModel>> = _cardColorList
 
     init {
-        _cardList.value = listOf(
-            CardModel(R.drawable.ic_baseline_add_circle_24, ""),
-            CardModel(R.drawable.ic_baseline_shopping_cart_24, "Biedronka"),
-            CardModel(R.drawable.ic_baseline_credit_card_24, "Biedronka"),
-            CardModel(R.drawable.ic_baseline_favorite_24, "Biedronka"),
-            CardModel(R.drawable.ic_baseline_share_24, "Biedronka"),
-            CardModel(R.drawable.ic_baseline_email_24, "Biedronka"),
-            CardModel(R.drawable.ic_baseline_settings_24, "Biedronka"),
-            CardModel(R.drawable.ic_baseline_info_24, "Biedronka")
-        )
         _cardColorList.value = listOf(
             CardColorModel(R.color.black_700),
             CardColorModel(R.color.blue_grey_700),
@@ -53,6 +41,23 @@ class CardViewModel @ViewModelInject constructor(
             CardColorModel(R.color.pink_700),
             CardColorModel(R.color.red_700),
         ).reversed()
+        getCardList()
+    }
+
+    fun getCardList() {
+        viewModelScope.launch {
+            _cardList.value = mutableListOf<CardDb>().apply {
+                add(CardDb("", "", ""))
+                addAll(cardRepository.getCardList())
+            }
+        }
+    }
+
+    fun addCard(name: String, color: String, number: String) {
+        val card = CardDb(name, color, number)
+        viewModelScope.launch {
+            cardRepository.insertCard(card)
+        }
     }
 
 

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
-import com.superpromo.superpromo.ui.data.CardModel
+import com.superpromo.superpromo.data.db.model.CardDb
 
 class CardAddViewHolder constructor(
     private val view: View,
@@ -26,15 +26,15 @@ class CardAddViewHolder constructor(
         }
     }
 
-    private var cardModel: CardModel? = null
+    private var cardDb: CardDb? = null
 
     init {
         view.setOnClickListener {
-            cardModel?.let { clickListener.onClick(view, it) }
+            cardDb?.let { clickListener.onClick(view, it) }
         }
     }
 
-    fun bind(item: CardModel) {
-        cardModel = item
+    fun bind(item: CardDb) {
+        cardDb = item
     }
 }

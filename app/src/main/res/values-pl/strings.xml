@@ -38,6 +38,7 @@
     <string name="detail_promoInfo">Informacja o promocji</string>
     <string name="detail_url">Link do produktu</string>
 
+    <string name="card_barcode_dialog_color_title">Wybierz kolor karty</string>
     <string name="card_barcode_dialog_name_title">Wpowadź nazwe karty</string>
     <string name="card_barcode_dialog_number_title">Wpowadź numer karty</string>
     <string name="card_barcode_title">Zeskanuj kod kreskowy karty</string>

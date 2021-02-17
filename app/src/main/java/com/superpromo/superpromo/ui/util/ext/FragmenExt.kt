@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
@@ -74,4 +75,8 @@ fun Fragment.setStatusBarTransparent() {
     val window: Window = activity.window
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
     window.statusBarColor = ContextCompat.getColor(activity, R.color.transparent)
+}
+
+fun Fragment.toast(text: String) {
+    Toast.makeText(requireActivity(), text, Toast.LENGTH_LONG).show()
 }

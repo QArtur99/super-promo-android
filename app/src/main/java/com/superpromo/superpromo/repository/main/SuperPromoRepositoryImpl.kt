@@ -14,7 +14,6 @@ import com.superpromo.superpromo.repository.main.mapper.asDbModel
 import com.superpromo.superpromo.repository.state.ResultApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 class SuperPromoRepositoryImpl @Inject constructor(
@@ -64,19 +63,19 @@ class SuperPromoRepositoryImpl @Inject constructor(
 
     override suspend fun insertShop(shop: Shop) {
         withContext(ioDispatcher) {
-            superPromoDb.movieDatabaseDao().insert(shop.asDbModel())
+            superPromoDb.shopDao().insert(shop.asDbModel())
         }
     }
 
     override suspend fun deleteShopAll() {
         withContext(ioDispatcher) {
-            superPromoDb.movieDatabaseDao().deleteAll()
+            superPromoDb.shopDao().deleteAll()
         }
     }
 
     override suspend fun getShopList(): List<ShopDb> {
         return withContext(ioDispatcher) {
-            superPromoDb.movieDatabaseDao().getItemAll()
+            superPromoDb.shopDao().getItemAll()
         }
     }
 

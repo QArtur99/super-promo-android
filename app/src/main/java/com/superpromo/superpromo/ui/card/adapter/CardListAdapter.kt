@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
-import com.superpromo.superpromo.ui.data.CardModel
+import com.superpromo.superpromo.data.db.model.CardDb
 
 
 class CardListAdapter(
     private val glide: GlideRequests,
     private val clickListener: OnClickListener,
-) : ListAdapter<CardModel, RecyclerView.ViewHolder>(GridViewDiffCallback) {
+) : ListAdapter<CardDb, RecyclerView.ViewHolder>(GridViewDiffCallback) {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
@@ -32,23 +32,23 @@ class CardListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)!!
-        return when(item.background){
-            R.drawable.ic_baseline_add_circle_24 -> R.layout.item_card_add
+        return when (item.name) {
+            "" -> R.layout.item_card_add
             else -> R.layout.item_card
         }
     }
 
-    companion object GridViewDiffCallback : DiffUtil.ItemCallback<CardModel>() {
-        override fun areItemsTheSame(oldItem: CardModel, newItem: CardModel): Boolean {
-            return oldItem.title == newItem.title
+    companion object GridViewDiffCallback : DiffUtil.ItemCallback<CardDb>() {
+        override fun areItemsTheSame(oldItem: CardDb, newItem: CardDb): Boolean {
+            return oldItem.name == newItem.name
         }
 
-        override fun areContentsTheSame(oldItem: CardModel, newItem: CardModel): Boolean {
+        override fun areContentsTheSame(oldItem: CardDb, newItem: CardDb): Boolean {
             return oldItem == newItem
         }
     }
 
-    open class OnClickListener(val clickListener: (v: View, CardModel: CardModel) -> Unit) {
-        fun onClick(v: View, cardModel: CardModel) = clickListener(v, cardModel)
+    open class OnClickListener(val clickListener: (v: View, cardDb: CardDb) -> Unit) {
+        fun onClick(v: View, cardDb: CardDb) = clickListener(v, cardDb)
     }
 }
