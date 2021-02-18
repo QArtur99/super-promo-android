@@ -10,8 +10,7 @@
 
     <include
         android:id="@+id/appBar"
-        layout="@layout/include_toolbar_activity"
-        android:elevation="@dimen/elevation_toolbar" />
+        layout="@layout/include_toolbar_activity" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -56,15 +55,15 @@
             android:id="@+id/enterManually"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:backgroundTint="@color/colorPrimary"
-            app:cornerRadius="@dimen/corner_basic"
+            android:layout_margin="@dimen/margin_large"
+            android:paddingStart="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_basic"
+            android:paddingEnd="@dimen/padding_large"
+            android:paddingBottom="@dimen/padding_basic"
             android:text="@string/card_barcode_enter_manually"
             android:textAllCaps="false"
-            android:paddingTop="@dimen/padding_basic"
-            android:paddingBottom="@dimen/padding_basic"
-            android:paddingStart="@dimen/padding_large"
-            android:paddingEnd="@dimen/padding_large"
-            android:layout_margin="@dimen/margin_large"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="@dimen/corner_basic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

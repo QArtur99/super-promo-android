@@ -13,6 +13,7 @@
     <dimen name="elevation_toolbar">4dp</dimen>
     <dimen name="elevation_card">2dp</dimen>
     <dimen name="elevation_fab">6dp</dimen>
+    <dimen name="elevation_dialog">24dp</dimen>
 
     <dimen name="corner_small">4dp</dimen>
     <dimen name="corner_basic">8dp</dimen>
