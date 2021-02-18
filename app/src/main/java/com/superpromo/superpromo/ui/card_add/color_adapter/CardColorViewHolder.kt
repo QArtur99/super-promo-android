@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.card.color_adapter
+package com.superpromo.superpromo.ui.card_add.color_adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -39,5 +39,6 @@ class CardColorViewHolder constructor(
     fun bind(item: CardColorModel) {
         cardColorModel = item
         colorView.setCardBackgroundColor(view.context.getColor(item.color))
+        if(item.click) view.performClick()
     }
 }

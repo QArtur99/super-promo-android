@@ -15,12 +15,14 @@ import androidx.navigation.fragment.findNavController
 import com.google.zxing.integration.android.IntentIntegrator
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
+import com.superpromo.superpromo.data.db.model.CardDb
 import com.superpromo.superpromo.databinding.DialogCardColorBinding
 import com.superpromo.superpromo.databinding.DialogCardNameBinding
 import com.superpromo.superpromo.databinding.FragmentCardBinding
 import com.superpromo.superpromo.ui.CustomCaptureActivity
 import com.superpromo.superpromo.ui.card.adapter.CardListAdapter
-import com.superpromo.superpromo.ui.card.color_adapter.CardColorListAdapter
+import com.superpromo.superpromo.ui.card_add.color_adapter.CardColorListAdapter
+import com.superpromo.superpromo.ui.card_add.CardAddFragment
 import com.superpromo.superpromo.ui.card_detail.CardDetailFragment
 import com.superpromo.superpromo.ui.data.CardColorModel
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
@@ -36,10 +38,6 @@ class CardFragment : Fragment() {
 
     private lateinit var binding: FragmentCardBinding
     private lateinit var adapter: CardListAdapter
-
-    private var selectedName: String? = null
-    private var selectedView: View? = null
-    private var selectedColor: CardColorModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,16 +60,12 @@ class CardFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
-            if (result.contents == null) {
-                toast("Cancelled")
-            } else {
-                toast("Success")
-                cardViewModel.addCard(
-                    selectedName!!,
-                    getString(selectedColor?.color!!),
-                    result.contents,
-                    result.formatName,
+            if (result.contents != null) {
+                val cardDb = CardDb(0, "", "", result.contents, result.formatName)
+                val bundle = bundleOf(
+                    CardAddFragment.KEY_CARD to cardDb,
                 )
+                findNavController().navigate(R.id.action_to_card_add, bundle)
             }
         }
     }
@@ -98,7 +92,7 @@ class CardFragment : Fragment() {
 
     private fun onShopClickListener() = CardListAdapter.OnClickListener { view, card ->
         when (card.name) {
-            "" -> addCardName()
+            "" -> scanCard()
             else -> {
                 val bundle = bundleOf(
                     CardDetailFragment.KEY_CARD to card,
@@ -108,55 +102,6 @@ class CardFragment : Fragment() {
             }
         }
     }
-
-    private fun addCardName() {
-        val bindingDialog = DialogCardNameBinding.inflate(layoutInflater)
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.card_barcode_dialog_name_title)
-            .setView(bindingDialog.root)
-            .setPositiveButton(R.string.common_btn_ok) { _, _ ->
-                selectedName = bindingDialog.editText.text.toString()
-                addCardColor()
-            }
-            .setNegativeButton(R.string.common_btn_cancel) { _, _ ->
-            }
-            .create()
-        dialog.show()
-    }
-
-    private fun addCardColor() {
-        val bindingDialog = DialogCardColorBinding.inflate(layoutInflater)
-        setColorCardAdapter(bindingDialog)
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.card_barcode_dialog_color_title)
-            .setView(bindingDialog.root)
-            .setPositiveButton(R.string.common_btn_ok) { _, _ ->
-                scanCard()
-            }
-            .setNegativeButton(R.string.common_btn_cancel) { _, _ ->
-            }
-            .create()
-        dialog.show()
-    }
-
-    private fun setColorCardAdapter(binding: DialogCardColorBinding) {
-        val glide = GlideApp.with(this)
-        val adapter = CardColorListAdapter(glide, onCardColorClickListener())
-        binding.recyclerView.adapter = adapter
-        cardViewModel.cardColorList.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
-        })
-    }
-
-    private fun onCardColorClickListener() =
-        CardColorListAdapter.OnClickListener { view, cardColor ->
-            var selector = selectedView?.findViewById<RelativeLayout>(R.id.selector)
-            selector?.visibility = View.GONE
-            selectedView = view
-            selectedColor = cardColor
-            selector = view.findViewById(R.id.selector)
-            selector.visibility = View.VISIBLE
-        }
 
     private fun scanCard() {
         val scanIntegrator = IntentIntegrator.forSupportFragment(this)

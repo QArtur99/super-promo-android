@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">Super Promo</string>
     <string name="common_btn_ok">Ok</string>
+    <string name="common_btn_add">Dodaj</string>
+    <string name="common_btn_save">Zapisz</string>
     <string name="common_btn_cancel">Anuluj</string>
 
     <string name="retry">Retry</string>

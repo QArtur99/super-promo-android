@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.card.color_adapter
+package com.superpromo.superpromo.ui.card_add.color_adapter
 
 import android.view.View
 import android.view.ViewGroup

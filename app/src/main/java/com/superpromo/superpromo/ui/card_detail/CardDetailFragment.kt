@@ -21,7 +21,7 @@ import com.superpromo.superpromo.databinding.DialogCardColorBinding
 import com.superpromo.superpromo.databinding.DialogCardNameBinding
 import com.superpromo.superpromo.databinding.FragmentCardDetailBinding
 import com.superpromo.superpromo.ui.CustomCaptureActivity
-import com.superpromo.superpromo.ui.card.color_adapter.CardColorListAdapter
+import com.superpromo.superpromo.ui.card_add.color_adapter.CardColorListAdapter
 import com.superpromo.superpromo.ui.data.CardColorModel
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.util.ext.setToolbar
