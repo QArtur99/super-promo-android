@@ -69,7 +69,8 @@ class CardFragment : Fragment() {
                 cardViewModel.addCard(
                     selectedName!!,
                     getString(selectedColor?.color!!),
-                    result.contents
+                    result.contents,
+                    result.formatName,
                 )
             }
         }
@@ -89,7 +90,10 @@ class CardFragment : Fragment() {
     }
 
     private fun initSwipeToRefresh() {
-        binding.swipeRefresh.setOnRefreshListener { cardViewModel.getCardList() }
+        binding.swipeRefresh.setOnRefreshListener {
+//            cardViewModel.getCardList()
+            binding.swipeRefresh.isRefreshing = false
+        }
     }
 
     private fun onShopClickListener() = CardListAdapter.OnClickListener { view, card ->

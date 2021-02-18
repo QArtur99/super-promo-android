@@ -7,6 +7,7 @@ import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.CardDb
 import com.superpromo.superpromo.repository.card.CardRepository
 import com.superpromo.superpromo.ui.data.CardColorModel
+import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.launch
 
 class CardViewModel @ViewModelInject constructor(
@@ -14,8 +15,13 @@ class CardViewModel @ViewModelInject constructor(
     private val cardRepository: CardRepository,
 ) : ViewModel() {
 
-    private val _cardList = MutableLiveData<List<CardDb>>()
-    val cardList: LiveData<List<CardDb>> = _cardList
+    private val _cardList = cardRepository.getCardList().asLiveData()
+    val cardList: LiveData<List<CardDb>> = _cardList.map {
+        mutableListOf<CardDb>().apply {
+            add(CardDb(0, "", "", "", ""))
+            addAll(it)
+        }
+    }
 
     private val _cardColorList = MutableLiveData<List<CardColorModel>>()
     val cardColorList: LiveData<List<CardColorModel>> = _cardColorList
@@ -41,20 +47,10 @@ class CardViewModel @ViewModelInject constructor(
             CardColorModel(R.color.pink_700),
             CardColorModel(R.color.red_700),
         ).reversed()
-        getCardList()
     }
 
-    fun getCardList() {
-        viewModelScope.launch {
-            _cardList.value = mutableListOf<CardDb>().apply {
-                add(CardDb(0, "", "", ""))
-                addAll(cardRepository.getCardList())
-            }
-        }
-    }
-
-    fun addCard(name: String, color: String, number: String) {
-        val card = CardDb(0, name, color, number)
+    fun addCard(name: String, color: String, number: String, formatName: String) {
+        val card = CardDb(0, name, color, number, formatName)
         viewModelScope.launch {
             cardRepository.insertCard(card)
         }

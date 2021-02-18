@@ -7,6 +7,9 @@ import com.superpromo.superpromo.di.DefaultDispatcher
 import com.superpromo.superpromo.di.IoDispatcher
 import com.superpromo.superpromo.repository.BaseRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -29,10 +32,9 @@ class CardRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCardList(): List<CardDb> {
-        return withContext(ioDispatcher) {
-            superPromoDb.cardDao().getItemAll()
-        }
-    }
+    override fun getCardList(): Flow<List<CardDb>> =
+        superPromoDb.cardDao().getItemAll()
+            .distinctUntilChanged()
+            .flowOn(ioDispatcher)
 
 }

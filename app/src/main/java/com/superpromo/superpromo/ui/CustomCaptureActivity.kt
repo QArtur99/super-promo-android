@@ -52,6 +52,7 @@ class CustomCaptureActivity : CaptureActivity() {
         val editTextInput = bindingDialog.editText.text.toString()
         val intent = Intent(Intents.Scan.ACTION)
         intent.putExtra(Intents.Scan.RESULT, editTextInput)
+        intent.putExtra(Intents.Scan.RESULT_FORMAT, "")
         setResult(RESULT_OK, intent)
         finish()
     }

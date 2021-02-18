@@ -45,16 +45,11 @@ class CardDetailViewModel @ViewModelInject constructor(
     }
 
     fun getCardList() {
-        viewModelScope.launch {
-            _cardList.value = mutableListOf<CardDb>().apply {
-                add(CardDb(0, "", "", ""))
-                addAll(cardRepository.getCardList())
-            }
-        }
+
     }
 
-    fun addCard(name: String, color: String, number: String) {
-        val card = CardDb(0, name, color, number)
+    fun addCard(name: String, color: String, number: String, formatName: String) {
+        val card = CardDb(0, name, color, number, formatName)
         viewModelScope.launch {
             cardRepository.insertCard(card)
         }

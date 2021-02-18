@@ -2,6 +2,7 @@ package com.superpromo.superpromo.data.db
 
 import androidx.room.*
 import com.superpromo.superpromo.data.db.model.CardDb
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -29,5 +30,5 @@ interface CardDao {
     fun getItem(itemId: Int): CardDb
 
     @Query("SELECT * FROM cards ORDER BY id DESC")
-    fun getItemAll(): List<CardDb>
+    fun getItemAll(): Flow<List<CardDb>>
 }

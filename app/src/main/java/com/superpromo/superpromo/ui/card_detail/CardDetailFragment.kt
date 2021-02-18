@@ -1,5 +1,6 @@
 package com.superpromo.superpromo.ui.card_detail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -15,6 +16,7 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
+import com.superpromo.superpromo.data.db.model.CardDb
 import com.superpromo.superpromo.databinding.DialogCardColorBinding
 import com.superpromo.superpromo.databinding.DialogCardNameBinding
 import com.superpromo.superpromo.databinding.FragmentCardDetailBinding
@@ -53,18 +55,26 @@ class CardDetailFragment : Fragment() {
         bundle.card?.let {
             binding.editText.text = it.name
             binding.code.text = it.number
-            generateBarcode(it.number)
+            binding.background.setBackgroundColor(Color.parseColor(it.color))
+            generateBarcode(it)
         }
         setHasOptionsMenu(true)
         return binding.root
     }
 
 
-    private fun generateBarcode(number: String) {
+    private fun generateBarcode(cardDb: CardDb) {
         try {
-            val barcodeEncoder = BarcodeEncoder()
-            val bitmap = barcodeEncoder.encodeBitmap(number, BarcodeFormat.CODE_39, 600, 200)
-            binding.barcode.setImageBitmap(bitmap)
+            if (cardDb.formatName.isNotEmpty()) {
+                val barcodeEncoder = BarcodeEncoder()
+                val bitmap = barcodeEncoder.encodeBitmap(
+                    cardDb.number,
+                    BarcodeFormat.valueOf(cardDb.formatName),
+                    600,
+                    200
+                )
+                binding.barcode.setImageBitmap(bitmap)
+            }
         } catch (e: Exception) {
         }
     }

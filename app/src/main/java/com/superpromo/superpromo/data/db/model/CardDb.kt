@@ -4,7 +4,6 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "cards")
@@ -21,4 +20,7 @@ data class CardDb(
 
     @ColumnInfo(name = "number")
     val number: String,
+
+    @ColumnInfo(name = "formatName")
+    val formatName: String,
 ) : Parcelable

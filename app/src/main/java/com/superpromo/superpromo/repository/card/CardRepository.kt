@@ -1,9 +1,10 @@
 package com.superpromo.superpromo.repository.card
 
 import com.superpromo.superpromo.data.db.model.CardDb
+import kotlinx.coroutines.flow.Flow
 
 interface CardRepository {
     suspend fun insertCard(card: CardDb)
     suspend fun deleteCardAll()
-    suspend fun getCardList(): List<CardDb>
+    fun getCardList(): Flow<List<CardDb>>
 }
