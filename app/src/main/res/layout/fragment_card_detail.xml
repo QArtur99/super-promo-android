@@ -13,19 +13,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="@dimen/padding_large"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/margin_large"
             app:cardCornerRadius="@dimen/corner_basic"
             app:cardElevation="@dimen/elevation_fab"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="8:5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/background"
@@ -60,9 +64,9 @@
 
                     <ImageView
                         android:id="@+id/barcode"
-                        android:layout_marginTop="@dimen/margin_small"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/margin_small"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toTopOf="@+id/code"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +96,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_basic"
+            android:gravity="center"
+            android:text="@string/card_barcode_enter_manually_info"
+            android:textColor="@color/black_info"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/card" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

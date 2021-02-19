@@ -9,7 +9,7 @@ import com.superpromo.superpromo.data.db.model.ShopDb
     entities = [
         ShopDb::class,
         CardDb::class,
-    ], version = 11, exportSchema = false
+    ], version = 1, exportSchema = true
 )
 abstract class SuperPromoDb : RoomDatabase() {
 

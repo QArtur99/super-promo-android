@@ -45,4 +45,5 @@
     <string name="card_barcode_dialog_number_title">Wpowadź numer karty</string>
     <string name="card_barcode_title">Zeskanuj kod kreskowy karty</string>
     <string name="card_barcode_enter_manually">Wprowadź ręcznie</string>
+    <string name="card_barcode_enter_manually_info">Jeśli czytnik nie rozpoznaje kodu. \nPoproś sprzedawcę, aby wpisał kod ręcznie.</string>
 </resources>

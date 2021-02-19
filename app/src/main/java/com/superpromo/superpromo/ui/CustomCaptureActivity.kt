@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
+import androidx.core.text.isDigitsOnly
+import com.google.zxing.BarcodeFormat
 import com.google.zxing.client.android.Intents
 import com.journeyapps.barcodescanner.CaptureActivity
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
@@ -50,9 +52,14 @@ class CustomCaptureActivity : CaptureActivity() {
 
     private fun onSuccess(bindingDialog: DialogCardNumberBinding) {
         val editTextInput = bindingDialog.editText.text.toString()
+        val isDigitsOnly = editTextInput.isDigitsOnly()
+        val format = when {
+            editTextInput.length == 13 && isDigitsOnly -> BarcodeFormat.EAN_13
+            else -> BarcodeFormat.CODE_128
+        }
         val intent = Intent(Intents.Scan.ACTION)
         intent.putExtra(Intents.Scan.RESULT, editTextInput)
-        intent.putExtra(Intents.Scan.RESULT_FORMAT, "")
+        intent.putExtra(Intents.Scan.RESULT_FORMAT, format.toString())
         setResult(RESULT_OK, intent)
         finish()
     }

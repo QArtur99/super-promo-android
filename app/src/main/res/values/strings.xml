@@ -45,4 +45,5 @@
     <string name="card_barcode_dialog_number_title">Enter a card\'s number</string>
     <string name="card_barcode_title">Scan a card\'s barcode</string>
     <string name="card_barcode_enter_manually">Enter manually</string>
+    <string name="card_barcode_enter_manually_info">If the reader does not recognize the code. \nAsk the seller to enter the code manually.</string>
 </resources>
