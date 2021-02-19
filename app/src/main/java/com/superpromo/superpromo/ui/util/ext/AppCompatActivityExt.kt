@@ -25,6 +25,5 @@ fun AppCompatActivity.setToolbar(toolbar: Toolbar) {
         if (hideSoftKeyBoard(it) == false) {
             onBackPressed()
         }
-        it.rootView.clearFocus()
     }
 }

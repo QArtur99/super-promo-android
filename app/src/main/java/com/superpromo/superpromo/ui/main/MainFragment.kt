@@ -3,16 +3,11 @@ package com.superpromo.superpromo.ui.main
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.FragmentStartBinding
-import com.superpromo.superpromo.ui.util.EventObserver
-import com.superpromo.superpromo.ui.util.ext.setToolbar
 import com.superpromo.superpromo.ui.util.ext.setToolbarHome
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,7 +41,25 @@ class MainFragment : Fragment() {
 //            intent.putExtra(WebViewActivity.ACTION_GO_TO_URL, "")
 //            activity?.startActivityForResult(intent, WebViewActivity.ACTION_RESULT)
         }
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_card -> onCard()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun onCard() {
+        findNavController().navigate(R.id.action_start_to_card)
     }
 
 }

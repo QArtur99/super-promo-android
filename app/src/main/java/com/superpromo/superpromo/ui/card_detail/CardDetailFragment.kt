@@ -2,28 +2,22 @@ package com.superpromo.superpromo.ui.card_detail
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
-import android.widget.RelativeLayout
-import androidx.appcompat.app.AlertDialog
+import android.view.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.CardDb
-import com.superpromo.superpromo.databinding.DialogCardColorBinding
-import com.superpromo.superpromo.databinding.DialogCardNameBinding
 import com.superpromo.superpromo.databinding.FragmentCardDetailBinding
 import com.superpromo.superpromo.ui.CustomCaptureActivity
-import com.superpromo.superpromo.ui.card_add.color_adapter.CardColorListAdapter
-import com.superpromo.superpromo.ui.data.CardColorModel
+import com.superpromo.superpromo.ui.card_add.CardAddFragment
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
+import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,10 +34,7 @@ class CardDetailFragment : Fragment() {
 
     private val bundle: CardDetailFragmentArgs by navArgs()
     private lateinit var binding: FragmentCardDetailBinding
-
-    private var selectedName: String? = null
-    private var selectedView: View? = null
-    private var selectedColor: CardColorModel? = null
+    private lateinit var cardDb: CardDb
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,14 +43,35 @@ class CardDetailFragment : Fragment() {
     ): View {
         binding = FragmentCardDetailBinding.inflate(inflater)
         setToolbar(binding.appBar.toolbar)
-        bundle.card?.let {
-            binding.editText.text = it.name
-            binding.code.text = it.number
-            binding.background.setBackgroundColor(Color.parseColor(it.color))
-            generateBarcode(it)
-        }
+        onNavigationResult()
+
+        getBundle()
+
         setHasOptionsMenu(true)
         return binding.root
+    }
+
+    private fun onNavigationResult() {
+        onNavBackStackListener {
+            if (it.containsKey(CardAddFragment.KEY_CARD)) {
+                val cardDb = it.get(CardAddFragment.KEY_CARD) as CardDb
+                setCard(cardDb)
+            }
+        }
+    }
+
+    private fun getBundle() {
+        bundle.card?.let {
+            setCard(it)
+        }
+    }
+
+    private fun setCard(cardDb: CardDb) {
+        this.cardDb = cardDb
+        binding.editText.text = cardDb.name
+        binding.code.text = cardDb.number
+        binding.background.setBackgroundColor(Color.parseColor(cardDb.color))
+        generateBarcode(cardDb)
     }
 
 
@@ -79,54 +91,6 @@ class CardDetailFragment : Fragment() {
         }
     }
 
-    private fun addCardName() {
-        val bindingDialog = DialogCardNameBinding.inflate(layoutInflater)
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.card_barcode_dialog_name_title)
-            .setView(bindingDialog.root)
-            .setPositiveButton(R.string.common_btn_ok) { _, _ ->
-                selectedName = bindingDialog.editText.text.toString()
-                addCardColor()
-            }
-            .setNegativeButton(R.string.common_btn_cancel) { _, _ ->
-            }
-            .create()
-        dialog.show()
-    }
-
-    private fun addCardColor() {
-        val bindingDialog = DialogCardColorBinding.inflate(layoutInflater)
-        setColorCardAdapter(bindingDialog)
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.card_barcode_dialog_color_title)
-            .setView(bindingDialog.root)
-            .setPositiveButton(R.string.common_btn_ok) { _, _ ->
-                scanCard()
-            }
-            .setNegativeButton(R.string.common_btn_cancel) { _, _ ->
-            }
-            .create()
-        dialog.show()
-    }
-
-    private fun setColorCardAdapter(binding: DialogCardColorBinding) {
-        val glide = GlideApp.with(this)
-        val adapter = CardColorListAdapter(glide, onCardColorClickListener())
-        binding.recyclerView.adapter = adapter
-        cardDetailViewModel.cardColorList.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
-        })
-    }
-
-    private fun onCardColorClickListener() =
-        CardColorListAdapter.OnClickListener { view, cardColor ->
-            var selector = selectedView?.findViewById<RelativeLayout>(R.id.selector)
-            selector?.visibility = View.GONE
-            selectedView = view
-            selectedColor = cardColor
-            selector = view.findViewById(R.id.selector)
-            selector.visibility = View.VISIBLE
-        }
 
     private fun scanCard() {
         val scanIntegrator = IntentIntegrator.forSupportFragment(this)
@@ -136,8 +100,30 @@ class CardDetailFragment : Fragment() {
         scanIntegrator.initiateScan()
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
+        inflater.inflate(R.menu.card, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_edit -> onEdit()
+            R.id.action_delete -> onDelete()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun onEdit() {
+        val bundle = bundleOf(
+            CardAddFragment.KEY_CARD to cardDb,
+        )
+        findNavController().navigate(R.id.action_to_card_add, bundle)
+    }
+
+    private fun onDelete() {
+        cardDetailViewModel.deleteCard(cardDb.id)
+        activity?.onBackPressed()
+    }
+
 }

@@ -21,13 +21,13 @@ interface CardDao {
     fun updateAll(list: List<CardDb>)
 
     @Query("DELETE FROM cards WHERE id = :itemId")
-    fun delete(itemId: Int)
+    fun delete(itemId: Long)
 
     @Query("DELETE FROM cards")
     fun deleteAll()
 
     @Query("SELECT * from cards WHERE id = :itemId")
-    fun getItem(itemId: Int): CardDb
+    fun getItem(itemId: Long): CardDb
 
     @Query("SELECT * FROM cards ORDER BY id DESC")
     fun getItemAll(): Flow<List<CardDb>>

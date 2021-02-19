@@ -1,11 +1,9 @@
 package com.superpromo.superpromo.ui.card_add
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.RelativeLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -16,6 +14,8 @@ import com.superpromo.superpromo.databinding.FragmentCardAddBinding
 import com.superpromo.superpromo.ui.card_add.color_adapter.CardColorListAdapter
 import com.superpromo.superpromo.ui.data.CardColorModel
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
+import com.superpromo.superpromo.ui.util.ext.hideSoftKeyBoard
+import com.superpromo.superpromo.ui.util.ext.setNavigationResult
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -86,21 +86,25 @@ class CardAddFragment : Fragment() {
             var selector = selectedView?.findViewById<RelativeLayout>(R.id.selector)
             selector?.visibility = View.GONE
             selectedView = view
-            selectedColor = cardColor
+            cardDb = cardDb.copy(color = getString(cardColor.color))
             selector = view.findViewById(R.id.selector)
             selector.visibility = View.VISIBLE
+            activity?.hideSoftKeyBoard(binding.root)
         }
 
     private fun saveCard() {
         binding.save.setOnClickListener {
             if (isCorrect()) {
-                cardAddViewModel.addCard(
-                    binding.name.text.toString(),
-                    getString(selectedColor?.color!!),
-                    binding.number.text.toString(),
-                    cardDb.formatName,
+                cardDb = cardDb.copy(
+                    name = binding.name.text.toString(),
+                    number = binding.number.text.toString()
                 )
-                activity?.onBackPressed()
+                cardAddViewModel.addCard(cardDb)
+                val bundle = bundleOf(
+                    KEY_CARD to cardDb,
+                )
+                activity?.hideSoftKeyBoard(binding.root)
+                setNavigationResult(bundle)
             }
         }
     }
@@ -119,8 +123,8 @@ class CardAddFragment : Fragment() {
 
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

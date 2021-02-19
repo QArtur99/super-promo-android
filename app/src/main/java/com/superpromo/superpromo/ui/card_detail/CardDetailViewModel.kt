@@ -17,35 +17,14 @@ class CardDetailViewModel @ViewModelInject constructor(
     private val _cardList = MutableLiveData<List<CardDb>>()
     val cardList: LiveData<List<CardDb>> = _cardList
 
-    private val _cardColorList = MutableLiveData<List<CardColorModel>>()
-    val cardColorList: LiveData<List<CardColorModel>> = _cardColorList
-
     init {
-        _cardColorList.value = listOf(
-            CardColorModel(R.color.black_700),
-            CardColorModel(R.color.blue_grey_700),
-            CardColorModel(R.color.deep_orange_700),
-            CardColorModel(R.color.orange_700),
-            CardColorModel(R.color.amber_700),
-            CardColorModel(R.color.yellow_700),
-            CardColorModel(R.color.lime_700),
-            CardColorModel(R.color.light_green_700),
-            CardColorModel(R.color.green_700),
-            CardColorModel(R.color.teal_700),
-            CardColorModel(R.color.cyan_700),
-            CardColorModel(R.color.light_blue_700),
-            CardColorModel(R.color.blue_700),
-            CardColorModel(R.color.indigo_700),
-            CardColorModel(R.color.deep_purple_700),
-            CardColorModel(R.color.purple_700),
-            CardColorModel(R.color.pink_700),
-            CardColorModel(R.color.red_700),
-        ).reversed()
-        getCardList()
+
     }
 
-    fun getCardList() {
-
+    fun deleteCard(id: Long) {
+        viewModelScope.launch {
+            cardRepository.deleteCard(id)
+        }
     }
 
     fun addCard(name: String, color: String, number: String, formatName: String) {

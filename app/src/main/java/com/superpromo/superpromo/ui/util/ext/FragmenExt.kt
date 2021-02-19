@@ -56,7 +56,6 @@ fun Fragment.setToolbar(toolbar: Toolbar) {
         if (activity?.hideSoftKeyBoard(it) == false) {
             activityCompat.onBackPressed()
         }
-        it.rootView.clearFocus()
     }
 }
 

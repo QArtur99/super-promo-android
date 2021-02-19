@@ -140,6 +140,10 @@
             android:name="card"
             app:argType="com.superpromo.superpromo.data.db.model.CardDb"
             app:nullable="true" />
+
+        <action
+            android:id="@+id/action_to_card_add"
+            app:destination="@id/fragment_card_add" />
     </fragment>
 
     <fragment

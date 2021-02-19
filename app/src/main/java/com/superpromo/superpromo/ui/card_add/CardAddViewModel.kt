@@ -48,10 +48,9 @@ class CardAddViewModel @ViewModelInject constructor(
 
     }
 
-    fun addCard(name: String, color: String, number: String, formatName: String) {
-        val card = CardDb(0, name, color, number, formatName)
+    fun addCard(cardDb: CardDb) {
         viewModelScope.launch {
-            cardRepository.insertCard(card)
+            cardRepository.insertCard(cardDb)
         }
     }
 

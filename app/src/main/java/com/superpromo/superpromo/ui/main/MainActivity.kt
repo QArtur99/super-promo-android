@@ -1,6 +1,7 @@
 package com.superpromo.superpromo.ui.main
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -56,9 +57,11 @@ class MainActivity : AppCompatActivity() {
         })
         sharedDrawerVm.onCloseStartClick.observe(this, EventObserver {
             binding.drawer.closeDrawer(GravityCompat.START)
-            when (it) {
-                R.string.menu_cards -> findNavController().navigate(R.id.action_start_to_card)
-            }
+            Handler(mainLooper).postDelayed({
+                when (it) {
+                    R.string.menu_cards -> findNavController().navigate(R.id.action_start_to_card)
+                }
+            }, 200)
         })
     }
 

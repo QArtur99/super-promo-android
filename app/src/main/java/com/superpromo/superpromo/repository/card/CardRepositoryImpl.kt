@@ -26,9 +26,15 @@ class CardRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun deleteCard(id: Long) {
+        withContext(ioDispatcher) {
+            superPromoDb.cardDao().delete(id)
+        }
+    }
+
     override suspend fun deleteCardAll() {
         withContext(ioDispatcher) {
-            superPromoDb.shopDao().deleteAll()
+            superPromoDb.cardDao().deleteAll()
         }
     }
 

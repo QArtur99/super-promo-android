@@ -11,5 +11,7 @@ fun Context.showSoftKeyBoard(v: View): Boolean? {
 
 fun Context.hideSoftKeyBoard(v: View): Boolean? {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-    return imm?.hideSoftInputFromWindow(v.windowToken, 0)
+    val result = imm?.hideSoftInputFromWindow(v.windowToken, 0)
+    v.rootView.clearFocus()
+    return result
 }
