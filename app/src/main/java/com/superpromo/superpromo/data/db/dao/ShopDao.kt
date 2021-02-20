@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.data.db
+package com.superpromo.superpromo.data.db.dao
 
 import androidx.room.*
 import com.superpromo.superpromo.data.db.model.ShopDb
@@ -29,5 +29,5 @@ interface ShopDao {
     fun getItem(itemId: Int): ShopDb
 
     @Query("SELECT * FROM shops ORDER BY id DESC")
-    fun getItemAll(): List<ShopDb>
+    fun getAll(): List<ShopDb>
 }

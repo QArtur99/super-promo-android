@@ -16,15 +16,11 @@
             android:id="@+id/action_start_to_offer"
             app:destination="@id/fragment_offer" />
         <action
+            android:id="@+id/action_start_to_shopping_list"
+            app:destination="@id/fragment_shopping_list" />
+        <action
             android:id="@+id/action_start_to_card"
             app:destination="@id/fragment_card" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/fragment_shopping_list"
-        android:name="com.superpromo.superpromo.ui.main.MainFragment"
-        android:label="StartFragment">
-
     </fragment>
 
     <fragment
@@ -147,9 +143,32 @@
     </fragment>
 
     <fragment
-        android:id="@+id/fragment_shopping_list_archvied"
-        android:name="com.superpromo.superpromo.ui.main.MainFragment"
-        android:label="StartFragment">
+        android:id="@+id/fragment_shopping_list"
+        android:name="com.superpromo.superpromo.ui.shopping.list.ShoppingListFragment"
+        android:label="ShoppingListFragment">
+
+        <action
+            android:id="@+id/action_to_product"
+            app:destination="@id/fragment_product" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_shopping_list_archvie"
+        android:name="com.superpromo.superpromo.ui.shopping.list_archived.ShoppingListArchiveFragment"
+        android:label="ShoppingListArchiveFragment">
 
     </fragment>
+
+    <fragment
+        android:id="@+id/fragment_product"
+        android:name="com.superpromo.superpromo.ui.shopping.product.ProductFragment"
+        android:label="ProductFragment">
+
+        <argument
+            android:name="shoppingList"
+            app:argType="com.superpromo.superpromo.data.db.model.ShoppingListDb"
+            app:nullable="true" />
+    </fragment>
+
+
 </navigation>

@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.data.db
+package com.superpromo.superpromo.data.db.dao
 
 import androidx.room.*
 import com.superpromo.superpromo.data.db.model.CardDb
@@ -30,5 +30,5 @@ interface CardDao {
     fun getItem(itemId: Long): CardDb
 
     @Query("SELECT * FROM cards ORDER BY id DESC")
-    fun getItemAll(): Flow<List<CardDb>>
+    fun getAll(): Flow<List<CardDb>>
 }

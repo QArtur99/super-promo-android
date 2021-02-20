@@ -4,8 +4,8 @@ import com.superpromo.superpromo.data.db.model.CardDb
 import kotlinx.coroutines.flow.Flow
 
 interface CardRepository {
-    suspend fun insertCard(card: CardDb)
-    suspend fun deleteCard(id: Long)
-    suspend fun deleteCardAll()
-    fun getCardList(): Flow<List<CardDb>>
+    suspend fun insert(card: CardDb)
+    suspend fun delete(id: Long)
+    suspend fun deleteAll()
+    fun getList(): Flow<List<CardDb>>
 }

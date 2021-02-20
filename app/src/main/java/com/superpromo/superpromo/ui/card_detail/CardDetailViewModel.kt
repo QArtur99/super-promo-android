@@ -3,10 +3,8 @@ package com.superpromo.superpromo.ui.card_detail
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.CardDb
 import com.superpromo.superpromo.repository.card.CardRepository
-import com.superpromo.superpromo.ui.data.CardColorModel
 import kotlinx.coroutines.launch
 
 class CardDetailViewModel @ViewModelInject constructor(
@@ -23,14 +21,14 @@ class CardDetailViewModel @ViewModelInject constructor(
 
     fun deleteCard(id: Long) {
         viewModelScope.launch {
-            cardRepository.deleteCard(id)
+            cardRepository.delete(id)
         }
     }
 
     fun addCard(name: String, color: String, number: String, formatName: String) {
         val card = CardDb(0, name, color, number, formatName)
         viewModelScope.launch {
-            cardRepository.insertCard(card)
+            cardRepository.insert(card)
         }
     }
 

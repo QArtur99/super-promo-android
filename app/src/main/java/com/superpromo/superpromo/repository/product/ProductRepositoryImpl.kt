@@ -1,7 +1,9 @@
-package com.superpromo.superpromo.repository.card
+package com.superpromo.superpromo.repository.product
 
 import com.superpromo.superpromo.data.db.SuperPromoDb
 import com.superpromo.superpromo.data.db.model.CardDb
+import com.superpromo.superpromo.data.db.model.ProductDb
+import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.data.network.SuperPromoApi
 import com.superpromo.superpromo.di.DefaultDispatcher
 import com.superpromo.superpromo.di.IoDispatcher
@@ -13,33 +15,33 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class CardRepositoryImpl @Inject constructor(
+class ProductRepositoryImpl @Inject constructor(
     private val superPromoDb: SuperPromoDb,
     private val superPromoApi: SuperPromoApi,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-) : BaseRepository(ioDispatcher), CardRepository {
+) : BaseRepository(ioDispatcher), ProductRepository {
 
-    override suspend fun insert(card: CardDb) {
+    override suspend fun insert(card: ProductDb) {
         withContext(ioDispatcher) {
-            superPromoDb.cardDao().insert(card)
+            superPromoDb.productDao().insert(card)
         }
     }
 
     override suspend fun delete(id: Long) {
         withContext(ioDispatcher) {
-            superPromoDb.cardDao().delete(id)
+            superPromoDb.productDao().delete(id)
         }
     }
 
     override suspend fun deleteAll() {
         withContext(ioDispatcher) {
-            superPromoDb.cardDao().deleteAll()
+            superPromoDb.productDao().deleteAll()
         }
     }
 
-    override fun getList(): Flow<List<CardDb>> =
-        superPromoDb.cardDao().getAll()
+    override fun getList(shoppingListId: Long): Flow<List<ProductDb>> =
+        superPromoDb.productDao().getAll(shoppingListId)
             .distinctUntilChanged()
             .flowOn(ioDispatcher)
 

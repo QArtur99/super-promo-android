@@ -40,7 +40,7 @@ class CardListAdapter(
 
     companion object GridViewDiffCallback : DiffUtil.ItemCallback<CardDb>() {
         override fun areItemsTheSame(oldItem: CardDb, newItem: CardDb): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: CardDb, newItem: CardDb): Boolean {

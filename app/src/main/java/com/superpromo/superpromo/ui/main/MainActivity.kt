@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             binding.drawer.closeDrawer(GravityCompat.START)
             Handler(mainLooper).postDelayed({
                 when (it) {
+                    R.string.menu_shopping -> findNavController().navigate(R.id.action_start_to_shopping_list)
                     R.string.menu_cards -> findNavController().navigate(R.id.action_start_to_card)
                 }
             }, 200)

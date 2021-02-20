@@ -85,7 +85,6 @@ class CardFragment : Fragment() {
 
     private fun initSwipeToRefresh() {
         binding.swipeRefresh.setOnRefreshListener {
-//            cardViewModel.getCardList()
             binding.swipeRefresh.isRefreshing = false
         }
     }

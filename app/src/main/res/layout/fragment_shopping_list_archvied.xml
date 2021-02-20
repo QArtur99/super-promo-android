@@ -7,11 +7,15 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/include_toolbar" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

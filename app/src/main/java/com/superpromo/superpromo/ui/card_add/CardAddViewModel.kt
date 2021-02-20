@@ -41,16 +41,11 @@ class CardAddViewModel @ViewModelInject constructor(
             CardColorModel(R.color.pink_700),
             CardColorModel(R.color.red_700),
         ).reversed()
-        getCardList()
-    }
-
-    fun getCardList() {
-
     }
 
     fun addCard(cardDb: CardDb) {
         viewModelScope.launch {
-            cardRepository.insertCard(cardDb)
+            cardRepository.insert(cardDb)
         }
     }
 

@@ -1,10 +1,13 @@
 package com.superpromo.superpromo.data.db.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "shops")
+@Parcelize
 data class ShopDb(
 
     @PrimaryKey(autoGenerate = false)
@@ -30,4 +33,4 @@ data class ShopDb(
 
     @ColumnInfo(name = "isAvailableInDb")
     val isAvailableInDb: Boolean,
-)
+) : Parcelable

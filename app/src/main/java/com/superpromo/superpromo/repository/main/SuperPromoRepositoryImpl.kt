@@ -75,7 +75,7 @@ class SuperPromoRepositoryImpl @Inject constructor(
 
     override suspend fun getShopList(): List<ShopDb> {
         return withContext(ioDispatcher) {
-            superPromoDb.shopDao().getItemAll()
+            superPromoDb.shopDao().getAll()
         }
     }
 

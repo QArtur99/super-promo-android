@@ -6,7 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.superpromo.superpromo.repository.main.SuperPromoRepository
 
-class ShoppingListArchivedViewModel @ViewModelInject constructor(
+class ShoppingListArchiveViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val superPromoRepository: SuperPromoRepository
 ) : ViewModel() {
