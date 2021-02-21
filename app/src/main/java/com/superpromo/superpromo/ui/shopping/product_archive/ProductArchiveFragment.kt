@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.shopping.product
+package com.superpromo.superpromo.ui.shopping.product_archive
 
 import android.os.Bundle
 import android.view.*
@@ -10,27 +10,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
-import com.superpromo.superpromo.data.db.model.ProductDb
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.databinding.DialogShoppingListNameBinding
 import com.superpromo.superpromo.databinding.FragmentProductBinding
 import com.superpromo.superpromo.ui.card_detail.CardDetailFragment
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
-import com.superpromo.superpromo.ui.main.SharedShopVm
+import com.superpromo.superpromo.ui.shopping.product.ProductFragmentArgs
 import com.superpromo.superpromo.ui.shopping.product.adapter.ProductListAdapter
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductFragment : Fragment() {
+class ProductArchiveFragment : Fragment() {
 
     companion object {
         const val KEY_SHOPPING_LIST = "shoppingList"
     }
 
-    private val sharedShopVm: SharedShopVm by viewModels({ requireActivity() })
     private val sharedDrawerVm: SharedDrawerVm by viewModels({ requireActivity() })
-    private val productViewModel: ProductViewModel by viewModels()
+    private val productArchiveViewModel: ProductArchiveViewModel by viewModels()
     private val bundle: ProductFragmentArgs by navArgs()
 
     private lateinit var binding: FragmentProductBinding
@@ -64,11 +62,11 @@ class ProductFragment : Fragment() {
 
     private fun setShoppingList(shoppingListDb: ShoppingListDb) {
         this.shoppingListDb = shoppingListDb
-        productViewModel.setShoppingListId(shoppingListDb.id)
+        productArchiveViewModel.setShoppingListId(shoppingListDb.id)
     }
 
     private fun observeMenuList() {
-        productViewModel.productList.observe(viewLifecycleOwner, {
+        productArchiveViewModel.productList.observe(viewLifecycleOwner, {
             binding.swipeRefresh.isRefreshing = false
             adapter.submitList(it)
         })
@@ -111,67 +109,36 @@ class ProductFragment : Fragment() {
     private fun onEditListSuccess(bindingDialog: DialogShoppingListNameBinding) {
         val name = bindingDialog.editText.text.toString()
         shoppingListDb = shoppingListDb.copy(name = name)
-        productViewModel.editShoppingListDb(shoppingListDb)
+        productArchiveViewModel.editShoppingListDb(shoppingListDb)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
-        inflater.inflate(R.menu.shopping_list_product, menu)
+        inflater.inflate(R.menu.shopping_list_product_archive, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_add -> onAdd()
-            R.id.action_search -> onSearch()
             R.id.action_edit -> onEdit()
-            R.id.action_archive -> onArchive()
+            R.id.action_unarchive -> onUnarchive()
             R.id.action_delete -> onDelete()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun onAdd() {
-        val bindingDialog = DialogShoppingListNameBinding.inflate(layoutInflater)
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.shopping_list_dialog_name_title)
-            .setView(bindingDialog.root)
-            .setPositiveButton(R.string.common_btn_ok) { _, _ ->
-                onAddSuccess(bindingDialog)
-            }
-            .setNegativeButton(R.string.common_btn_cancel) { _, _ ->
-            }
-            .create()
-        dialog.show()
-    }
-
-    private fun onAddSuccess(bindingDialog: DialogShoppingListNameBinding) {
-        val name = bindingDialog.editText.text.toString()
-        val productDb = ProductDb(
-            name = name,
-            shoppingListId = shoppingListDb.id
-        )
-        productViewModel.addProductDb(productDb)
-    }
-
-    private fun onSearch() {
-        sharedShopVm.showShops("")
-        findNavController().navigate(R.id.action_to_offer)
-    }
-
-
     private fun onEdit() {
         editListName()
     }
 
-    private fun onArchive() {
-        shoppingListDb = shoppingListDb.copy(isArchived = true)
-        productViewModel.editShoppingListDb(shoppingListDb)
+    private fun onUnarchive() {
+        shoppingListDb = shoppingListDb.copy(isArchived = false)
+        productArchiveViewModel.editShoppingListDb(shoppingListDb)
         activity?.onBackPressed()
     }
 
     private fun onDelete() {
-        productViewModel.deleteShoppingListDb(shoppingListDb)
+        productArchiveViewModel.deleteShoppingListDb(shoppingListDb)
         activity?.onBackPressed()
     }
 }

@@ -12,39 +12,39 @@ data class ProductDb(
     @PrimaryKey(autoGenerate = false)
     val id: Long = 0L,
 
-    @ColumnInfo(name = "shopId")
-    val shopId: Int,
+    @ColumnInfo(name = "shoppingListId")
+    val shoppingListId: Long,
 
     @ColumnInfo(name = "shopName")
-    var shopName: String?,
+    var shopName: String? = null,
 
     @ColumnInfo(name = "name")
-    val name: String?,
+    val name: String? = null,
 
     @ColumnInfo(name = "subtitle")
-    val subtitle: String?,
+    val subtitle: String? = null,
 
     @ColumnInfo(name = "price")
-    val price: Double?,
+    val price: Double? = null,
 
     @ColumnInfo(name = "amount")
-    val amount: String?,
+    val amount: String? = null,
 
     @ColumnInfo(name = "details")
-    val details: String?,
+    val details: String? = null,
 
     @ColumnInfo(name = "promoInfo")
-    val promoInfo: String?,
+    val promoInfo: String? = null,
 
     @ColumnInfo(name = "promo")
-    val promo: String?,
+    val promo: String? = null,
 
     @ColumnInfo(name = "imgUrl")
-    val imgUrl: String?,
+    val imgUrl: String? = null,
 
     @ColumnInfo(name = "url")
-    val url: String?,
+    val url: String? = null,
 
     @ColumnInfo(name = "isOnlyImg")
-    val isOnlyImg: Boolean?,
+    val isOnlyImg: Boolean? = null,
 ) : Parcelable

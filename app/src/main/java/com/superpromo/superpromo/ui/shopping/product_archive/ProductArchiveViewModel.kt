@@ -1,15 +1,14 @@
-package com.superpromo.superpromo.ui.shopping.product
+package com.superpromo.superpromo.ui.shopping.product_archive
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.superpromo.superpromo.data.db.model.ProductDb
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.repository.product.ProductRepository
 import com.superpromo.superpromo.repository.shopping_list.ShoppingListRepository
 import kotlinx.coroutines.launch
 
-class ProductViewModel @ViewModelInject constructor(
+class ProductArchiveViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val productRepository: ProductRepository,
     private val shoppingListRepository: ShoppingListRepository
@@ -18,12 +17,6 @@ class ProductViewModel @ViewModelInject constructor(
     private val _shoppingListId = MutableLiveData<Long>()
     val productList = _shoppingListId.switchMap {
         productRepository.getList(it).asLiveData()
-    }
-
-    fun addProductDb(productDb: ProductDb) {
-        viewModelScope.launch {
-            productRepository.insert(productDb)
-        }
     }
 
     fun setShoppingListId(shoppingListId: Long) {

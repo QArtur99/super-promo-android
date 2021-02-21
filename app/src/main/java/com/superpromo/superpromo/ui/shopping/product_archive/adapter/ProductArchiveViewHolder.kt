@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.shopping.list_archived.adapter
+package com.superpromo.superpromo.ui.shopping.product_archive.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,40 +7,42 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
-import com.superpromo.superpromo.data.db.model.ShoppingListDb
+import com.superpromo.superpromo.data.db.model.ProductDb
 
 
-class ShoppingListViewHolder constructor(
+class ProductArchiveViewHolder constructor(
     private val view: View,
     private val glide: GlideRequests,
-    private val clickListener: ShoppingListArchiveListAdapter.OnClickListener
+    private val clickListener: ProductArchiveListAdapter.OnClickListener
 ) : RecyclerView.ViewHolder(view) {
 
     companion object {
         fun create(
             parent: ViewGroup,
             glide: GlideRequests,
-            clickListener: ShoppingListArchiveListAdapter.OnClickListener
-        ): ShoppingListViewHolder {
+            clickListener: ProductArchiveListAdapter.OnClickListener
+        ): ProductArchiveViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_shopping_list, parent, false)
-            return ShoppingListViewHolder(view, glide, clickListener)
+            return ProductArchiveViewHolder(view, glide, clickListener)
         }
     }
 
     private val name: TextView = view.findViewById(R.id.name)
+    private val info: TextView = view.findViewById(R.id.info)
     private val date: TextView = view.findViewById(R.id.date)
-    private var shoppingListDb: ShoppingListDb? = null
+    private var productDb: ProductDb? = null
 
     init {
         view.setOnClickListener {
-            shoppingListDb?.let { clickListener.onClick(view, it) }
+            productDb?.let { clickListener.onClick(view, it) }
         }
     }
 
-    fun bind(item: ShoppingListDb) {
-        shoppingListDb = item
-        name.text = item.name
-        date.text = item.created.toString()
+    fun bind(item: ProductDb) {
+        productDb = item
+//        name.text = item.name
+//        info.text = "4 products"
+//        date.text = TimeHelper.getDateFormat().format(Date(item.created))
     }
 }

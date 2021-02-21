@@ -23,40 +23,27 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/dateTemp"
+                android:id="@+id/info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:textColor="@color/black_info"
                 android:textSize="14sp"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="2020/08/01" />
+                tools:text="5" />
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_small"
+                android:padding="@dimen/padding_small"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/date"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateTemp"
-                tools:text="Name" />
-
-            <TextView
-                android:id="@+id/info"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_small"
-                android:textColor="@color/black_info"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toStartOf="@id/date"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/info"
                 tools:text="Name" />
 
             <TextView
@@ -67,7 +54,7 @@
                 android:textColor="@color/black_info"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/info"
+                app:layout_constraintTop_toBottomOf="@+id/name"
                 tools:text="2020/08/01" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,8 +38,13 @@ class ShoppingListRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getList(): Flow<List<ShoppingListDb>> =
+    override fun getAll(): Flow<List<ShoppingListDb>> =
         superPromoDb.shoppingListDao().getAll()
+            .distinctUntilChanged()
+            .flowOn(ioDispatcher)
+
+    override fun getAllArchived(): Flow<List<ShoppingListDb>> =
+        superPromoDb.shoppingListDao().getAllArchived()
             .distinctUntilChanged()
             .flowOn(ioDispatcher)
 

@@ -7,5 +7,6 @@ interface ShoppingListRepository {
     suspend fun insert(card: ShoppingListDb)
     suspend fun delete(id: Long)
     suspend fun deleteAll()
-    fun getList(): Flow<List<ShoppingListDb>>
+    fun getAll(): Flow<List<ShoppingListDb>>
+    fun getAllArchived(): Flow<List<ShoppingListDb>>
 }

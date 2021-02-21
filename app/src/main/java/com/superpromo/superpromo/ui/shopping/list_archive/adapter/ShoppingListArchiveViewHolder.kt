@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.shopping.list.adapter
+package com.superpromo.superpromo.ui.shopping.list_archive.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,21 +12,21 @@ import com.superpromo.superpromo.ui.util.TimeHelper
 import java.util.*
 
 
-class ShoppingListViewHolder constructor(
+class ShoppingListArchiveViewHolder constructor(
     private val view: View,
     private val glide: GlideRequests,
-    private val clickListener: ShoppingListListAdapter.OnClickListener
+    private val clickListener: ShoppingListArchiveListAdapter.OnClickListener
 ) : RecyclerView.ViewHolder(view) {
 
     companion object {
         fun create(
             parent: ViewGroup,
             glide: GlideRequests,
-            clickListener: ShoppingListListAdapter.OnClickListener
-        ): ShoppingListViewHolder {
+            clickListener: ShoppingListArchiveListAdapter.OnClickListener
+        ): ShoppingListArchiveViewHolder {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_shopping_list, parent, false)
-            return ShoppingListViewHolder(view, glide, clickListener)
+                .inflate(R.layout.item_shopping_list_archived, parent, false)
+            return ShoppingListArchiveViewHolder(view, glide, clickListener)
         }
     }
 

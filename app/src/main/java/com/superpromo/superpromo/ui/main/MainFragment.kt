@@ -2,7 +2,6 @@ package com.superpromo.superpromo.ui.main
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -36,7 +35,8 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_start_to_suggestion)
         }
         binding.shoppingList.setOnClickListener {
-            Toast.makeText(context, "Not Available", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_start_to_shopping_list)
+//            Toast.makeText(context, "Not Available", Toast.LENGTH_SHORT).show()
 //            val intent = Intent(context, WebViewActivity::class.java)
 //            intent.putExtra(WebViewActivity.ACTION_GO_TO_URL, "")
 //            activity?.startActivityForResult(intent, WebViewActivity.ACTION_RESULT)

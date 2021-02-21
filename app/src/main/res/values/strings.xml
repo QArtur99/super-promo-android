@@ -5,6 +5,8 @@
     <string name="common_btn_add">Add</string>
     <string name="common_btn_save">Save</string>
     <string name="common_btn_cancel">Cancel</string>
+    <string name="common_btn_delete">Delete</string>
+    <string name="common_btn_edit">Edit</string>
 
     <string name="retry">Retry</string>
     <string name="no_connection">Connection error.</string>
@@ -48,6 +50,9 @@
     <string name="card_barcode_enter_manually_info">If the reader does not recognize the code. \nAsk the seller to enter the code manually.</string>
 
     <string name="shopping_list_archive">Archive</string>
-    <string name="shopping_list_dialog_name_title">Enter the shopping list\'s name</string>
+    <string name="shopping_list_unarchive">Unarchive</string>
+    <string name="shopping_list_active">Active</string>
+    <string name="shopping_list_dialog_name_title">Enter a name for the shopping list</string>
+    <string name="product_dialog_name_title">Enter a product name</string>
 
 </resources>

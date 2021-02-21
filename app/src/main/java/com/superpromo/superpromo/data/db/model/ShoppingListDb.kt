@@ -18,6 +18,12 @@ data class ShoppingListDb(
     @ColumnInfo(name = "created")
     val created: Long = System.currentTimeMillis(),
 
+    @ColumnInfo(name = "productCount")
+    val productCount: Int = 0,
+
+    @ColumnInfo(name = "productCountActive")
+    val productCountActive: Int = 0,
+
     @ColumnInfo(name = "isArchived")
     val isArchived: Boolean = false
 ) : Parcelable

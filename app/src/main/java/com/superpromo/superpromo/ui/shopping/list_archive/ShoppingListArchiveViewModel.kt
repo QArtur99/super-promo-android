@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.shopping.list
+package com.superpromo.superpromo.ui.shopping.list_archive
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
@@ -7,15 +7,14 @@ import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.repository.shopping_list.ShoppingListRepository
 import kotlinx.coroutines.launch
 
-class ShoppingListViewModel @ViewModelInject constructor(
+class ShoppingListArchiveViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val shoppingListRepository: ShoppingListRepository
 ) : ViewModel() {
 
-    private val _shoppingLists = shoppingListRepository.getAll().asLiveData()
+    private val _shoppingLists = shoppingListRepository.getAllArchived().asLiveData()
     val shoppingLists: LiveData<List<ShoppingListDb>> = _shoppingLists.map {
         mutableListOf<ShoppingListDb>().apply {
-            add(ShoppingListDb())
             addAll(it)
         }
     }
@@ -25,6 +24,5 @@ class ShoppingListViewModel @ViewModelInject constructor(
             shoppingListRepository.insert(shoppingListDb)
         }
     }
-
 
 }

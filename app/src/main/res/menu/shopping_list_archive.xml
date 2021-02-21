@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_archive"
-        android:icon="@drawable/ic_baseline_archive_24"
+        android:id="@+id/action_active"
+        android:icon="@drawable/ic_baseline_unarchive_24"
         android:orderInCategory="100"
-        android:title="@string/shopping_list_archive"
+        android:title="@string/shopping_list_active"
         app:showAsAction="never" />
 </menu>

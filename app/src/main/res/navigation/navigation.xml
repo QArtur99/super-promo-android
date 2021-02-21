@@ -148,21 +148,42 @@
         android:label="ShoppingListFragment">
 
         <action
+            android:id="@+id/action_to_archive"
+            app:destination="@id/fragment_shopping_list_archvie" />
+        <action
             android:id="@+id/action_to_product"
             app:destination="@id/fragment_product" />
     </fragment>
 
     <fragment
         android:id="@+id/fragment_shopping_list_archvie"
-        android:name="com.superpromo.superpromo.ui.shopping.list_archived.ShoppingListArchiveFragment"
+        android:name="com.superpromo.superpromo.ui.shopping.list_archive.ShoppingListArchiveFragment"
         android:label="ShoppingListArchiveFragment">
 
+        <action
+            android:id="@+id/action_to_product_archive"
+            app:destination="@id/fragment_product_archive" />
     </fragment>
 
     <fragment
         android:id="@+id/fragment_product"
         android:name="com.superpromo.superpromo.ui.shopping.product.ProductFragment"
         android:label="ProductFragment">
+
+        <argument
+            android:name="shoppingList"
+            app:argType="com.superpromo.superpromo.data.db.model.ShoppingListDb"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_to_offer"
+            app:destination="@id/fragment_offer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_product_archive"
+        android:name="com.superpromo.superpromo.ui.shopping.product_archive.ProductArchiveFragment"
+        android:label="ProductArchiveFragment">
 
         <argument
             android:name="shoppingList"

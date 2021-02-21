@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.shopping.list_archived.adapter
+package com.superpromo.superpromo.ui.shopping.list_archive.adapter
 
 import android.view.View
 import android.view.ViewGroup
@@ -17,13 +17,13 @@ class ShoppingListArchiveListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.item_shopping_list -> (holder as ShoppingListViewHolder).bind(getItem(position))
+            R.layout.item_shopping_list_archived -> (holder as ShoppingListArchiveViewHolder).bind(getItem(position))
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.item_shopping_list -> ShoppingListViewHolder
+            R.layout.item_shopping_list_archived -> ShoppingListArchiveViewHolder
                 .create(parent, glide, clickListener)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
@@ -31,7 +31,7 @@ class ShoppingListArchiveListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)!!
-        return R.layout.item_shopping_list
+        return R.layout.item_shopping_list_archived
     }
 
     companion object GridViewDiffCallback : DiffUtil.ItemCallback<ShoppingListDb>() {
