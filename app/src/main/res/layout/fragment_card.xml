@@ -27,4 +27,8 @@
             app:spanCount="2" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <include
+        android:id="@+id/emptyView"
+        layout="@layout/include_empty_product" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/include_toolbar"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:padding="@dimen/padding_basic">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/closeWrapper"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent=".6">
+
+                    <ImageView
+                        android:id="@+id/productImg"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/shopName_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/detail_shopName"
+                android:textColor="@color/detail_title_hint"
+                android:textSize="16sp"
+                tools:text="@string/detail_shopName" />
+
+            <TextView
+                android:id="@+id/shopName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="@string/detail_shopName" />
+
+            <TextView
+                android:id="@+id/productName_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/detail_productName"
+                android:textColor="@color/detail_title_hint"
+                android:textSize="16sp"
+                tools:text="@string/detail_productName" />
+
+            <TextView
+                android:id="@+id/productName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="@string/detail_productName" />
+
+            <TextView
+                android:id="@+id/productNameSub_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/detail_productSubName"
+                android:textColor="@color/detail_title_hint"
+                android:textSize="16sp"
+                tools:text="@string/detail_productSubName" />
+
+            <TextView
+                android:id="@+id/productNameSub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="@string/detail_productSubName" />
+
+            <TextView
+                android:id="@+id/price_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/detail_price"
+                android:textColor="@color/detail_title_hint"
+                android:textSize="16sp"
+                tools:text="@string/detail_price" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="@string/detail_price" />
+
+            <TextView
+                android:id="@+id/amount_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/detail_amount"
+                android:textColor="@color/detail_title_hint"
+                android:textSize="16sp"
+                tools:text="@string/detail_amount" />
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="@string/detail_amount" />
+
+            <TextView
+                android:id="@+id/details_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/detail_details"
+                android:textColor="@color/detail_title_hint"
+                android:textSize="16sp"
+                tools:text="@string/detail_details" />
+
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="@string/detail_details" />
+
+            <TextView
+                android:id="@+id/promo_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/detail_promo"
+                android:textColor="@color/detail_title_hint"
+                android:textSize="16sp"
+                tools:text="@string/detail_promo" />
+
+            <TextView
+                android:id="@+id/promo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="@string/detail_promo" />
+
+            <TextView
+                android:id="@+id/promoInfo_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/detail_promoInfo"
+                android:textColor="@color/detail_title_hint"
+                android:textSize="16sp"
+                tools:text="@string/detail_promoInfo" />
+
+            <TextView
+                android:id="@+id/promoInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="@string/detail_promoInfo" />
+
+            <TextView
+                android:id="@+id/url_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/detail_url"
+                android:textColor="@color/detail_title_hint"
+                android:textSize="16sp"
+                tools:text="@string/detail_url" />
+
+            <TextView
+                android:id="@+id/url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/url"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="@string/detail_url" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

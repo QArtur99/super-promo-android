@@ -18,7 +18,7 @@ import com.superpromo.superpromo.databinding.FragmentShoppingListBinding
 import com.superpromo.superpromo.ui.card_add.CardAddFragment
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.shopping.list_archive.adapter.ShoppingListArchiveListAdapter
-import com.superpromo.superpromo.ui.shopping.product_archive.ProductArchiveFragment
+import com.superpromo.superpromo.ui.shopping.product.list_archive.ProductArchiveFragment
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -65,7 +65,15 @@ class ShoppingListArchiveFragment : Fragment() {
         shoppingListArchiveViewModel.shoppingLists.observe(viewLifecycleOwner, {
             binding.swipeRefresh.isRefreshing = false
             adapter.submitList(it)
+            setEmptyView(it)
         })
+    }
+
+    private fun setEmptyView(list: List<ShoppingListDb>) {
+        binding.emptyView.emptyView.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+        binding.emptyView.emptyTitleText.text = getString(R.string.shopping_list_empty_list)
+        binding.emptyView.emptySubtitleText.text = getString(R.string.shopping_list_empty_sub_text)
+        binding.emptyView.emptyImage.setImageResource(R.drawable.gradient_ic_baseline_add_shopping_cart_24)
     }
 
     private fun initAdapter() {

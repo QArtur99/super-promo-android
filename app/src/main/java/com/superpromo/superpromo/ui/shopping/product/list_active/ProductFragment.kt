@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.ui.shopping.product
+package com.superpromo.superpromo.ui.shopping.product.list_active
 
 import android.os.Bundle
 import android.view.*
@@ -8,16 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ProductDb
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.databinding.DialogShoppingListNameBinding
-import com.superpromo.superpromo.databinding.FragmentProductBinding
-import com.superpromo.superpromo.ui.card_detail.CardDetailFragment
+import com.superpromo.superpromo.databinding.FragmentShoppingProductBinding
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.main.SharedShopVm
-import com.superpromo.superpromo.ui.shopping.product.adapter.ProductListAdapter
+import com.superpromo.superpromo.ui.shopping.product.list_active.adapter.ProductListAdapter
+import com.superpromo.superpromo.ui.shopping.product.detail.ProductDetailFragment
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,7 +34,7 @@ class ProductFragment : Fragment() {
     private val productViewModel: ProductViewModel by viewModels()
     private val bundle: ProductFragmentArgs by navArgs()
 
-    private lateinit var binding: FragmentProductBinding
+    private lateinit var binding: FragmentShoppingProductBinding
     private lateinit var adapter: ProductListAdapter
     private lateinit var shoppingListDb: ShoppingListDb
 
@@ -42,7 +43,7 @@ class ProductFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProductBinding.inflate(inflater)
+        binding = FragmentShoppingProductBinding.inflate(inflater)
         setToolbar(binding.appBar.toolbar)
 
         getBundle()
@@ -71,13 +72,24 @@ class ProductFragment : Fragment() {
         productViewModel.productList.observe(viewLifecycleOwner, {
             binding.swipeRefresh.isRefreshing = false
             adapter.submitList(it)
+            setEmptyView(it)
         })
+    }
+
+    private fun setEmptyView(list: List<ProductDb>) {
+        binding.emptyView.emptyView.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+        binding.emptyView.emptyTitleText.text = getString(R.string.product_empty_list)
+        binding.emptyView.emptySubtitleText.text = getString(R.string.product_empty_sub_text)
+        binding.emptyView.emptyImage.setImageResource(R.drawable.gradient_ic_baseline_add_shopping_cart_24)
     }
 
     private fun initAdapter() {
         val glide = GlideApp.with(this)
         adapter = ProductListAdapter(glide, onShopClickListener())
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
+        )
     }
 
     private fun initSwipeToRefresh() {
@@ -86,11 +98,28 @@ class ProductFragment : Fragment() {
         }
     }
 
-    private fun onShopClickListener() = ProductListAdapter.OnClickListener { view, card ->
-        val bundle = bundleOf(
-            CardDetailFragment.KEY_CARD to card,
-        )
-        findNavController().navigate(R.id.action_to_card_detail, bundle)
+    private fun onShopClickListener() = object : ProductListAdapter.OnClickListener {
+        override fun onClick(v: View, productDb: ProductDb) {
+            if (productDb.isLocal == true) return
+            val bundle = bundleOf(
+                ProductDetailFragment.KEY_PRODUCT to productDb,
+            )
+            findNavController().navigate(R.id.action_to_product_detail, bundle)
+        }
+
+        override fun onSelect(v: View, productDb: ProductDb) {
+            val count = if (productDb.isSelected) {
+                shoppingListDb.productCountActive.dec()
+            } else {
+                shoppingListDb.productCountActive.inc()
+            }
+            shoppingListDb = shoppingListDb.copy(
+                productCountActive = count
+            )
+            productDb.isSelected = productDb.isSelected.not()
+            productViewModel.updateProductDb(productDb)
+            productViewModel.updateShoppingListDb(shoppingListDb)
+        }
     }
 
     private fun editListName() {
@@ -111,7 +140,7 @@ class ProductFragment : Fragment() {
     private fun onEditListSuccess(bindingDialog: DialogShoppingListNameBinding) {
         val name = bindingDialog.editText.text.toString()
         shoppingListDb = shoppingListDb.copy(name = name)
-        productViewModel.editShoppingListDb(shoppingListDb)
+        productViewModel.updateShoppingListDb(shoppingListDb)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -149,9 +178,14 @@ class ProductFragment : Fragment() {
         val name = bindingDialog.editText.text.toString()
         val productDb = ProductDb(
             name = name,
-            shoppingListId = shoppingListDb.id
+            shoppingListId = shoppingListDb.id,
+            isLocal = true
         )
-        productViewModel.addProductDb(productDb)
+        productViewModel.updateProductDb(productDb)
+        shoppingListDb = shoppingListDb.copy(
+            productCount = shoppingListDb.productCount.inc()
+        )
+        productViewModel.updateShoppingListDb(shoppingListDb)
     }
 
     private fun onSearch() {
@@ -166,7 +200,7 @@ class ProductFragment : Fragment() {
 
     private fun onArchive() {
         shoppingListDb = shoppingListDb.copy(isArchived = true)
-        productViewModel.editShoppingListDb(shoppingListDb)
+        productViewModel.updateShoppingListDb(shoppingListDb)
         activity?.onBackPressed()
     }
 

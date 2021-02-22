@@ -48,6 +48,12 @@ data class ProductDb(
     @ColumnInfo(name = "url")
     val url: String? = null,
 
+    @ColumnInfo(name = "isLocal")
+    val isLocal: Boolean? = null,
+
     @ColumnInfo(name = "isOnlyImg")
     val isOnlyImg: Boolean? = null,
+
+    @ColumnInfo(name = "isSelected")
+    var isSelected: Boolean = false,
 ) : Parcelable

@@ -43,8 +43,9 @@ class ShoppingListViewHolder constructor(
 
     fun bind(item: ShoppingListDb) {
         shoppingListDb = item
+        val infoString = item.productCountActive.toString() + "/" + item.productCount.toString()
         name.text = item.name
-        info.text = item.productCount.toString()
+        info.text =  infoString
         date.text = TimeHelper.getDateFormat().format(Date(item.created))
     }
 }

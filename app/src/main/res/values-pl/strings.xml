@@ -48,11 +48,17 @@
     <string name="card_barcode_title">Zeskanuj kod kreskowy karty</string>
     <string name="card_barcode_enter_manually">Wprowadź ręcznie</string>
     <string name="card_barcode_enter_manually_info">Jeśli czytnik nie rozpoznaje kodu. \nPoproś sprzedawcę, aby wpisał kod ręcznie.</string>
+    <string name="card_empty_list">Lista jest pusta.</string>
+    <string name="card_empty_sub_text">Dodaj karte lojalnosciową.</string>
 
     <string name="shopping_list_archive">Archiwum</string>
     <string name="shopping_list_unarchive">Przywróć</string>
     <string name="shopping_list_active">Aktywne</string>
     <string name="shopping_list_dialog_name_title">Wpowadź nazwe listy zakupów</string>
+    <string name="shopping_list_empty_list">Lista jest pusta.</string>
+    <string name="shopping_list_empty_sub_text">Dodaj liste zakupów.</string>
     <string name="product_dialog_name_title">Wpowadź nazwe produktu</string>
+    <string name="product_empty_list">Lista jest pusta.</string>
+    <string name="product_empty_sub_text">Dodaj produkt.</string>
 
 </resources>

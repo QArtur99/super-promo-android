@@ -16,7 +16,7 @@
             android:layout_width="108dp"
             android:layout_height="108dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_baseline_cloud_off_24" />
+            android:src="@drawable/gradient_ic_baseline_cloud_off_24" />
 
         <TextView
             android:id="@+id/empty_title_text"

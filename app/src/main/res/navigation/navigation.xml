@@ -167,7 +167,7 @@
 
     <fragment
         android:id="@+id/fragment_product"
-        android:name="com.superpromo.superpromo.ui.shopping.product.ProductFragment"
+        android:name="com.superpromo.superpromo.ui.shopping.product.list_active.ProductFragment"
         android:label="ProductFragment">
 
         <argument
@@ -178,17 +178,37 @@
         <action
             android:id="@+id/action_to_offer"
             app:destination="@id/fragment_offer" />
+
+        <action
+            android:id="@+id/action_to_product_detail"
+            app:destination="@id/fragment_product_detail" />
     </fragment>
 
     <fragment
         android:id="@+id/fragment_product_archive"
-        android:name="com.superpromo.superpromo.ui.shopping.product_archive.ProductArchiveFragment"
+        android:name="com.superpromo.superpromo.ui.shopping.product.list_archive.ProductArchiveFragment"
         android:label="ProductArchiveFragment">
 
         <argument
             android:name="shoppingList"
             app:argType="com.superpromo.superpromo.data.db.model.ShoppingListDb"
             app:nullable="true" />
+
+        <action
+            android:id="@+id/action_to_product_detail"
+            app:destination="@id/fragment_product_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_product_detail"
+        android:name="com.superpromo.superpromo.ui.shopping.product.detail.ProductDetailFragment"
+        android:label="ProductDetailFragment">
+
+        <argument
+            android:name="product"
+            app:argType="com.superpromo.superpromo.data.db.model.ProductDb"
+            app:nullable="true" />
+
     </fragment>
 
 

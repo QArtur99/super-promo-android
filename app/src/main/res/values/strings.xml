@@ -48,11 +48,17 @@
     <string name="card_barcode_title">Scan a card\'s barcode</string>
     <string name="card_barcode_enter_manually">Enter manually</string>
     <string name="card_barcode_enter_manually_info">If the reader does not recognize the code. \nAsk the seller to enter the code manually.</string>
+    <string name="card_empty_list">List is empty.</string>
+    <string name="card_empty_sub_text">Add a loyalty card.</string>
 
     <string name="shopping_list_archive">Archive</string>
     <string name="shopping_list_unarchive">Unarchive</string>
     <string name="shopping_list_active">Active</string>
     <string name="shopping_list_dialog_name_title">Enter a name for the shopping list</string>
+    <string name="shopping_list_empty_list">List is empty.</string>
+    <string name="shopping_list_empty_sub_text">Add a shopping list.</string>
     <string name="product_dialog_name_title">Enter a product name</string>
+    <string name="product_empty_list">List is empty.</string>
+    <string name="product_empty_sub_text">Add a product.</string>
 
 </resources>

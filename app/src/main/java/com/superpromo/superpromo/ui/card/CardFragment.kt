@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
-import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,18 +14,13 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.CardDb
-import com.superpromo.superpromo.databinding.DialogCardColorBinding
-import com.superpromo.superpromo.databinding.DialogCardNameBinding
 import com.superpromo.superpromo.databinding.FragmentCardBinding
 import com.superpromo.superpromo.ui.CustomCaptureActivity
 import com.superpromo.superpromo.ui.card.adapter.CardListAdapter
-import com.superpromo.superpromo.ui.card_add.color_adapter.CardColorListAdapter
 import com.superpromo.superpromo.ui.card_add.CardAddFragment
 import com.superpromo.superpromo.ui.card_detail.CardDetailFragment
-import com.superpromo.superpromo.ui.data.CardColorModel
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.util.ext.setToolbar
-import com.superpromo.superpromo.ui.util.ext.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -74,7 +67,15 @@ class CardFragment : Fragment() {
         cardViewModel.cardList.observe(viewLifecycleOwner, {
             binding.swipeRefresh.isRefreshing = false
             adapter.submitList(it)
+            setEmptyView(it)
         })
+    }
+
+    private fun setEmptyView(list: List<CardDb>) {
+        binding.emptyView.emptyView.visibility = if (1 >= list.size) View.VISIBLE else View.GONE
+        binding.emptyView.emptyTitleText.text = getString(R.string.card_empty_list)
+        binding.emptyView.emptySubtitleText.text = getString(R.string.card_empty_sub_text)
+        binding.emptyView.emptyImage.setImageResource(R.drawable.gradient_ic_baseline_credit_card_24)
     }
 
     private fun initAdapter() {

@@ -12,6 +12,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey_dark">#7b7b7b</color>
     <color name="grey_light">#c4c4c4</color>
+    <color name="disabled">#E6E6FA</color>
     <color name="grey_very_light">#dddddd</color>
     <color name="transparent">#00000000</color>
     <color name="iconStart">#FFFFFFFF</color>
