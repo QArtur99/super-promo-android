@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ProductDb
+import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductFromMainVh
+import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductImgFromMainVh
 
 
 class ProductListAdapter(
@@ -17,20 +19,23 @@ class ProductListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.item_shopping_list -> (holder as ProductViewHolder).bind(getItem(position))
+            R.layout.item_product -> (holder as ProductViewHolder).bind(getItem(position))
+            R.layout.item_product_img -> (holder as ProductImgViewHolder).bind(getItem(position))
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.item_shopping_list -> ProductViewHolder.create(parent, glide, clickListener)
+            R.layout.item_product -> ProductViewHolder.create(parent, glide, clickListener)
+            R.layout.item_product_img -> ProductImgViewHolder.create(parent, glide, clickListener)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)!!
-        return R.layout.item_shopping_list
+        val isOnlyImg = item.isOnlyImg ?: false
+        return if (isOnlyImg) R.layout.item_product_img else R.layout.item_product
     }
 
     companion object GridViewDiffCallback : DiffUtil.ItemCallback<ProductDb>() {

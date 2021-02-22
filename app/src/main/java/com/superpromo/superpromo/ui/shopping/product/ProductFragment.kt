@@ -134,7 +134,7 @@ class ProductFragment : Fragment() {
     private fun onAdd() {
         val bindingDialog = DialogShoppingListNameBinding.inflate(layoutInflater)
         val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.shopping_list_dialog_name_title)
+            .setTitle(R.string.product_dialog_name_title)
             .setView(bindingDialog.root)
             .setPositiveButton(R.string.common_btn_ok) { _, _ ->
                 onAddSuccess(bindingDialog)

@@ -33,6 +33,6 @@ interface ProductDao {
     @Query("SELECT * from products WHERE id = :itemId")
     fun getItem(itemId: Long): ProductDb
 
-    @Query("SELECT * FROM products WHERE shopId = :shoppingListId ORDER BY id DESC")
+    @Query("SELECT * FROM products WHERE shoppingListId = :shoppingListId ORDER BY id DESC")
     fun getAll(shoppingListId: Long): Flow<List<ProductDb>>
 }

@@ -9,8 +9,11 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "products")
 @Parcelize
 data class ProductDb(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
+
+    @ColumnInfo(name = "productId")
+    val productId: Long? = null,
 
     @ColumnInfo(name = "shoppingListId")
     val shoppingListId: Long,
