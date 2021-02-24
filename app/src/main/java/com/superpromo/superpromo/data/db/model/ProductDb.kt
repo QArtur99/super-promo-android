@@ -12,6 +12,9 @@ data class ProductDb(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
 
+    @ColumnInfo(name = "shopId")
+    val shopId: Long? = null,
+
     @ColumnInfo(name = "productId")
     val productId: Long? = null,
 

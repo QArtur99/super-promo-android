@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ProductDb
@@ -125,7 +126,7 @@ class ProductFragment : Fragment() {
     private fun editListName() {
         val bindingDialog = DialogShoppingListNameBinding.inflate(layoutInflater)
         bindingDialog.editText.setText(shoppingListDb.name)
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.shopping_list_dialog_name_title)
             .setView(bindingDialog.root)
             .setPositiveButton(R.string.common_btn_ok) { _, _ ->
@@ -162,7 +163,7 @@ class ProductFragment : Fragment() {
 
     private fun onAdd() {
         val bindingDialog = DialogShoppingListNameBinding.inflate(layoutInflater)
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.product_dialog_name_title)
             .setView(bindingDialog.root)
             .setPositiveButton(R.string.common_btn_ok) { _, _ ->
@@ -181,10 +182,10 @@ class ProductFragment : Fragment() {
             shoppingListId = shoppingListDb.id,
             isLocal = true
         )
-        productViewModel.updateProductDb(productDb)
         shoppingListDb = shoppingListDb.copy(
             productCount = shoppingListDb.productCount.inc()
         )
+        productViewModel.updateProductDb(productDb)
         productViewModel.updateShoppingListDb(shoppingListDb)
     }
 

@@ -1,4 +1,4 @@
-package com.superpromo.superpromo.repository.main.mapper
+package com.superpromo.superpromo.repository.mapper
 
 import com.superpromo.superpromo.data.db.model.ShopDb
 import com.superpromo.superpromo.data.network.model.Shop

@@ -10,7 +10,7 @@ import com.superpromo.superpromo.data.network.model.Suggestion
 import com.superpromo.superpromo.di.DefaultDispatcher
 import com.superpromo.superpromo.di.IoDispatcher
 import com.superpromo.superpromo.repository.BaseRepository
-import com.superpromo.superpromo.repository.main.mapper.asDbModel
+import com.superpromo.superpromo.repository.mapper.asDbModel
 import com.superpromo.superpromo.repository.state.ResultApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

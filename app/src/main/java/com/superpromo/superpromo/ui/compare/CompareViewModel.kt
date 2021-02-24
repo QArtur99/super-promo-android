@@ -2,23 +2,27 @@ package com.superpromo.superpromo.ui.compare
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.superpromo.superpromo.data.db.model.ProductDb
+import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.data.network.model.Product
 import com.superpromo.superpromo.data.network.model.Shop
 import com.superpromo.superpromo.repository.main.SuperPromoRepository
+import com.superpromo.superpromo.repository.mapper.asDbModel
+import com.superpromo.superpromo.repository.product.ProductRepository
+import com.superpromo.superpromo.repository.shopping_list.ShoppingListRepository
 import com.superpromo.superpromo.ui.data.SearchModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
-import timber.log.Timber
+import kotlinx.coroutines.launch
 
 class CompareViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val superPromoRepository: SuperPromoRepository
+    private val superPromoRepository: SuperPromoRepository,
+    private val shoppingListRepository: ShoppingListRepository,
+    private val productRepository: ProductRepository,
 ) : ViewModel() {
     companion object {
         const val KEY_SHOP = "shopId&CompareViewModel"
@@ -26,6 +30,13 @@ class CompareViewModel @ViewModelInject constructor(
     }
 
     private val clearListCh = Channel<Unit>(Channel.CONFLATED)
+
+    private val _shoppingLists = shoppingListRepository.getAll().asLiveData()
+    val shoppingLists: LiveData<List<ShoppingListDb>> = _shoppingLists.map {
+        mutableListOf<ShoppingListDb>().apply {
+            addAll(it)
+        }
+    }
 
     init {
         if (!savedStateHandle.contains(KEY_SHOP)) {
@@ -38,9 +49,9 @@ class CompareViewModel @ViewModelInject constructor(
         savedStateHandle.getLiveData<SearchModel>(KEY_SHOP)
             .asFlow()
             .flatMapLatest {
-                if(it.shopId.isNotEmpty()) {
+                if (it.shopId.isNotEmpty()) {
                     superPromoRepository.getProducts(it.shopId, 20, it.product)
-                }else {
+                } else {
                     emptyFlow()
                 }
             }
@@ -84,4 +95,19 @@ class CompareViewModel @ViewModelInject constructor(
     private fun shouldShowProduct(
         product: String
     ) = savedStateHandle.get<SearchModel>(KEY_SHOP)?.product != product
+
+    fun updateProductDb(product: Product, shoppingListId: Long) {
+        val productDb = product.asDbModel().run {
+            copy(shoppingListId = shoppingListId)
+        }
+        viewModelScope.launch {
+            productRepository.insert(productDb)
+        }
+    }
+
+    fun updateShoppingListDb(shoppingListDb: ShoppingListDb) {
+        viewModelScope.launch {
+            shoppingListRepository.insert(shoppingListDb)
+        }
+    }
 }

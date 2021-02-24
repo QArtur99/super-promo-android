@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.core.text.isDigitsOnly
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.client.android.Intents
 import com.journeyapps.barcodescanner.CaptureActivity
@@ -38,7 +39,7 @@ class CustomCaptureActivity : CaptureActivity() {
 
     private fun createDialog() {
         val bindingDialog = DialogCardNumberBinding.inflate(layoutInflater)
-        val dialog = AlertDialog.Builder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle(R.string.card_barcode_dialog_number_title)
             .setView(bindingDialog.root)
             .setPositiveButton(R.string.common_btn_ok) { _, _ ->

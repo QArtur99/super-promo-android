@@ -17,8 +17,8 @@ data class ProductContainer(
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Product(
-    val id: Int,
-    val shopId: Int,
+    val id: Long,
+    val shopId: Long,
     var shopName: String?,
     val name: String?,
     val subtitle: String?,

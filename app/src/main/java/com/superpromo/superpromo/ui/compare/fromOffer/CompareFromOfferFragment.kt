@@ -1,5 +1,6 @@
 package com.superpromo.superpromo.ui.compare.fromOffer
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -14,18 +15,22 @@ import androidx.navigation.fragment.navArgs
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Product
+import com.superpromo.superpromo.databinding.DialogTextListBinding
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.CompareViewModel
 import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferPagingAdapter
 import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferStateAdapter
 import com.superpromo.superpromo.ui.compare.fromMain.SuggestionFromMainFragment
 import com.superpromo.superpromo.ui.detail.DetailFragment
+import com.superpromo.superpromo.ui.shopping.list.adapter_dialog.ShoppingListListAdapter
 import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
 import com.superpromo.superpromo.ui.util.ext.setToolbar
+import com.superpromo.superpromo.ui.util.ext.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -41,6 +46,7 @@ class CompareFromOfferFragment : Fragment() {
 
     private val glide: GlideRequests by lazy { GlideApp.with(this) }
     private val compareViewModel: CompareViewModel by viewModels()
+
     private lateinit var binding: FragmentCompareBinding
     private lateinit var adapter: ProductFromOfferPagingAdapter
     private val bundle: CompareFromOfferFragmentArgs by navArgs()
@@ -156,9 +162,46 @@ class CompareFromOfferFragment : Fragment() {
         }
 
         override fun onLongClick(v: View, product: Product) {
-            TODO("Not yet implemented")
+            createDialog(product)
         }
     }
+
+    private fun createDialog(product: Product) {
+        val bindingDialog = DialogTextListBinding.inflate(layoutInflater)
+        bindingDialog.appBar.toolbarTitle.text = getString(R.string.shopping_dialog_choose_title)
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(bindingDialog.root)
+            .create()
+        initShoppingListAdapter(bindingDialog, dialog, product)
+        dialog.show()
+    }
+
+    private fun initShoppingListAdapter(
+        binding: DialogTextListBinding,
+        dialog: Dialog,
+        product: Product
+    ) {
+        val adapter = ShoppingListListAdapter(glide, onShoppingListClick(dialog, product))
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
+        )
+        compareViewModel.shoppingLists.observe(viewLifecycleOwner, {
+            adapter.submitList(it)
+        })
+
+    }
+
+    private fun onShoppingListClick(dialog: Dialog, product: Product) =
+        ShoppingListListAdapter.OnClickListener { v, item ->
+            dialog.hide()
+            val item = item.copy(
+                productCount = item.productCount.inc()
+            )
+            compareViewModel.updateProductDb(product, item.id)
+            compareViewModel.updateShoppingListDb(item)
+            snackbar(binding.root, "Dodano")
+        }
 
     private fun initSwipeToRefresh() {
         binding.swipeRefresh.setOnRefreshListener { adapter.refresh() }

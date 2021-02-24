@@ -38,9 +38,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
+                android:padding="@dimen/margin_small"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_baseline_menu_24"
-                tools:background="@color/dteal_700" />
+                app:tint="@color/dteal_700" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -48,6 +49,7 @@
         android:id="@+id/shopName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_basic"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="16sp"
@@ -61,6 +63,7 @@
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_basic"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="16sp"
@@ -73,6 +76,7 @@
         android:id="@+id/col_v2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_basic"
         app:layout_constraintEnd_toStartOf="@+id/checkbox"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/name">
@@ -113,6 +117,7 @@
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="0dp"
         app:buttonTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
