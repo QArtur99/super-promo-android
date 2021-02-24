@@ -42,6 +42,10 @@ class ProductFromMainVh constructor(
         view.setOnClickListener {
             product?.let { clickListener.onClick(view, it) }
         }
+        view.setOnLongClickListener {
+            product?.let { clickListener.onLongClick(view, it) }
+            true
+        }
     }
 
     fun bind(item: Product?) {

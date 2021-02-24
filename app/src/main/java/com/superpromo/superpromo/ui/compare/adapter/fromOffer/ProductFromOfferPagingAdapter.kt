@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Product
-import com.superpromo.superpromo.ui.compare.adapter.fromMain.ProductImgFromMainVh
 
 
 class ProductFromOfferPagingAdapter(
@@ -47,8 +46,9 @@ class ProductFromOfferPagingAdapter(
         }
     }
 
-    open class OnClickListener(val clickListener: (v: View, product: Product) -> Unit) {
-        fun onClick(v: View, product: Product) = clickListener(v, product)
+    interface OnClickListener {
+        fun onClick(v: View, product: Product)
+        fun onLongClick(v: View, product: Product)
     }
 
     fun getItemAt(position: Int): Product {

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
+import com.superpromo.superpromo.data.network.model.Product
 import com.superpromo.superpromo.databinding.FragmentCompareBinding
 import com.superpromo.superpromo.ui.compare.CompareViewModel
 import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferPagingAdapter
@@ -146,14 +147,18 @@ class CompareFromOfferFragment : Fragment() {
         }
     }
 
-
-    private fun onProductClickListener() =
-        ProductFromOfferPagingAdapter.OnClickListener { view, product ->
+    private fun onProductClickListener() = object : ProductFromOfferPagingAdapter.OnClickListener {
+        override fun onClick(v: View, product: Product) {
             val bundle = bundleOf(
                 DetailFragment.KEY_PRODUCT to product,
             )
             findNavController().navigate(R.id.action_to_detail, bundle)
         }
+
+        override fun onLongClick(v: View, product: Product) {
+            TODO("Not yet implemented")
+        }
+    }
 
     private fun initSwipeToRefresh() {
         binding.swipeRefresh.setOnRefreshListener { adapter.refresh() }

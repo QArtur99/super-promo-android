@@ -45,8 +45,9 @@ class ProductFromMainPagingAdapter(
         }
     }
 
-    open class OnClickListener(val clickListener: (v: View, product: Product) -> Unit) {
-        fun onClick(v: View, product: Product) = clickListener(v, product)
+    interface OnClickListener {
+        fun onClick(v: View, product: Product)
+        fun onLongClick(v: View, product: Product)
     }
 
     fun getItemAt(position: Int): Product {
