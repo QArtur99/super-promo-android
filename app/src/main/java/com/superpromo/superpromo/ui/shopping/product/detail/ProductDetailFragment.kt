@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -52,6 +53,7 @@ class ProductDetailFragment : Fragment() {
     private fun setView(item: ProductDb) {
         item.imgUrl?.let {
             GlideHelper.bingImg(binding.productImg, glide, it)
+            ImageViewCompat.setImageTintList(binding.productImg, null);
         }
         binding.shopName.text = item.shopName
         binding.productName.text = item.name

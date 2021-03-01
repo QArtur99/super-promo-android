@@ -101,7 +101,7 @@ class ProductFragment : Fragment() {
 
     private fun onShopClickListener() = object : ProductListAdapter.OnClickListener {
         override fun onClick(v: View, productDb: ProductDb) {
-            if (productDb.isLocal == true) return
+//            if (productDb.isLocal == true) return
             val bundle = bundleOf(
                 ProductDetailFragment.KEY_PRODUCT to productDb,
             )
