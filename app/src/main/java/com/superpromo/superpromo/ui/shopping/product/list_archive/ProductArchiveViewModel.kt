@@ -23,7 +23,7 @@ class ProductArchiveViewModel @ViewModelInject constructor(
         _shoppingListId.value = shoppingListId
     }
 
-    fun editShoppingListDb(shoppingListDb: ShoppingListDb) {
+    fun updateShoppingListDb(shoppingListDb: ShoppingListDb) {
         viewModelScope.launch {
             shoppingListRepository.insert(shoppingListDb)
         }

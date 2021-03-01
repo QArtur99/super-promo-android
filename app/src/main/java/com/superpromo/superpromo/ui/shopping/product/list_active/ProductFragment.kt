@@ -2,7 +2,6 @@ package com.superpromo.superpromo.ui.shopping.product.list_active
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,8 +17,9 @@ import com.superpromo.superpromo.databinding.DialogShoppingListNameBinding
 import com.superpromo.superpromo.databinding.FragmentShoppingProductBinding
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.main.SharedShopVm
-import com.superpromo.superpromo.ui.shopping.product.list_active.adapter.ProductListAdapter
 import com.superpromo.superpromo.ui.shopping.product.detail.ProductDetailFragment
+import com.superpromo.superpromo.ui.shopping.product.list_active.adapter.ProductListAdapter
+import com.superpromo.superpromo.ui.util.ext.safeNavigate
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -101,25 +101,15 @@ class ProductFragment : Fragment() {
 
     private fun onShopClickListener() = object : ProductListAdapter.OnClickListener {
         override fun onClick(v: View, productDb: ProductDb) {
-//            if (productDb.isLocal == true) return
             val bundle = bundleOf(
                 ProductDetailFragment.KEY_PRODUCT to productDb,
             )
-            findNavController().navigate(R.id.action_to_product_detail, bundle)
+            safeNavigate(R.id.action_to_product_detail, bundle)
         }
 
         override fun onSelect(v: View, productDb: ProductDb) {
-            val count = if (productDb.isSelected) {
-                shoppingListDb.productCountActive.dec()
-            } else {
-                shoppingListDb.productCountActive.inc()
-            }
-            shoppingListDb = shoppingListDb.copy(
-                productCountActive = count
-            )
             productDb.isSelected = productDb.isSelected.not()
             productViewModel.updateProductDb(productDb)
-            productViewModel.updateShoppingListDb(shoppingListDb)
         }
     }
 
@@ -182,11 +172,7 @@ class ProductFragment : Fragment() {
             shoppingListId = shoppingListDb.id,
             isLocal = true
         )
-        shoppingListDb = shoppingListDb.copy(
-            productCount = shoppingListDb.productCount.inc()
-        )
         productViewModel.updateProductDb(productDb)
-        productViewModel.updateShoppingListDb(shoppingListDb)
     }
 
     private fun onSearch() {

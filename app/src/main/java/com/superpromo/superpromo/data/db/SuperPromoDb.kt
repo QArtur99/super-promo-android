@@ -17,7 +17,7 @@ import com.superpromo.superpromo.data.db.model.ShoppingListDb
         CardDb::class,
         ShoppingListDb::class,
         ProductDb::class,
-    ], version = 9, exportSchema = true
+    ], version = 10, exportSchema = true
 )
 abstract class SuperPromoDb : RoomDatabase() {
 

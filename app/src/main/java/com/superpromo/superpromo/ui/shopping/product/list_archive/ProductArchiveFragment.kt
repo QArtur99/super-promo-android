@@ -124,7 +124,7 @@ class ProductArchiveFragment : Fragment() {
 
     private fun onUnarchive() {
         shoppingListDb = shoppingListDb.copy(isArchived = false)
-        productArchiveViewModel.editShoppingListDb(shoppingListDb)
+        productArchiveViewModel.updateShoppingListDb(shoppingListDb)
         activity?.onBackPressed()
     }
 
