@@ -22,8 +22,8 @@ class ProductRepositoryImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : BaseRepository(ioDispatcher), ProductRepository {
 
-    override suspend fun insert(card: ProductDb) {
-        withContext(ioDispatcher) {
+    override suspend fun insert(card: ProductDb) : Long {
+        return withContext(ioDispatcher) {
             superPromoDb.productDao().insert(card)
         }
     }

@@ -2,10 +2,7 @@ package com.superpromo.superpromo.ui.shopping.product.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
@@ -13,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.GlideRequests
+import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ProductDb
 import com.superpromo.superpromo.databinding.FragmentShoppingProductDetailBinding
 import com.superpromo.superpromo.ui.WebViewActivity
@@ -33,6 +31,10 @@ class ProductDetailFragment : Fragment() {
     private lateinit var binding: FragmentShoppingProductDetailBinding
     private val bundle: ProductDetailFragmentArgs by navArgs()
 
+    private lateinit var _menu: Menu
+    private lateinit var _productDb: ProductDb
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,10 +44,29 @@ class ProductDetailFragment : Fragment() {
         setToolbar(binding.appBar.toolbar)
 
         bundle.product?.let {
+            _productDb = it
             setView(it)
             hideEmptyView(it)
             setListeners()
+            productDetailViewModel.setProductId(it.id)
+            productDetailViewModel.setShoppingListId(it.shoppingListId)
         }
+
+        productDetailViewModel.showAdd.observe(viewLifecycleOwner, {
+            _menu.findItem(R.id.action_add).isVisible = true
+            _menu.findItem(R.id.action_delete).isVisible = false
+        })
+
+        productDetailViewModel.showDelete.observe(viewLifecycleOwner, {
+            _menu.findItem(R.id.action_add).isVisible = false
+            _menu.findItem(R.id.action_delete).isVisible = true
+        })
+
+        productDetailViewModel.productIdNew.observe(viewLifecycleOwner, {
+            _productDb = _productDb.copy(id = it)
+        })
+
+
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -114,9 +135,34 @@ class ProductDetailFragment : Fragment() {
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
+    private fun observeMenuList() {
+//        productDetailViewModel.productList.observe(viewLifecycleOwner, {
+//            adapter.submitList(it)
+//            setEmptyView(it)
+//        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        _menu = menu
         menu.clear()
+        inflater.inflate(R.menu.shopping_list_product_detail, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_add -> onAdd()
+            R.id.action_delete -> onDelete()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun onAdd() {
+        productDetailViewModel.insertProductDb(_productDb)
+    }
+
+    private fun onDelete() {
+        productDetailViewModel.deleteProductDb(_productDb)
     }
 
 }

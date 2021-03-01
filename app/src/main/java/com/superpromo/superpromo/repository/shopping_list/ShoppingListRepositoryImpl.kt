@@ -38,6 +38,12 @@ class ShoppingListRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun get(id: Long): ShoppingListDb {
+        return withContext(ioDispatcher) {
+            superPromoDb.shoppingListDao().get(id)
+        }
+    }
+
     override fun getAll(): Flow<List<ShoppingListDb>> =
         superPromoDb.shoppingListDao().getAll()
             .distinctUntilChanged()

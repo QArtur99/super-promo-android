@@ -1,11 +1,7 @@
 package com.superpromo.superpromo.data.db.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.superpromo.superpromo.data.db.model.CardDb
 import com.superpromo.superpromo.data.db.model.ProductDb
-import com.superpromo.superpromo.data.db.model.ShoppingListDb
-import com.superpromo.superpromo.data.network.model.Product
 import kotlinx.coroutines.flow.Flow
 
 
@@ -13,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface ProductDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(item: ProductDb)
+    fun insert(item: ProductDb): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<ProductDb>)

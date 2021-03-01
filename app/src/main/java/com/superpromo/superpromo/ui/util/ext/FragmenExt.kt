@@ -34,6 +34,14 @@ fun Fragment.setNavigationResult(result: Bundle) {
     findNavController().popBackStack()
 }
 
+fun Fragment.safeNavigate(resId: Int, args: Bundle? = null) {
+    try {
+        findNavController().navigate(resId, args)
+    } catch (e: Exception) {
+
+    }
+}
+
 fun Fragment.addBackPressListener(backPress: BackPress) {
     activity?.onBackPressedDispatcher?.addCallback {
         backPress.onBackPressed()

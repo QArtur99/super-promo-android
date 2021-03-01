@@ -27,7 +27,7 @@ interface ShoppingListDao {
     fun deleteAll()
 
     @Query("SELECT * from shopping_lists WHERE id = :itemId")
-    fun getItem(itemId: Long): ShoppingListDb
+    fun get(itemId: Long): ShoppingListDb
 
     @Query("SELECT * FROM shopping_lists WHERE isArchived IS 0 ORDER BY created DESC")
     fun getAll(): Flow<List<ShoppingListDb>>
