@@ -49,7 +49,6 @@ class ProductDetailFragment : Fragment() {
             hideEmptyView(it)
             setListeners()
             productDetailViewModel.setProductId(it.id)
-            productDetailViewModel.setShoppingListId(it.shoppingListId)
         }
 
         productDetailViewModel.showAdd.observe(viewLifecycleOwner, {
@@ -133,13 +132,6 @@ class ProductDetailFragment : Fragment() {
             intent.putExtra(WebViewActivity.ACTION_GO_TO_URL, textView.text)
             activity?.startActivityForResult(intent, WebViewActivity.ACTION_RESULT)
         }
-    }
-
-    private fun observeMenuList() {
-//        productDetailViewModel.productList.observe(viewLifecycleOwner, {
-//            adapter.submitList(it)
-//            setEmptyView(it)
-//        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

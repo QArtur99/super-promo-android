@@ -34,21 +34,25 @@ class DatabaseModule {
             db.run {
                 execSQL(
                     """CREATE TRIGGER IF NOT EXISTS productCount AFTER INSERT ON products
-                                FOR EACH ROW
                                 BEGIN
                                   update shopping_lists 
                                     set productCount = (select count(*) from products where shoppingListId = new.shoppingListId) 
-                                    where id = new.shoppingListId;                            
-                                END;"""
-                )
-                execSQL(
-                    """CREATE TRIGGER IF NOT EXISTS productCountActive AFTER INSERT ON products
-                                FOR EACH ROW
-                                BEGIN
+                                    where id = new.shoppingListId;
                                   update shopping_lists 
                                     set productCountActive = (select count(*) from products where shoppingListId = new.shoppingListId and isSelected = 1) 
                                     where id = new.shoppingListId;
-                                END;"""
+                                END;""".trimIndent()
+                )
+                execSQL(
+                    """CREATE TRIGGER IF NOT EXISTS delete_productCount AFTER DELETE ON products
+                                BEGIN
+                                  update shopping_lists 
+                                    set productCount = (select count(*) from products where shoppingListId = old.shoppingListId) 
+                                    where id = old.shoppingListId;
+                                  update shopping_lists 
+                                    set productCountActive = (select count(*) from products where shoppingListId = old.shoppingListId and isSelected = 1) 
+                                    where id = old.shoppingListId;                  
+                                END;""".trimIndent()
                 )
             }
         }

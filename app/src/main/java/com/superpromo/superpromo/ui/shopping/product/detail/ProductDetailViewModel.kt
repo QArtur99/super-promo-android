@@ -17,13 +17,7 @@ class ProductDetailViewModel @ViewModelInject constructor(
     private val shoppingListRepository: ShoppingListRepository
 ) : ViewModel() {
 
-    private lateinit var shoppingListDb: ShoppingListDb
     private var _productId: Long = 0
-
-    private val _shoppingListId = MutableLiveData<Long>()
-    val productList = _shoppingListId.switchMap {
-        productRepository.getList(it).asLiveData()
-    }
 
     private val _showAdd = MutableLiveData<Event<Boolean>>()
     val showAdd: LiveData<Event<Boolean>> = _showAdd
@@ -38,22 +32,10 @@ class ProductDetailViewModel @ViewModelInject constructor(
         _productId = productId
     }
 
-    fun setShoppingListId(shoppingListId: Long) {
-        _shoppingListId.value = shoppingListId
-        viewModelScope.launch {
-            shoppingListDb = shoppingListRepository.get(shoppingListId)
-        }
-    }
-
     fun insertProductDb(productDb: ProductDb) {
         viewModelScope.launch {
             _productIdNew.value = productRepository.insert(productDb)
             _showDelete.value = Event(true)
-            shoppingListDb = shoppingListDb.copy(
-                productCount = shoppingListDb.productCount.inc(),
-                productCountActive = shoppingListDb.productCountActive + productDb.isSelected.toInt()
-            )
-            updateShoppingListDb(shoppingListDb)
         }
     }
 
@@ -61,17 +43,6 @@ class ProductDetailViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             productRepository.delete(productDb.id)
             _showAdd.value = Event(true)
-            shoppingListDb = shoppingListDb.copy(
-                productCount = shoppingListDb.productCount.dec(),
-                productCountActive = shoppingListDb.productCountActive - productDb.isSelected.toInt()
-            )
-            updateShoppingListDb(shoppingListDb)
-        }
-    }
-
-    fun updateShoppingListDb(shoppingListDb: ShoppingListDb) {
-        viewModelScope.launch {
-            shoppingListRepository.insert(shoppingListDb)
         }
     }
 
