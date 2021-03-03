@@ -57,9 +57,13 @@
     <string name="shopping_list_active">Aktywne</string>
     <string name="shopping_list_moved_to_active">Przeniesiono do aktywnych</string>
     <string name="shopping_list_moved_to_archive">Przeniesiono do archiwum</string>
+    <string name="shopping_list_delete">Chcesz usunąć listę zakupów?</string>
+    <string name="shopping_list_deleted">Lista zakupów została usunięta</string>
     <string name="shopping_list_dialog_name_title">Wpowadź nazwe listy zakupów</string>
-    <string name="shopping_list_empty_list">Lista jest pusta.</string>
+    <string name="shopping_list_empty_list">Brak listy zakupów.</string>
     <string name="shopping_list_empty_sub_text">Dodaj liste zakupów.</string>
+    <string name="shopping_list_archive_empty_list">Archiwum jest puste.</string>
+    <string name="shopping_list_archive_empty_sub_text">Dodaj liste zakupów do archiwum.</string>
     <string name="shopping_dialog_choose_title">Wybierz listę zakupów</string>
     <string name="product_dialog_name_title">Wpowadź nazwe produktu</string>
     <string name="product_empty_list">Lista jest pusta.</string>

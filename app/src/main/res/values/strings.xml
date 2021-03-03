@@ -57,9 +57,13 @@
     <string name="shopping_list_active">Active</string>
     <string name="shopping_list_moved_to_active">Moved to the active</string>
     <string name="shopping_list_moved_to_archive">Moved to the archive</string>
+    <string name="shopping_list_delete">Do you want to delete your shopping list?</string>
+    <string name="shopping_list_deleted">The shopping list deleted</string>
     <string name="shopping_list_dialog_name_title">Enter a name for the shopping list</string>
-    <string name="shopping_list_empty_list">List is empty.</string>
+    <string name="shopping_list_empty_list">No shopping list.</string>
     <string name="shopping_list_empty_sub_text">Add a shopping list.</string>
+    <string name="shopping_list_archive_empty_list">The archive is empty.</string>
+    <string name="shopping_list_archive_empty_sub_text">Add shopping list to archive.</string>
     <string name="shopping_dialog_choose_title">Select a shopping list</string>
     <string name="product_dialog_name_title">Enter a product name</string>
     <string name="product_empty_list">List is empty.</string>

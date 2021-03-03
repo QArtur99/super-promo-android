@@ -72,8 +72,8 @@ class ShoppingListArchiveFragment : Fragment() {
 
     private fun setEmptyView(list: List<ShoppingListDb>) {
         binding.emptyView.emptyView.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
-        binding.emptyView.emptyTitleText.text = getString(R.string.shopping_list_empty_list)
-        binding.emptyView.emptySubtitleText.text = getString(R.string.shopping_list_empty_sub_text)
+        binding.emptyView.emptyTitleText.text = getString(R.string.shopping_list_archive_empty_list)
+        binding.emptyView.emptySubtitleText.text = getString(R.string.shopping_list_archive_empty_sub_text)
         binding.emptyView.emptyImage.setImageResource(R.drawable.gradient_ic_baseline_add_shopping_cart_24)
     }
 

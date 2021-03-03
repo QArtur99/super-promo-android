@@ -102,7 +102,7 @@ class ProductArchiveFragment : Fragment() {
             val bundle = bundleOf(
                 ProductArchiveDetailFragment.KEY_PRODUCT to productDb,
             )
-            findNavController().navigate(R.id.action_to_product_detail, bundle)
+            findNavController().navigate(R.id.action_to_product_archive_detail, bundle)
         }
 
         override fun onSelect(v: View, productDb: ProductDb) {
@@ -132,6 +132,7 @@ class ProductArchiveFragment : Fragment() {
 
     private fun onDelete() {
         productArchiveViewModel.deleteShoppingListDb(shoppingListDb)
+        snackbar(binding.root, R.string.shopping_list_deleted)
         activity?.onBackPressed()
     }
 }

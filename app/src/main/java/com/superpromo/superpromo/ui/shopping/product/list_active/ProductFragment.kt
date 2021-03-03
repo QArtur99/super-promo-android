@@ -195,6 +195,7 @@ class ProductFragment : Fragment() {
 
     private fun onDelete() {
         productViewModel.deleteShoppingListDb(shoppingListDb)
+        snackbar(binding.root, R.string.shopping_list_deleted)
         activity?.onBackPressed()
     }
 }
