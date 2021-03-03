@@ -90,7 +90,12 @@ fun Fragment.toast(text: String) {
     Toast.makeText(requireActivity(), text, Toast.LENGTH_LONG).show()
 }
 
-fun Fragment.snackbar(view: View, text: String) {
-    val snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
+fun Fragment.snackbar(view: View, text: Any) {
+    val msg = when (text) {
+        is String -> text
+        is Int -> getString(text)
+        else -> ""
+    }
+    val snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
     snackbar.show()
 }

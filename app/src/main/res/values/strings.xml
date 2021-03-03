@@ -55,6 +55,8 @@
     <string name="shopping_list_archive">Archive</string>
     <string name="shopping_list_unarchive">Unarchive</string>
     <string name="shopping_list_active">Active</string>
+    <string name="shopping_list_moved_to_active">Moved to the active</string>
+    <string name="shopping_list_moved_to_archive">Moved to the archive</string>
     <string name="shopping_list_dialog_name_title">Enter a name for the shopping list</string>
     <string name="shopping_list_empty_list">List is empty.</string>
     <string name="shopping_list_empty_sub_text">Add a shopping list.</string>

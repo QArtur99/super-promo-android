@@ -15,9 +15,11 @@ import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.databinding.FragmentShoppingProductBinding
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.shopping.product.detail.ProductDetailFragment
+import com.superpromo.superpromo.ui.shopping.product.detail_archive.ProductArchiveDetailFragment
 import com.superpromo.superpromo.ui.shopping.product.list_active.ProductFragmentArgs
 import com.superpromo.superpromo.ui.shopping.product.list_archive.adapter.ProductArchiveListAdapter
 import com.superpromo.superpromo.ui.util.ext.setToolbar
+import com.superpromo.superpromo.ui.util.ext.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -97,9 +99,8 @@ class ProductArchiveFragment : Fragment() {
 
     private fun onShopClickListener() = object : ProductArchiveListAdapter.OnClickListener {
         override fun onClick(v: View, productDb: ProductDb) {
-            if (productDb.isLocal == true) return
             val bundle = bundleOf(
-                ProductDetailFragment.KEY_PRODUCT to productDb,
+                ProductArchiveDetailFragment.KEY_PRODUCT to productDb,
             )
             findNavController().navigate(R.id.action_to_product_detail, bundle)
         }
@@ -125,6 +126,7 @@ class ProductArchiveFragment : Fragment() {
     private fun onUnarchive() {
         shoppingListDb = shoppingListDb.copy(isArchived = false)
         productArchiveViewModel.updateShoppingListDb(shoppingListDb)
+        snackbar(binding.root, R.string.shopping_list_moved_to_active)
         activity?.onBackPressed()
     }
 
