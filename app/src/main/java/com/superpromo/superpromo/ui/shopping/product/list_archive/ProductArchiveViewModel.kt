@@ -1,6 +1,5 @@
 package com.superpromo.superpromo.ui.shopping.product.list_archive
 
-
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
