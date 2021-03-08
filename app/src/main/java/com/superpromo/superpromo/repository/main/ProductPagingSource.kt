@@ -2,6 +2,7 @@ package com.superpromo.superpromo.repository.main
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingSource.LoadResult.Page
+import androidx.paging.PagingState
 import com.superpromo.superpromo.data.network.SuperPromoApi
 import com.superpromo.superpromo.data.network.model.Product
 import com.superpromo.superpromo.data.network.model.Shop
@@ -38,5 +39,9 @@ class ProductPagingSource(
         } catch (e: HttpException) {
             LoadResult.Error(e)
         }
+    }
+
+    override fun getRefreshKey(state: PagingState<String, Product>): String {
+        return ""
     }
 }

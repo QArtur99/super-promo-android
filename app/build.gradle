@@ -90,7 +90,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
 
     //Lifecycle
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_ext"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
 
@@ -129,7 +129,7 @@ dependencies {
     //Barcode
     implementation "com.journeyapps:zxing-android-embedded:$barcode"
 
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.room:room-testing:2.2.6"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
