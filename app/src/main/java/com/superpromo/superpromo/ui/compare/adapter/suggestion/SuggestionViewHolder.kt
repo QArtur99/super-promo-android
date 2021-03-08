@@ -27,7 +27,6 @@ class SuggestionViewHolder constructor(
         }
     }
 
-
     private val suggestion: TextView = view.findViewById(R.id.suggestion)
     private var item: Suggestion? = null
 

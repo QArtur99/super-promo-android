@@ -1,3 +1,3 @@
 package com.superpromo.superpromo.ui.util.ext
 
-fun Double?.toStringN() : String? = this?.toString()
+fun Double?.toStringN(): String? = this?.toString()

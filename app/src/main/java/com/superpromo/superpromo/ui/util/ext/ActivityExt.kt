@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import com.superpromo.superpromo.BuildConfig
 import com.superpromo.superpromo.R
 
-
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun setStatusBarGradient(activity: Activity) {
     val window: Window = activity.window

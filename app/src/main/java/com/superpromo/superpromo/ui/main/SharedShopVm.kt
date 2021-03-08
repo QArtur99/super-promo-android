@@ -2,7 +2,13 @@ package com.superpromo.superpromo.ui.main
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.superpromo.superpromo.data.network.model.Shop
 import com.superpromo.superpromo.repository.main.SuperPromoRepository
 import com.superpromo.superpromo.repository.state.ResultApi
@@ -120,5 +126,4 @@ class SharedShopVm @ViewModelInject constructor(
         val newList = list.map { it.copy(isAvailableInDb = map[it.id] ?: false) }
         savedStateHandle.set(KEY_SHOPS, newList)
     }
-
 }

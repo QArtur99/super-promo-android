@@ -53,5 +53,4 @@ class ProductFromMainPagingAdapter(
     fun getItemAt(position: Int): Product {
         return getItem(position)!!
     }
-
 }

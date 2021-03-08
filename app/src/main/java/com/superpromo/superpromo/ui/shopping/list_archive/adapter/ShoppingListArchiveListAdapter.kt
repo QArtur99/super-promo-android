@@ -9,7 +9,6 @@ import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 
-
 class ShoppingListArchiveListAdapter(
     private val glide: GlideRequests,
     private val clickListener: OnClickListener,
@@ -17,14 +16,17 @@ class ShoppingListArchiveListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.item_shopping_list_archived -> (holder as ShoppingListArchiveViewHolder).bind(getItem(position))
+            R.layout.item_shopping_list_archived -> (holder as ShoppingListArchiveViewHolder).bind(
+                getItem(position)
+            )
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.item_shopping_list_archived -> ShoppingListArchiveViewHolder
-                .create(parent, glide, clickListener)
+            R.layout.item_shopping_list_archived ->
+                ShoppingListArchiveViewHolder
+                    .create(parent, glide, clickListener)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
     }

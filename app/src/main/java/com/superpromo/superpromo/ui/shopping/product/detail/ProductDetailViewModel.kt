@@ -2,13 +2,15 @@ package com.superpromo.superpromo.ui.shopping.product.detail
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.superpromo.superpromo.data.db.model.ProductDb
-import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.repository.product.ProductRepository
 import com.superpromo.superpromo.repository.shopping_list.ShoppingListRepository
 import com.superpromo.superpromo.ui.util.Event
-import com.superpromo.superpromo.ui.util.ext.toInt
 import kotlinx.coroutines.launch
 
 class ProductDetailViewModel @ViewModelInject constructor(
@@ -45,5 +47,4 @@ class ProductDetailViewModel @ViewModelInject constructor(
             _showAdd.value = Event(true)
         }
     }
-
 }

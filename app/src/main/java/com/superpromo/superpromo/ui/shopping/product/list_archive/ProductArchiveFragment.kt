@@ -1,7 +1,12 @@
 package com.superpromo.superpromo.ui.shopping.product.list_archive
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -67,11 +72,14 @@ class ProductArchiveFragment : Fragment() {
     }
 
     private fun observeMenuList() {
-        productArchiveViewModel.productList.observe(viewLifecycleOwner, {
-            binding.swipeRefresh.isRefreshing = false
-            adapter.submitList(it)
-            setEmptyView(it)
-        })
+        productArchiveViewModel.productList.observe(
+            viewLifecycleOwner,
+            {
+                binding.swipeRefresh.isRefreshing = false
+                adapter.submitList(it)
+                setEmptyView(it)
+            }
+        )
     }
 
     private fun setEmptyView(list: List<ProductDb>) {

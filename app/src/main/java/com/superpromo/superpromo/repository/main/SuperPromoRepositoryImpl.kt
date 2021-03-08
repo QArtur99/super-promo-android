@@ -78,5 +78,4 @@ class SuperPromoRepositoryImpl @Inject constructor(
             superPromoDb.shopDao().getAll()
         }
     }
-
 }

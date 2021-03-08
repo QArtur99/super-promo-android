@@ -58,36 +58,39 @@ class FilterOfferFragment : Fragment() {
     }
 
     private fun observeShops() {
-        sharedShopVm.shopList.observe(viewLifecycleOwner, {
-            when (it.state) {
-                is State.Loading -> {
-                    binding.swipeRefresh.isRefreshing = true
-                    binding.noConnection.noConnection.visibility = View.GONE
-                    binding.emptyView.emptyView.visibility = View.GONE
-                }
-                is State.Success -> {
-                    adapter.submitList(it.shopList)
-                    binding.swipeRefresh.isRefreshing = false
-                    if (it.shopList.isEmpty()) {
-                        binding.noConnection.noConnection.visibility = View.GONE
-                        binding.emptyView.emptyView.visibility = View.VISIBLE
-                    } else {
+        sharedShopVm.shopList.observe(
+            viewLifecycleOwner,
+            {
+                when (it.state) {
+                    is State.Loading -> {
+                        binding.swipeRefresh.isRefreshing = true
                         binding.noConnection.noConnection.visibility = View.GONE
                         binding.emptyView.emptyView.visibility = View.GONE
                     }
-                }
-                is State.Error -> {
-                    binding.swipeRefresh.isRefreshing = false
-                    if (it.shopList.isEmpty()) {
-                        binding.noConnection.noConnection.visibility = View.VISIBLE
-                        binding.emptyView.emptyView.visibility = View.GONE
-                    } else {
-                        binding.noConnection.noConnection.visibility = View.GONE
-                        binding.emptyView.emptyView.visibility = View.GONE
+                    is State.Success -> {
+                        adapter.submitList(it.shopList)
+                        binding.swipeRefresh.isRefreshing = false
+                        if (it.shopList.isEmpty()) {
+                            binding.noConnection.noConnection.visibility = View.GONE
+                            binding.emptyView.emptyView.visibility = View.VISIBLE
+                        } else {
+                            binding.noConnection.noConnection.visibility = View.GONE
+                            binding.emptyView.emptyView.visibility = View.GONE
+                        }
+                    }
+                    is State.Error -> {
+                        binding.swipeRefresh.isRefreshing = false
+                        if (it.shopList.isEmpty()) {
+                            binding.noConnection.noConnection.visibility = View.VISIBLE
+                            binding.emptyView.emptyView.visibility = View.GONE
+                        } else {
+                            binding.noConnection.noConnection.visibility = View.GONE
+                            binding.emptyView.emptyView.visibility = View.GONE
+                        }
                     }
                 }
             }
-        })
+        )
     }
 
     private fun initAdapter() {

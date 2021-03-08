@@ -1,7 +1,11 @@
 package com.superpromo.superpromo.ui.card_add
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -18,7 +22,6 @@ import com.superpromo.superpromo.ui.util.ext.hideSoftKeyBoard
 import com.superpromo.superpromo.ui.util.ext.setNavigationResult
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class CardAddFragment : Fragment() {
@@ -62,10 +65,13 @@ class CardAddFragment : Fragment() {
         val glide = GlideApp.with(this)
         val adapter = CardColorListAdapter(glide, onCardColorClickListener())
         binding.recyclerView.adapter = adapter
-        cardAddViewModel.cardColorList.observe(viewLifecycleOwner, { list ->
-            findSelectedColor(list)
-            adapter.submitList(list)
-        })
+        cardAddViewModel.cardColorList.observe(
+            viewLifecycleOwner,
+            { list ->
+                findSelectedColor(list)
+                adapter.submitList(list)
+            }
+        )
     }
 
     private fun findSelectedColor(it: List<CardColorModel>) {
@@ -120,7 +126,6 @@ class CardAddFragment : Fragment() {
             result = false
         }
         return result
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

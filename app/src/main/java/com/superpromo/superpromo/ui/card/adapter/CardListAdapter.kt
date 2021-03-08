@@ -9,7 +9,6 @@ import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.CardDb
 
-
 class CardListAdapter(
     private val glide: GlideRequests,
     private val clickListener: OnClickListener,

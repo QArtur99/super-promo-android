@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -21,7 +20,6 @@ import com.superpromo.superpromo.ui.main.SharedSuggestionVm
 import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class SuggestionFromMainFragment : Fragment() {
@@ -54,36 +52,39 @@ class SuggestionFromMainFragment : Fragment() {
     }
 
     private fun observeSuggestions() {
-        sharedSuggestionVm.suggestions.observe(viewLifecycleOwner, {
-            when (it.state) {
-                is State.Loading -> {
-                    binding.swipeRefresh.isRefreshing = true
-                    binding.noConnection.noConnection.visibility = View.GONE
-                    binding.emptyView.emptyView.visibility = View.GONE
-                }
-                is State.Success -> {
-                    adapter.submitList(it.suggestionList)
-                    binding.swipeRefresh.isRefreshing = false
-                    if (it.suggestionList.isEmpty()) {
-                        binding.noConnection.noConnection.visibility = View.GONE
-                        binding.emptyView.emptyView.visibility = View.VISIBLE
-                    } else {
+        sharedSuggestionVm.suggestions.observe(
+            viewLifecycleOwner,
+            {
+                when (it.state) {
+                    is State.Loading -> {
+                        binding.swipeRefresh.isRefreshing = true
                         binding.noConnection.noConnection.visibility = View.GONE
                         binding.emptyView.emptyView.visibility = View.GONE
                     }
-                }
-                is State.Error -> {
-                    binding.swipeRefresh.isRefreshing = false
-                    if (it.suggestionList.isEmpty()) {
-                        binding.noConnection.noConnection.visibility = View.VISIBLE
-                        binding.emptyView.emptyView.visibility = View.GONE
-                    } else {
-                        binding.noConnection.noConnection.visibility = View.GONE
-                        binding.emptyView.emptyView.visibility = View.GONE
+                    is State.Success -> {
+                        adapter.submitList(it.suggestionList)
+                        binding.swipeRefresh.isRefreshing = false
+                        if (it.suggestionList.isEmpty()) {
+                            binding.noConnection.noConnection.visibility = View.GONE
+                            binding.emptyView.emptyView.visibility = View.VISIBLE
+                        } else {
+                            binding.noConnection.noConnection.visibility = View.GONE
+                            binding.emptyView.emptyView.visibility = View.GONE
+                        }
+                    }
+                    is State.Error -> {
+                        binding.swipeRefresh.isRefreshing = false
+                        if (it.suggestionList.isEmpty()) {
+                            binding.noConnection.noConnection.visibility = View.VISIBLE
+                            binding.emptyView.emptyView.visibility = View.GONE
+                        } else {
+                            binding.noConnection.noConnection.visibility = View.GONE
+                            binding.emptyView.emptyView.visibility = View.GONE
+                        }
                     }
                 }
             }
-        })
+        )
     }
 
     private fun onNavigationResult() {

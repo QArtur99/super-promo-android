@@ -36,9 +36,12 @@ class MenuFragment : Fragment() {
     }
 
     private fun observeMenuList() {
-        menuViewModel.menuList.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
-        })
+        menuViewModel.menuList.observe(
+            viewLifecycleOwner,
+            {
+                adapter.submitList(it)
+            }
+        )
     }
 
     private fun initAdapter() {

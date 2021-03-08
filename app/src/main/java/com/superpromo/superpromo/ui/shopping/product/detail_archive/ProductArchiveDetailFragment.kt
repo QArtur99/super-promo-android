@@ -2,7 +2,11 @@ package com.superpromo.superpromo.ui.shopping.product.detail_archive
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
@@ -10,7 +14,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.GlideRequests
-import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ProductDb
 import com.superpromo.superpromo.databinding.FragmentShoppingProductDetailBinding
 import com.superpromo.superpromo.ui.WebViewActivity
@@ -57,7 +60,7 @@ class ProductArchiveDetailFragment : Fragment() {
     private fun setView(item: ProductDb) {
         item.imgUrl?.let {
             GlideHelper.bingImg(binding.productImg, glide, it)
-            ImageViewCompat.setImageTintList(binding.productImg, null);
+            ImageViewCompat.setImageTintList(binding.productImg, null)
         }
         binding.shopName.text = item.shopName
         binding.productName.text = item.name

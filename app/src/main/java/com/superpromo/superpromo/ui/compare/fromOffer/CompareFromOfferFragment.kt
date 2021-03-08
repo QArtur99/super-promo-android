@@ -186,10 +186,12 @@ class CompareFromOfferFragment : Fragment() {
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
         )
-        compareViewModel.shoppingLists.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
-        })
-
+        compareViewModel.shoppingLists.observe(
+            viewLifecycleOwner,
+            {
+                adapter.submitList(it)
+            }
+        )
     }
 
     private fun onShoppingListClick(dialog: Dialog, product: Product) =
@@ -211,5 +213,4 @@ class CompareFromOfferFragment : Fragment() {
         super.onPrepareOptionsMenu(menu)
         menu.clear()
     }
-
 }

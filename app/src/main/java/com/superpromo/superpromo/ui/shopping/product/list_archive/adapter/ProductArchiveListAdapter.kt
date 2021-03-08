@@ -12,7 +12,6 @@ import com.superpromo.superpromo.ui.shopping.product.list_archive.adapter.vh.Pro
 import com.superpromo.superpromo.ui.shopping.product.list_archive.adapter.vh.ProductTextViewHolder
 import com.superpromo.superpromo.ui.shopping.product.list_archive.adapter.vh.ProductViewHolder
 
-
 class ProductArchiveListAdapter(
     private val glide: GlideRequests,
     private val clickListener: OnClickListener,
@@ -31,12 +30,15 @@ class ProductArchiveListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.item_shopping_product -> ProductViewHolder
-                .create(parent, glide, clickListener)
-            R.layout.item_shopping_product_img -> ProductImgViewHolder
-                .create(parent, glide, clickListener)
-            R.layout.item_shopping_product_text -> ProductTextViewHolder
-                .create(parent, glide, clickListener)
+            R.layout.item_shopping_product ->
+                ProductViewHolder
+                    .create(parent, glide, clickListener)
+            R.layout.item_shopping_product_img ->
+                ProductImgViewHolder
+                    .create(parent, glide, clickListener)
+            R.layout.item_shopping_product_text ->
+                ProductTextViewHolder
+                    .create(parent, glide, clickListener)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
     }

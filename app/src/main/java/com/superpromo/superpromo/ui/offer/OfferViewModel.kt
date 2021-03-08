@@ -9,7 +9,4 @@ import com.superpromo.superpromo.repository.main.SuperPromoRepository
 class OfferViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val superPromoRepository: SuperPromoRepository
-) : ViewModel() {
-
-
-}
+) : ViewModel()

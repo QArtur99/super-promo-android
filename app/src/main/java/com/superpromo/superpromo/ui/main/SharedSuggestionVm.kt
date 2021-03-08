@@ -2,7 +2,13 @@ package com.superpromo.superpromo.ui.main
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.superpromo.superpromo.data.network.model.Suggestion
 import com.superpromo.superpromo.repository.main.SuperPromoRepository
 import com.superpromo.superpromo.repository.state.ResultApi
@@ -64,5 +70,4 @@ class SharedSuggestionVm @ViewModelInject constructor(
     fun showSuggestions(query: String) {
         savedStateHandle.set(KEY_FILTER_SUGGESTIONS, query)
     }
-
 }

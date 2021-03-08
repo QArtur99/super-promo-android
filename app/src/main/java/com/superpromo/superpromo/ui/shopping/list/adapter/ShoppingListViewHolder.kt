@@ -9,8 +9,7 @@ import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.ui.util.TimeHelper
-import java.util.*
-
+import java.util.Date
 
 class ShoppingListViewHolder constructor(
     private val view: View,
@@ -45,7 +44,7 @@ class ShoppingListViewHolder constructor(
         shoppingListDb = item
         val infoString = item.productCountActive.toString() + "/" + item.productCount.toString()
         name.text = item.name
-        info.text =  infoString
+        info.text = infoString
         date.text = TimeHelper.getDateFormat().format(Date(item.created))
     }
 }

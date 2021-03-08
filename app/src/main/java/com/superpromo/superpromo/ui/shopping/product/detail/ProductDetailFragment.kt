@@ -2,7 +2,12 @@ package com.superpromo.superpromo.ui.shopping.product.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
@@ -34,7 +39,6 @@ class ProductDetailFragment : Fragment() {
     private lateinit var _menu: Menu
     private lateinit var _productDb: ProductDb
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,20 +55,28 @@ class ProductDetailFragment : Fragment() {
             productDetailViewModel.setProductId(it.id)
         }
 
-        productDetailViewModel.showAdd.observe(viewLifecycleOwner, {
-            _menu.findItem(R.id.action_add).isVisible = true
-            _menu.findItem(R.id.action_delete).isVisible = false
-        })
+        productDetailViewModel.showAdd.observe(
+            viewLifecycleOwner,
+            {
+                _menu.findItem(R.id.action_add).isVisible = true
+                _menu.findItem(R.id.action_delete).isVisible = false
+            }
+        )
 
-        productDetailViewModel.showDelete.observe(viewLifecycleOwner, {
-            _menu.findItem(R.id.action_add).isVisible = false
-            _menu.findItem(R.id.action_delete).isVisible = true
-        })
+        productDetailViewModel.showDelete.observe(
+            viewLifecycleOwner,
+            {
+                _menu.findItem(R.id.action_add).isVisible = false
+                _menu.findItem(R.id.action_delete).isVisible = true
+            }
+        )
 
-        productDetailViewModel.productIdNew.observe(viewLifecycleOwner, {
-            _productDb = _productDb.copy(id = it)
-        })
-
+        productDetailViewModel.productIdNew.observe(
+            viewLifecycleOwner,
+            {
+                _productDb = _productDb.copy(id = it)
+            }
+        )
 
         setHasOptionsMenu(true)
         return binding.root
@@ -73,7 +85,7 @@ class ProductDetailFragment : Fragment() {
     private fun setView(item: ProductDb) {
         item.imgUrl?.let {
             GlideHelper.bingImg(binding.productImg, glide, it)
-            ImageViewCompat.setImageTintList(binding.productImg, null);
+            ImageViewCompat.setImageTintList(binding.productImg, null)
         }
         binding.shopName.text = item.shopName
         binding.productName.text = item.name
@@ -156,5 +168,4 @@ class ProductDetailFragment : Fragment() {
     private fun onDelete() {
         productDetailViewModel.deleteProductDb(_productDb)
     }
-
 }

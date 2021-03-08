@@ -2,7 +2,11 @@ package com.superpromo.superpromo.ui.card_add
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.CardDb
 import com.superpromo.superpromo.repository.card.CardRepository
@@ -48,6 +52,4 @@ class CardAddViewModel @ViewModelInject constructor(
             cardRepository.insert(cardDb)
         }
     }
-
-
 }

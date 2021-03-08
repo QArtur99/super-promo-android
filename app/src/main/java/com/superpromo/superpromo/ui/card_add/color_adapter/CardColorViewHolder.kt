@@ -39,6 +39,6 @@ class CardColorViewHolder constructor(
     fun bind(item: CardColorModel) {
         cardColorModel = item
         colorView.setCardBackgroundColor(view.context.getColor(item.color))
-        if(item.click) view.performClick()
+        if (item.click) view.performClick()
     }
 }

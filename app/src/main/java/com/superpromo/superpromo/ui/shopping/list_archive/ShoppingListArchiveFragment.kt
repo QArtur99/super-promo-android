@@ -2,8 +2,12 @@ package com.superpromo.superpromo.ui.shopping.list_archive
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.app.AlertDialog
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -63,17 +67,21 @@ class ShoppingListArchiveFragment : Fragment() {
     }
 
     private fun observeMenuList() {
-        shoppingListArchiveViewModel.shoppingLists.observe(viewLifecycleOwner, {
-            binding.swipeRefresh.isRefreshing = false
-            adapter.submitList(it)
-            setEmptyView(it)
-        })
+        shoppingListArchiveViewModel.shoppingLists.observe(
+            viewLifecycleOwner,
+            {
+                binding.swipeRefresh.isRefreshing = false
+                adapter.submitList(it)
+                setEmptyView(it)
+            }
+        )
     }
 
     private fun setEmptyView(list: List<ShoppingListDb>) {
         binding.emptyView.emptyView.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
         binding.emptyView.emptyTitleText.text = getString(R.string.shopping_list_archive_empty_list)
-        binding.emptyView.emptySubtitleText.text = getString(R.string.shopping_list_archive_empty_sub_text)
+        binding.emptyView.emptySubtitleText.text =
+            getString(R.string.shopping_list_archive_empty_sub_text)
         binding.emptyView.emptyImage.setImageResource(R.drawable.gradient_ic_baseline_add_shopping_cart_24)
     }
 

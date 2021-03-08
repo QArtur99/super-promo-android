@@ -1,9 +1,7 @@
 package com.superpromo.superpromo.repository.product
 
 import com.superpromo.superpromo.data.db.SuperPromoDb
-import com.superpromo.superpromo.data.db.model.CardDb
 import com.superpromo.superpromo.data.db.model.ProductDb
-import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.data.network.SuperPromoApi
 import com.superpromo.superpromo.di.DefaultDispatcher
 import com.superpromo.superpromo.di.IoDispatcher
@@ -22,7 +20,7 @@ class ProductRepositoryImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : BaseRepository(ioDispatcher), ProductRepository {
 
-    override suspend fun insert(card: ProductDb) : Long {
+    override suspend fun insert(card: ProductDb): Long {
         return withContext(ioDispatcher) {
             superPromoDb.productDao().insert(card)
         }
@@ -44,5 +42,4 @@ class ProductRepositoryImpl @Inject constructor(
         superPromoDb.productDao().getAll(shoppingListId)
             .distinctUntilChanged()
             .flowOn(ioDispatcher)
-
 }

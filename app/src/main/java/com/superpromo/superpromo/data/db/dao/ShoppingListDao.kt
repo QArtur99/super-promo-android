@@ -1,9 +1,12 @@
 package com.superpromo.superpromo.data.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import kotlinx.coroutines.flow.Flow
-
 
 @Dao
 interface ShoppingListDao {

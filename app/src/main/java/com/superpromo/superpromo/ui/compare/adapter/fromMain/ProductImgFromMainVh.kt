@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Product
-import com.superpromo.superpromo.ui.compare.adapter.fromOffer.ProductFromOfferPagingAdapter
-import com.superpromo.superpromo.ui.util.FormatPrice
 import com.superpromo.superpromo.ui.util.GlideHelper
 
 class ProductImgFromMainVh constructor(

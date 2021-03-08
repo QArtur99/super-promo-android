@@ -9,7 +9,6 @@ import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Product
 
-
 class ProductFromOfferPagingAdapter(
     private val glide: GlideRequests,
     private val clickListener: OnClickListener,
@@ -54,5 +53,4 @@ class ProductFromOfferPagingAdapter(
     fun getItemAt(position: Int): Product {
         return getItem(position)!!
     }
-
 }

@@ -56,12 +56,14 @@ class CompareFromMainFragment : Fragment() {
         initSwipeToRefresh()
         initQuerySuggestion()
 
-
         bundle.query?.let { query ->
-            sharedShopVm.shopsAvailable.observe(viewLifecycleOwner, {
-                binding.appBar.searchView.setQuery(query, false)
-                compareViewModel.showProducts(it, query)
-            })
+            sharedShopVm.shopsAvailable.observe(
+                viewLifecycleOwner,
+                {
+                    binding.appBar.searchView.setQuery(query, false)
+                    compareViewModel.showProducts(it, query)
+                }
+            )
         }
         setHasOptionsMenu(true)
         return binding.root
@@ -156,5 +158,4 @@ class CompareFromMainFragment : Fragment() {
         super.onPrepareOptionsMenu(menu)
         menu.clear()
     }
-
 }

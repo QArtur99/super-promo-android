@@ -53,5 +53,4 @@ class ShoppingListRepositoryImpl @Inject constructor(
         superPromoDb.shoppingListDao().getAllArchived()
             .distinctUntilChanged()
             .flowOn(ioDispatcher)
-
 }

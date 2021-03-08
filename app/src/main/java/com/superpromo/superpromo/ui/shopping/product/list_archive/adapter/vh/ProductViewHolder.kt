@@ -15,7 +15,6 @@ import com.superpromo.superpromo.ui.shopping.product.list_archive.adapter.Produc
 import com.superpromo.superpromo.ui.util.FormatPrice
 import com.superpromo.superpromo.ui.util.GlideHelper
 
-
 class ProductViewHolder constructor(
     private val view: View,
     private val glide: GlideRequests,

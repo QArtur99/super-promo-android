@@ -41,7 +41,8 @@ class DatabaseModule {
                                   update shopping_lists 
                                     set productCountActive = (select count(*) from products where shoppingListId = new.shoppingListId and isSelected = 1) 
                                     where id = new.shoppingListId;
-                                END;""".trimIndent()
+                                END;
+                    """.trimIndent()
                 )
                 execSQL(
                     """CREATE TRIGGER IF NOT EXISTS delete_productCount AFTER DELETE ON products
@@ -52,10 +53,10 @@ class DatabaseModule {
                                   update shopping_lists 
                                     set productCountActive = (select count(*) from products where shoppingListId = old.shoppingListId and isSelected = 1) 
                                     where id = old.shoppingListId;                  
-                                END;""".trimIndent()
+                                END;
+                    """.trimIndent()
                 )
             }
         }
     }
-
 }

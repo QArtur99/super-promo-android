@@ -9,7 +9,6 @@ import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Suggestion
 
-
 class SuggestionListAdapter(
     private val glide: GlideRequests,
     private val clickListener: OnClickListener,

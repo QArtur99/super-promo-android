@@ -11,7 +11,6 @@ import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.CardDb
 
-
 class CardViewHolder constructor(
     private val view: View,
     private val glide: GlideRequests,

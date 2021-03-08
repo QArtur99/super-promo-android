@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.ui.util.assistant.BackPress
 
-
 const val KEY_NAV_BACK_STACK = "KEY_NAV_BACKSTACK"
 
 fun Fragment.onNavBackStackListener(onResult: (bundle: Bundle) -> Unit) {
@@ -35,7 +34,6 @@ fun Fragment.safeNavigate(resId: Int, args: Bundle? = null) {
     try {
         findNavController().navigate(resId, args)
     } catch (e: Exception) {
-
     }
 }
 
@@ -82,4 +80,3 @@ fun Fragment.setStatusBarTransparent() {
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
     window.statusBarColor = ContextCompat.getColor(activity, R.color.transparent)
 }
-

@@ -34,6 +34,4 @@ class SharedDrawerVm @ViewModelInject constructor(
     fun onOpenedEnd(id: Int) {
         _onOpenedEnd.value = Event(id)
     }
-
-
 }

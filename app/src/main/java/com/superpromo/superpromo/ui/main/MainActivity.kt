@@ -18,7 +18,6 @@ import com.superpromo.superpromo.ui.util.ext.setStatusBarGradient
 import com.superpromo.superpromo.ui.util.ext.shareApp
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         sharedSuggestionVm.suggestions.observe(this, {})
         binding.drawer.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-
             }
 
             override fun onDrawerOpened(drawerView: View) {
@@ -54,20 +52,29 @@ class MainActivity : AppCompatActivity() {
 //                TODO("Not yet implemented")
             }
         })
-        sharedDrawerVm.onCloseEndClick.observe(this, EventObserver {
-            binding.drawer.closeDrawer(GravityCompat.END)
-        })
-        sharedDrawerVm.onCloseStartClick.observe(this, EventObserver {
-            binding.drawer.closeDrawer(GravityCompat.START)
-            Handler(mainLooper).postDelayed({
-                when (it) {
-                    R.string.menu_shopping -> findNavController().navigate(R.id.action_start_to_shopping_list)
-                    R.string.menu_cards -> findNavController().navigate(R.id.action_start_to_card)
-                    R.string.menu_share -> shareApp()
-                    R.string.menu_contact -> contactUs()
-                }
-            }, 200)
-        })
+        sharedDrawerVm.onCloseEndClick.observe(
+            this,
+            EventObserver {
+                binding.drawer.closeDrawer(GravityCompat.END)
+            }
+        )
+        sharedDrawerVm.onCloseStartClick.observe(
+            this,
+            EventObserver {
+                binding.drawer.closeDrawer(GravityCompat.START)
+                Handler(mainLooper).postDelayed(
+                    {
+                        when (it) {
+                            R.string.menu_shopping -> findNavController().navigate(R.id.action_start_to_shopping_list)
+                            R.string.menu_cards -> findNavController().navigate(R.id.action_start_to_card)
+                            R.string.menu_share -> shareApp()
+                            R.string.menu_contact -> contactUs()
+                        }
+                    },
+                    200
+                )
+            }
+        )
     }
 
     private fun findNavController() = binding.navHostFragment.findNavController()

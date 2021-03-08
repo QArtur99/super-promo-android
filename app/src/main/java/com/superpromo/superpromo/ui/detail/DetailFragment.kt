@@ -116,5 +116,4 @@ class DetailFragment : Fragment() {
         super.onPrepareOptionsMenu(menu)
         menu.clear()
     }
-
 }

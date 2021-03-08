@@ -1,7 +1,12 @@
 package com.superpromo.superpromo.ui.shopping.product.list_active
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -71,11 +76,14 @@ class ProductFragment : Fragment() {
     }
 
     private fun observeMenuList() {
-        productViewModel.productList.observe(viewLifecycleOwner, {
-            binding.swipeRefresh.isRefreshing = false
-            adapter.submitList(it)
-            setEmptyView(it)
-        })
+        productViewModel.productList.observe(
+            viewLifecycleOwner,
+            {
+                binding.swipeRefresh.isRefreshing = false
+                adapter.submitList(it)
+                setEmptyView(it)
+            }
+        )
     }
 
     private fun setEmptyView(list: List<ProductDb>) {
@@ -180,7 +188,6 @@ class ProductFragment : Fragment() {
         sharedShopVm.showShops("")
         findNavController().navigate(R.id.action_to_offer)
     }
-
 
     private fun onEdit() {
         editListName()

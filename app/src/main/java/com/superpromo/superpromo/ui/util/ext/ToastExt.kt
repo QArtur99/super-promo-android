@@ -5,7 +5,6 @@ import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
-
 fun Activity.toastShort(text: Any) = toast(this, text, Toast.LENGTH_SHORT)
 fun Activity.toastLong(text: Any) = toast(this, text, Toast.LENGTH_LONG)
 

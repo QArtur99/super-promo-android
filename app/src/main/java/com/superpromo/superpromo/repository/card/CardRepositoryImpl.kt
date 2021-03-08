@@ -42,5 +42,4 @@ class CardRepositoryImpl @Inject constructor(
         superPromoDb.cardDao().getAll()
             .distinctUntilChanged()
             .flowOn(ioDispatcher)
-
 }

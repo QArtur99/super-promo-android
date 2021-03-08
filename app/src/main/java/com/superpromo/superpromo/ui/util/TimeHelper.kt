@@ -1,7 +1,8 @@
 package com.superpromo.superpromo.ui.util
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import java.util.TimeZone
 
 object TimeHelper {
 

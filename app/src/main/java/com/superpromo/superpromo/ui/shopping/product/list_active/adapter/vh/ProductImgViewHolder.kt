@@ -1,6 +1,5 @@
 package com.superpromo.superpromo.ui.shopping.product.list_active.adapter.vh
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ProductDb
 import com.superpromo.superpromo.ui.shopping.product.list_active.adapter.ProductListAdapter
 import com.superpromo.superpromo.ui.util.GlideHelper
-
 
 class ProductImgViewHolder constructor(
     private val view: View,

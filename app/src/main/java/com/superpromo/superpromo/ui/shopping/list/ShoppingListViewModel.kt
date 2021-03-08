@@ -2,7 +2,12 @@ package com.superpromo.superpromo.ui.shopping.list
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.repository.shopping_list.ShoppingListRepository
 import kotlinx.coroutines.launch
@@ -25,6 +30,4 @@ class ShoppingListViewModel @ViewModelInject constructor(
             shoppingListRepository.insert(shoppingListDb)
         }
     }
-
-
 }

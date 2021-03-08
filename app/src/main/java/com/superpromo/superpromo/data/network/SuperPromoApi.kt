@@ -24,5 +24,4 @@ interface SuperPromoApi {
         @Query("limit") limit: Int? = null,
         @Query("product") product: String? = null,
     ): Deferred<ProductContainer>
-
 }

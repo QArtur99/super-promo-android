@@ -3,7 +3,6 @@ package com.superpromo.superpromo.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import androidx.appcompat.app.AlertDialog
 import androidx.core.text.isDigitsOnly
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.BarcodeFormat
@@ -15,7 +14,6 @@ import com.superpromo.superpromo.databinding.DialogCardNumberBinding
 import com.superpromo.superpromo.databinding.ZxingCaptureBinding
 import com.superpromo.superpromo.ui.util.ext.setStatusBarGradient
 import com.superpromo.superpromo.ui.util.ext.setToolbar
-
 
 class CustomCaptureActivity : CaptureActivity() {
 

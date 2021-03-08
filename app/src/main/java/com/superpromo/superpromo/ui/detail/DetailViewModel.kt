@@ -16,7 +16,7 @@ class DetailViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val _menuList = MutableLiveData<List<MenuModel>>()
-    val menuList : LiveData<List<MenuModel>> = _menuList
+    val menuList: LiveData<List<MenuModel>> = _menuList
 
     init {
         _menuList.value = listOf(
@@ -29,6 +29,4 @@ class DetailViewModel @ViewModelInject constructor(
             MenuModel(R.drawable.ic_baseline_info_24, R.string.menu_info),
         )
     }
-
-
 }

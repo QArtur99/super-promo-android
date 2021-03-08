@@ -2,10 +2,15 @@ package com.superpromo.superpromo.ui.compare
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.superpromo.superpromo.data.db.model.ProductDb
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.data.network.model.Product
 import com.superpromo.superpromo.data.network.model.Shop
@@ -15,7 +20,12 @@ import com.superpromo.superpromo.repository.product.ProductRepository
 import com.superpromo.superpromo.repository.shopping_list.ShoppingListRepository
 import com.superpromo.superpromo.ui.data.SearchModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flattenMerge
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class CompareViewModel @ViewModelInject constructor(

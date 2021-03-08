@@ -64,11 +64,14 @@ class CardFragment : Fragment() {
     }
 
     private fun observeMenuList() {
-        cardViewModel.cardList.observe(viewLifecycleOwner, {
-            binding.swipeRefresh.isRefreshing = false
-            adapter.submitList(it)
-            setEmptyView(it)
-        })
+        cardViewModel.cardList.observe(
+            viewLifecycleOwner,
+            {
+                binding.swipeRefresh.isRefreshing = false
+                adapter.submitList(it)
+                setEmptyView(it)
+            }
+        )
     }
 
     private fun setEmptyView(list: List<CardDb>) {
@@ -98,7 +101,6 @@ class CardFragment : Fragment() {
                     CardDetailFragment.KEY_CARD to card,
                 )
                 findNavController().navigate(R.id.action_to_card_detail, bundle)
-
             }
         }
     }

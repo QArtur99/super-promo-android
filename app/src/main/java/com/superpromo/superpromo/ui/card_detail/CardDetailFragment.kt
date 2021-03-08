@@ -2,7 +2,12 @@ package com.superpromo.superpromo.ui.card_detail
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,7 +25,6 @@ import com.superpromo.superpromo.ui.main.SharedDrawerVm
 import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
 import com.superpromo.superpromo.ui.util.ext.setToolbar
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class CardDetailFragment : Fragment() {
@@ -74,7 +78,6 @@ class CardDetailFragment : Fragment() {
         generateBarcode(cardDb)
     }
 
-
     private fun generateBarcode(cardDb: CardDb) {
         try {
             if (cardDb.formatName.isNotEmpty()) {
@@ -90,7 +93,6 @@ class CardDetailFragment : Fragment() {
         } catch (e: Exception) {
         }
     }
-
 
     private fun scanCard() {
         val scanIntegrator = IntentIntegrator.forSupportFragment(this)
@@ -125,5 +127,4 @@ class CardDetailFragment : Fragment() {
         cardDetailViewModel.deleteCard(cardDb.id)
         activity?.onBackPressed()
     }
-
 }

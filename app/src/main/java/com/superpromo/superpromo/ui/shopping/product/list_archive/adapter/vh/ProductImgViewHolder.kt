@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ProductDb
-import com.superpromo.superpromo.ui.shopping.product.list_active.adapter.ProductListAdapter
 import com.superpromo.superpromo.ui.shopping.product.list_archive.adapter.ProductArchiveListAdapter
 import com.superpromo.superpromo.ui.util.GlideHelper
-
 
 class ProductImgViewHolder constructor(
     private val view: View,
