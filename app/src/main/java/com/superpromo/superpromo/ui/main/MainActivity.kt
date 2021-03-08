@@ -13,7 +13,9 @@ import androidx.navigation.findNavController
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.databinding.ActivityMainBinding
 import com.superpromo.superpromo.ui.util.EventObserver
+import com.superpromo.superpromo.ui.util.ext.contactUs
 import com.superpromo.superpromo.ui.util.ext.setStatusBarGradient
+import com.superpromo.superpromo.ui.util.ext.shareApp
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -61,6 +63,8 @@ class MainActivity : AppCompatActivity() {
                 when (it) {
                     R.string.menu_shopping -> findNavController().navigate(R.id.action_start_to_shopping_list)
                     R.string.menu_cards -> findNavController().navigate(R.id.action_start_to_card)
+                    R.string.menu_share -> shareApp()
+                    R.string.menu_contact -> contactUs()
                 }
             }, 200)
         })

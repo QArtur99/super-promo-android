@@ -30,11 +30,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'CONTACT_EMAIL', '"superapp@gmail.com"'
             buildConfigField 'Integer', 'HOST_PORT', ''
             buildConfigField 'String', 'HOST_URL', '"arturgniewowski.com"'
             buildConfigField 'String', 'BASE_URL', '"https://arturgniewowski.com"'
         }
         debug {
+            buildConfigField 'String', 'CONTACT_EMAIL', '"superapp@gmail.com"'
             buildConfigField 'Integer', 'HOST_PORT', '3002'
             buildConfigField 'String', 'HOST_URL', '"192.168.1.102"'
             buildConfigField 'String', 'BASE_URL', '"http://0.0.0.0:3002"'

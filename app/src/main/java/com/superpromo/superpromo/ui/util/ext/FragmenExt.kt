@@ -3,10 +3,8 @@ package com.superpromo.superpromo.ui.util.ext
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +12,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.ui.util.assistant.BackPress
 
@@ -86,16 +83,3 @@ fun Fragment.setStatusBarTransparent() {
     window.statusBarColor = ContextCompat.getColor(activity, R.color.transparent)
 }
 
-fun Fragment.toast(text: String) {
-    Toast.makeText(requireActivity(), text, Toast.LENGTH_LONG).show()
-}
-
-fun Fragment.snackbar(view: View, text: Any) {
-    val msg = when (text) {
-        is String -> text
-        is Int -> getString(text)
-        else -> ""
-    }
-    val snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-    snackbar.show()
-}

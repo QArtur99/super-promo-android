@@ -14,12 +14,11 @@ import com.superpromo.superpromo.data.db.model.ProductDb
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.databinding.FragmentShoppingProductBinding
 import com.superpromo.superpromo.ui.main.SharedDrawerVm
-import com.superpromo.superpromo.ui.shopping.product.detail.ProductDetailFragment
 import com.superpromo.superpromo.ui.shopping.product.detail_archive.ProductArchiveDetailFragment
 import com.superpromo.superpromo.ui.shopping.product.list_active.ProductFragmentArgs
 import com.superpromo.superpromo.ui.shopping.product.list_archive.adapter.ProductArchiveListAdapter
 import com.superpromo.superpromo.ui.util.ext.setToolbar
-import com.superpromo.superpromo.ui.util.ext.snackbar
+import com.superpromo.superpromo.ui.util.ext.snackbarLong
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -126,13 +125,13 @@ class ProductArchiveFragment : Fragment() {
     private fun onUnarchive() {
         shoppingListDb = shoppingListDb.copy(isArchived = false)
         productArchiveViewModel.updateShoppingListDb(shoppingListDb)
-        snackbar(binding.root, R.string.shopping_list_moved_to_active)
+        snackbarLong(R.string.shopping_list_moved_to_active)
         activity?.onBackPressed()
     }
 
     private fun onDelete() {
         productArchiveViewModel.deleteShoppingListDb(shoppingListDb)
-        snackbar(binding.root, R.string.shopping_list_deleted)
+        snackbarLong(R.string.shopping_list_deleted)
         activity?.onBackPressed()
     }
 }

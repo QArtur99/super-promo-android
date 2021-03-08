@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Super Promo</string>
+    <string name="share_check_out">Hej, pobierz tę aplikację:&#160;</string>
+
     <string name="common_btn_ok">Ok</string>
     <string name="common_btn_add">Dodaj</string>
     <string name="common_btn_save">Zapisz</string>
@@ -8,6 +10,11 @@
     <string name="common_btn_delete">Usuń</string>
     <string name="common_btn_edit">Edytuj</string>
     <string name="common_dialog_choose_title">Wybierz z listy</string>
+
+    <string name="common_intent_text_error">Na Twoim urządzeniu nie ma zainstalowanego klienta tekstowego.</string>
+    <string name="common_intent_email_error">Na Twoim urządzeniu nie ma zainstalowanego klienta poczty e-mail.</string>
+
+    <string name="contact_us_feedback">Opinia o aplikacji</string>
 
     <string name="retry">Retry</string>
     <string name="no_connection">Sprawdź połączenie z internetem.</string>

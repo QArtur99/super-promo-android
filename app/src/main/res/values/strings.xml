@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Super Promo</string>
+    <string name="share_check_out">Hey, download this app: </string>
+
     <string name="common_btn_ok">Ok</string>
     <string name="common_btn_add">Add</string>
     <string name="common_btn_save">Save</string>
@@ -8,6 +10,11 @@
     <string name="common_btn_delete">Delete</string>
     <string name="common_btn_edit">Edit</string>
     <string name="common_dialog_choose_title">Choose from the list</string>
+
+    <string name="common_intent_text_error">There are no text client installed on your device.</string>
+    <string name="common_intent_email_error">There are no email client installed on your device.</string>
+
+    <string name="contact_us_feedback">App feedback</string>
 
     <string name="retry">Retry</string>
     <string name="no_connection">Connection error.</string>

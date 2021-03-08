@@ -2,11 +2,15 @@ package com.superpromo.superpromo.ui.util.ext
 
 import android.annotation.TargetApi
 import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toolbar
 import androidx.core.content.ContextCompat
+import com.superpromo.superpromo.BuildConfig
 import com.superpromo.superpromo.R
 
 
@@ -38,5 +42,31 @@ fun Activity.setToolbar(toolbar: Toolbar) {
         if (hideSoftKeyBoard(it) == false) {
             onBackPressed()
         }
+    }
+}
+
+fun Activity.shareApp() {
+    try {
+        val sendIntent = Intent()
+        sendIntent.action = Intent.ACTION_SEND
+        sendIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            getString(R.string.share_check_out) + getString(R.string.google_play_url_id) + BuildConfig.APPLICATION_ID
+        )
+        sendIntent.type = "text/plain"
+        startActivity(sendIntent)
+    } catch (ex: ActivityNotFoundException) {
+        snackbarLong(R.string.common_intent_text_error)
+    }
+}
+
+fun Activity.contactUs() {
+    try {
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.data = Uri.parse("mailto:" + BuildConfig.CONTACT_EMAIL)
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.contact_us_feedback))
+        startActivity(intent)
+    } catch (ex: ActivityNotFoundException) {
+        snackbarLong(R.string.common_intent_email_error)
     }
 }

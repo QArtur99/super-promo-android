@@ -30,7 +30,7 @@ import com.superpromo.superpromo.ui.detail.DetailFragment
 import com.superpromo.superpromo.ui.shopping.list.adapter_dialog.ShoppingListListAdapter
 import com.superpromo.superpromo.ui.util.ext.onNavBackStackListener
 import com.superpromo.superpromo.ui.util.ext.setToolbar
-import com.superpromo.superpromo.ui.util.ext.snackbar
+import com.superpromo.superpromo.ui.util.ext.snackbarLong
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -200,7 +200,7 @@ class CompareFromOfferFragment : Fragment() {
             )
             compareViewModel.updateProductDb(product, item.id)
             compareViewModel.updateShoppingListDb(item)
-            snackbar(binding.root, "Dodano")
+            snackbarLong("Dodano")
         }
 
     private fun initSwipeToRefresh() {
