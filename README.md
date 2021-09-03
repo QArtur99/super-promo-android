@@ -7,9 +7,31 @@ Single screen countdown timer.
 ## Motivation and Context
 
 ## Screenshots
-<img src="/results/screenshot_1.png" width="260">
-&emsp;
-<img src="/results/screenshot_2.png" width="260">
+
+### Main
+<p float="left">
+<img src="/screenshots/main/1.jpg" width="260">
+<img src="/screenshots/main/2.jpg" width="260">
+</p>
+### Offer
+<p float="left">
+<img src="/screenshots/offer/1.jpg" width="260">
+<img src="/screenshots/offer/2.jpg" width="260">
+<img src="/screenshots/offer/3.jpg" width="260">
+</p>
+### Compare
+<p float="left">
+<img src="/screenshots/compare/1.jpg" width="260">
+<img src="/screenshots/compare/2.jpg" width="260">
+<img src="/screenshots/compare/3.jpg" width="260">
+</p>
+### Card
+<p float="left">
+<img src="/screenshots/card/1.jpg" width="260">
+<img src="/screenshots/card/2.jpg" width="260">
+<img src="/screenshots/card/3.jpg" width="260">
+<img src="/screenshots/card/4.jpg" width="260">
+</p>
 
 ## License
 
