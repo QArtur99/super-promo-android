@@ -1,5 +1,6 @@
 # SuperPromo
 ![SuperPromo result](https://github.com/QArtur99/super-promo-android/workflows/Check/badge.svg)
+
 Polish groceries price comparison app.
 
 ## Screenshots
