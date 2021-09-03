@@ -20,7 +20,7 @@ class ProductPagingSource(
         return try {
             val data = superPromoApi.getProductListAsync(
                 shopIds = shopIds,
-                page = if(params.key.isNullOrEmpty()) 0 else params.key?.toInt(),
+                page = if (params.key.isNullOrEmpty()) 0 else params.key?.toInt(),
                 limit = limit,
                 product = product,
             ).await()
