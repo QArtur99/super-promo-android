@@ -28,6 +28,13 @@ Single screen countdown timer.
 <img src="/screenshots/compare/3.jpg" width="200">
 </p>
 
+### Shopping list
+<p float="left">
+<img src="/screenshots/shopping/1.jpg" width="200">
+<img src="/screenshots/shopping/2.jpg" width="200">
+<img src="/screenshots/shopping/3.jpg" width="200">
+</p>
+
 ### Card
 <p float="left">
 <img src="/screenshots/card/1.jpg" width="200">
