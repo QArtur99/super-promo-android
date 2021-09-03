@@ -50,6 +50,7 @@ class CompareFromMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCompareBinding.inflate(inflater)
+        binding.appBar.toolbarTitle.text = getText(R.string.main_compare)
         setToolbar(binding.appBar.toolbar)
 
         initAdapter()

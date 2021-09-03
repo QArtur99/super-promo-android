@@ -38,6 +38,7 @@ class SuggestionFromMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSuggestionBinding.inflate(inflater)
+        binding.appBar.toolbarTitle.text = getText(R.string.main_compare)
         setToolbar(binding.appBar.toolbar)
         onNavigationResult()
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.superpromo.superpromo.GlideApp
 import com.superpromo.superpromo.GlideRequests
+import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.network.model.Product
 import com.superpromo.superpromo.databinding.FragmentDetailBinding
 import com.superpromo.superpromo.ui.WebViewActivity
@@ -38,6 +39,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailBinding.inflate(inflater)
+        binding.appBar.toolbarTitle.text = getText(R.string.detail_details)
         setToolbar(binding.appBar.toolbar)
 
         bundle.product?.let {

@@ -76,4 +76,6 @@
     <string name="product_empty_list">List is empty.</string>
     <string name="product_empty_sub_text">Add a product.</string>
 
+    <string name="defaultQueryHint">Search for a product e.g. „milk”</string>
+
 </resources>

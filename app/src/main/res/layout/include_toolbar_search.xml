@@ -51,7 +51,7 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-                app:defaultQueryHint="Sprawdz na przykład „mleko”"
+                app:defaultQueryHint="@string/defaultQueryHint"
                 app:iconifiedByDefault="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

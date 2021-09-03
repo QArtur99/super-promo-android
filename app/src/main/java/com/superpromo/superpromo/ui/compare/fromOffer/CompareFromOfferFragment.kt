@@ -58,6 +58,7 @@ class CompareFromOfferFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCompareBinding.inflate(inflater)
+        binding.appBar.toolbarTitle.text = getText(R.string.main_offer)
         setToolbar(binding.appBar.toolbar)
         onNavigationResult()
 

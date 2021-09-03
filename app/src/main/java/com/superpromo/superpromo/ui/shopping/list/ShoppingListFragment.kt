@@ -41,6 +41,7 @@ class ShoppingListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentShoppingListBinding.inflate(inflater)
+        binding.appBar.toolbarTitle.text = getText(R.string.main_shopping)
         setToolbar(binding.appBar.toolbar)
 
         initAdapter()
