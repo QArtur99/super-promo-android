@@ -1,18 +1,15 @@
 package com.superpromo.superpromo.ui.card_detail
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.superpromo.superpromo.data.db.model.CardDb
 import com.superpromo.superpromo.repository.card.CardRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CardDetailViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class CardDetailViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val cardRepository: CardRepository,
 ) : ViewModel() {
 

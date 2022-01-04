@@ -1,7 +1,5 @@
 package com.superpromo.superpromo.ui.menu_left
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -9,9 +7,13 @@ import androidx.lifecycle.ViewModel
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.repository.main.SuperPromoRepository
 import com.superpromo.superpromo.ui.data.MenuModel
+import dagger.assisted.Assisted
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MenuViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class MenuViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val superPromoRepository: SuperPromoRepository
 ) : ViewModel() {
 

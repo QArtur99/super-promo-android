@@ -18,6 +18,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:exported="true"
             android:name=".ui.main.MainActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>

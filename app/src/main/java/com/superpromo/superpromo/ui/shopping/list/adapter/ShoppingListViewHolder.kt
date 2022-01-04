@@ -9,7 +9,7 @@ import com.superpromo.superpromo.GlideRequests
 import com.superpromo.superpromo.R
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.ui.util.TimeHelper
-import java.util.Date
+import java.util.*
 
 class ShoppingListViewHolder constructor(
     private val view: View,

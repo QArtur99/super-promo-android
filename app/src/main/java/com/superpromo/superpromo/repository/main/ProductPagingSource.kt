@@ -28,7 +28,7 @@ class ProductPagingSource(
             Page(
                 data = data.productList.map {
                     it.apply {
-                        shopName = shopMap[it.shopId]?.name
+                        shopName = shopMap[it.shopId.toInt()]?.name
                     }
                 },
                 prevKey = data.prevKey,

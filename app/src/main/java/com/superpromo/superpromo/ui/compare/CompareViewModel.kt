@@ -1,14 +1,6 @@
 package com.superpromo.superpromo.ui.compare
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
@@ -19,17 +11,16 @@ import com.superpromo.superpromo.repository.mapper.asDbModel
 import com.superpromo.superpromo.repository.product.ProductRepository
 import com.superpromo.superpromo.repository.shopping_list.ShoppingListRepository
 import com.superpromo.superpromo.ui.data.SearchModel
+import dagger.assisted.Assisted
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flattenMerge
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CompareViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class CompareViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val superPromoRepository: SuperPromoRepository,
     private val shoppingListRepository: ShoppingListRepository,
     private val productRepository: ProductRepository,

@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="0dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header"
+    <com.superpromo.superpromo.ui.util.custom.StrokeTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="0dp">
+        android:fontFamily="@font/titan_one"
+        android:gravity="center"
+        android:lines="1"
+        android:padding="@dimen/padding_large"
+        android:text="@string/app_name"
+        android:textColor="@color/header_logo"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.superpromo.superpromo.ui.util.custom.StrokeTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/titan_one"
-            android:gravity="center"
-            android:lines="1"
-            android:padding="@dimen/padding_large"
-            android:text="@string/app_name"
-            android:textColor="@color/header_logo"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</merge>
+</androidx.constraintlayout.widget.ConstraintLayout>

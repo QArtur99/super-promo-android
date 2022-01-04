@@ -1,19 +1,16 @@
 package com.superpromo.superpromo.ui.shopping.list_archive
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.superpromo.superpromo.data.db.model.ShoppingListDb
 import com.superpromo.superpromo.repository.shopping_list.ShoppingListRepository
+import dagger.assisted.Assisted
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ShoppingListArchiveViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class ShoppingListArchiveViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val shoppingListRepository: ShoppingListRepository
 ) : ViewModel() {
 

@@ -1,11 +1,7 @@
 package com.superpromo.superpromo.ui.card_add
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.RelativeLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment

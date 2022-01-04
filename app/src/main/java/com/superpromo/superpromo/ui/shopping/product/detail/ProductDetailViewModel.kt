@@ -1,20 +1,19 @@
 package com.superpromo.superpromo.ui.shopping.product.detail
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+
+import androidx.lifecycle.*
 import com.superpromo.superpromo.data.db.model.ProductDb
 import com.superpromo.superpromo.repository.product.ProductRepository
 import com.superpromo.superpromo.repository.shopping_list.ShoppingListRepository
 import com.superpromo.superpromo.ui.util.Event
+import dagger.assisted.Assisted
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProductDetailViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class ProductDetailViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val productRepository: ProductRepository,
     private val shoppingListRepository: ShoppingListRepository
 ) : ViewModel() {

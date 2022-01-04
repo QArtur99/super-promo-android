@@ -1,14 +1,6 @@
 package com.superpromo.superpromo.ui.main
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.superpromo.superpromo.data.network.model.Suggestion
 import com.superpromo.superpromo.repository.main.SuperPromoRepository
 import com.superpromo.superpromo.repository.state.ResultApi
@@ -16,11 +8,15 @@ import com.superpromo.superpromo.repository.state.State
 import com.superpromo.superpromo.ui.data.SuggestionModel
 import com.superpromo.superpromo.ui.util.ext.addSourceInvoke
 import com.superpromo.superpromo.ui.util.unaccent
+import dagger.assisted.Assisted
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class SharedSuggestionVm @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class SharedSuggestionVm @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val superPromoRepository: SuperPromoRepository
 ) : ViewModel() {
     companion object {
